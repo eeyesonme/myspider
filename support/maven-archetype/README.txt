@@ -1,0 +1,1 @@
+Maven archetype for a springMVC web Application
