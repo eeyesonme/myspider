@@ -4,95 +4,103 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.myspider</groupId>
 	<artifactId>ireader</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>war</packaging>
 	<name>io.myspider :: ireader </name>
 
 	<properties>
 		<!-- 主要依赖库的版本定义 -->
-		<myspider.version>1.0.0-SNAPSHOT</myspider.version>
+		<myspider.version>1.0.0</myspider.version>
 		<spring.version>4.1.3.RELEASE</spring.version>
-		<mybatis.version>3.2.7</mybatis.version>
 		<tomcat-jdbc.version>7.0.57</tomcat-jdbc.version>
-		<shiro.version>1.2.3</shiro.version>
-		<hibernate-validator.version>5.0.3.Final</hibernate-validator.version>		
+		<sitemesh.version>3.0.0</sitemesh.version>
+		<slf4j.version>1.7.8</slf4j.version>
+		<logback.version>1.1.2</logback.version>
+		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<junit.version>4.11</junit.version>
 		<jetty.version>8.1.16.v20140903</jetty.version>
 		<h2.version>1.3.176</h2.version>
-
 		<!-- Plugin的属性 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.6</java.version>
+		<java.version>1.8</java.version>
 	</properties>
-
-	<prerequisites>
-		<maven>3.0.0</maven>
-	</prerequisites>
-
-	<!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 与  artifactId 即可 -->
-	<dependencyManagement>
-		<dependencies>
+	
+	<dependencies>
 			<dependency>
 				<groupId>io.myspider</groupId>
 				<artifactId>myspider-core</artifactId>
 				<version>${myspider.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			
 			<dependency>
-				<groupId>org.mybatis</groupId>
-				<artifactId>mybatis</artifactId>
-				<version>${mybatis.version}</version>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.mybatis</groupId>
-				<artifactId>mybatis-spring</artifactId>
-				<version>1.2.2</version>
-			</dependency>
-		
-			<!-- connection pool -->
+			
 			<dependency>
 				<groupId>org.apache.tomcat</groupId>
 				<artifactId>tomcat-jdbc</artifactId>
 				<version>${tomcat-jdbc.version}</version>
 				<scope>runtime</scope>
 			</dependency>
-
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-webmvc</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-
-			<!-- SECURITY begin -->
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-core</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-spring</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-web</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-ehcache</artifactId>
-				<version>${shiro.version}</version>
-			</dependency>
-			<!-- SECURITY end -->
 			
-			<!-- JSR303 Bean Validator -->
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>${hibernate-validator.version}</version>
-			</dependency>
-			
+			 <dependency>
+  				<groupId>org.sitemesh</groupId>
+   				<artifactId>sitemesh</artifactId>
+  				<version>${sitemesh.version}</version>
+ 			</dependency>
+ 					
+			<!-- LOGGING begin -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- 代码直接调用log4j会被桥接到slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- 代码直接调用common-logging会被桥接到slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- 代码直接调用java.util.logging会被桥接到slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- LOGGING end -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
 			<!-- jetty -->
 			<dependency>
 				<groupId>org.eclipse.jetty.aggregate</groupId>
@@ -120,16 +128,14 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 			</dependency>
-
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
 				<version>3.0.1</version>
 				<scope>provided</scope>
 			</dependency>
-		
 		</dependencies>
-	</dependencyManagement>
+	
 
 	<!-- 插件配置 -->
 	<build>
