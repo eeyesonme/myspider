@@ -36,8 +36,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-<<<<<<< HEAD
-=======
 	 <filter>
 		<filter-name>sitemeshFilter</filter-name>
 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -47,7 +45,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
->>>>>>> 5952e4c53f48fdcae538760c13dbc726e9270a62
 	<servlet>
 		<servlet-name>springServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
