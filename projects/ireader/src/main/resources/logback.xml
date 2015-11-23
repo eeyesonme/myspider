@@ -17,7 +17,7 @@
 	</appender>
 
 	<!-- project default level -->
-	<logger name="io.myspider.ireader" level="DEBUG" /> -->
+	<logger name="com.digitalplay.network.ireader.web" level="DEBUG" /> -->
 
 	<root level="DEBUG">
 		<appender-ref ref="console" />
