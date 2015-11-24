@@ -308,7 +308,7 @@
 									encoding="${project.build.sourceEncoding}">
 									<classpath refid="maven.test.classpath" />
 									<transaction src="src/main/resources/sql/h2/schema.sql" />
-									<transaction src="src/test/resources/data/h2/import-data.sql" />
+									<transaction src="src/main/resources/sql/h2/import.sql" />
 								</sql>
 							</target>
 						</configuration>

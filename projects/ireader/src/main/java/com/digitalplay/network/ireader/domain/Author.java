@@ -8,8 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ee_author")
 public class Author {
 
 	@Id
@@ -21,6 +23,10 @@ public class Author {
 	
 	@Column(nullable = false)
 	private String email;
+	
+	private String sex;
+	
+	private String status;
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="author")
 	private List<Book> books;
@@ -49,4 +55,21 @@ public class Author {
 		this.email = email;
 	}
 
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	
 }

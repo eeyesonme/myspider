@@ -6,21 +6,23 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ee_Tag")
-public class Tag {
+@Table(name="ee_channel")
+public class Category {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 	
 	private String name;
+	
+	private String status;
 
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="tags")
-	private List<Book>  books;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="channel")
+	private List<Book> books;
 	
 	public Long getId() {
 		return id;
@@ -38,4 +40,13 @@ public class Tag {
 		this.name = name;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 }

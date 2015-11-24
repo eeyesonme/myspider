@@ -10,18 +10,20 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ee_Tag")
-public class Tag {
-
+@Table(name="ee_author")
+public class Role {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
 	private String name;
-
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="tags")
-	private List<Book>  books;
 	
+	private String permission;
+	
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy="roles")
+	private List<Account> accounts;
+
 	public Long getId() {
 		return id;
 	}
@@ -37,5 +39,15 @@ public class Tag {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+	
+	
 
 }
