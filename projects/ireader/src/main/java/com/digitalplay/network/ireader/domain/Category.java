@@ -21,7 +21,7 @@ public class Category {
 	
 	private String status;
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="channel")
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="category")
 	private List<Book> books;
 	
 	public Long getId() {

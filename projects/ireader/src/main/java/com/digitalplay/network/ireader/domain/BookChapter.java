@@ -16,14 +16,14 @@ public class BookChapter {
 	@GeneratedValue
 	private Long id;
 	
-	@ManyToOne
-	private Book book;
-	
 	private String title;
 	
 	private String content;
 	
 	private Date updatetime;
+	
+	@ManyToOne
+	private Book book;
 
 	public Long getId() {
 		return id;

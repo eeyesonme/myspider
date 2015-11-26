@@ -35,14 +35,14 @@ public class Account {
 	
 	private Date regist_date;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Role> roles;
-
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="account")
 	private List<BookSubscribe> subscribes;
 	
 	/*@ManyToMany(fetch = FetchType.LAZY)
 	private List<Book> hits;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	private List<Role> roles;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Book> stars;*/
@@ -110,6 +110,15 @@ public class Account {
 	public void setRegist_date(Date regist_date) {
 		this.regist_date = regist_date;
 	}
+
+	public List<BookSubscribe> getSubscribes() {
+		return subscribes;
+	}
+
+	public void setSubscribes(List<BookSubscribe> subscribes) {
+		this.subscribes = subscribes;
+	}
+	
 	
 	
 }

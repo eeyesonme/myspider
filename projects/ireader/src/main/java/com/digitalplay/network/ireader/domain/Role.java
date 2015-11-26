@@ -21,8 +21,8 @@ public class Role {
 	
 	private String permission;
 	
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="roles")
-	private List<Account> accounts;
+	/*@ManyToMany(fetch = FetchType.LAZY,mappedBy="roles")
+	private List<Account> accounts;*/
 
 	public Long getId() {
 		return id;

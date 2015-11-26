@@ -35,8 +35,8 @@ public class Book {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
 	private List<BookChapter> chapters;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
-	private List<BookSubscribe> subscribes;
+/*	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
+	private List<BookSubscribe> subscribes;*/
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Tag> tags;

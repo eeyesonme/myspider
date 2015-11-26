@@ -18,4 +18,8 @@ public class AccountService {
 	public Iterable<Account> findAll(Pageable pageable) {
 		return accountRepository.findAll(pageable);
 	}
+	
+	public Account findOne(Long id){
+		return accountRepository.findOne(id);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,18 +17,28 @@ public class BookSubscribe {
 	@GeneratedValue
 	private long id;
 	
-	@ManyToOne
-	private Book book;
+	private Date subscribe_time;
 	
-	@ManyToOne
+	@ManyToOne(optional=false)
+	@JoinColumn(name="account_id" ,nullable=false, updatable=false)
 	private Account account;
 	
-	private Date subscribe_time;
+	/*@ManyToOne
+	private Book book;*/
+
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Date getSubscribe_time() {
 		return subscribe_time;
 	}
-
+	
 	public void setSubscribe_time(Date subscribe_time) {
 		this.subscribe_time = subscribe_time;
 	}
