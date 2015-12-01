@@ -39,26 +39,26 @@ public class AccountEndPoint {
 	@RequestMapping(value = "/api/account/{id}", produces = MediaTypes.JSON_UTF_8)
 	public Account  getMyAccount(@PathVariable("id") Long id){
 		Account account =accountServcie.findOne(id);
+		System.out.println("Account ID/Name " + account.getId()+"/"+ account.getUsername());
+		System.out.println(" The Account roles: ");
 		List<Role> roles = account.getRoles();
-		Iterator<Role> roleIter = roles.iterator();
-		while (roleIter.hasNext()){
-			Role role = roleIter.next();
-			System.out.println(role.getName()+":"+ role.getPermissions());
+		for(Role r : roles){
+			System.out.println("								role "+ r.getName()+":"+ r.getPermissions());
 		}
+		System.out.println(" The Account  subscribed  books: ");
 		List<AccountSubscribe> subscribes = account.getSubscribes();
-		Iterator<AccountSubscribe> scribeIter = subscribes.iterator();
-		while(scribeIter.hasNext()){
-			AccountSubscribe subscribe = scribeIter.next();
-			Book book = subscribe.getBook();
+		for (AccountSubscribe as : subscribes ){
+			Book book = as.getBook();
+			System.out.println("														 The Book Id/Name "+ book.getId()+ "/"+ book.getName());
 			Author author =book.getAuthor();
-			System.out.println("Book ID/Name : "+ author.getId() + "/"+ author.getName());
+			System.out.println("														 The Book Author Id/Name : "+ author.getId() + "/"+ author.getName());
 			Category category =book.getCategory();
-			System.out.println("Book Category: "+category.getName());
+			System.out.println("														 The Book Category: "+category.getName());
+			System.out.println("														 The Book Tags: ");
 			List<Tag> bookTags= book.getBookTags();
 			for(Tag tag: bookTags){
-				System.out.println(tag.getId()+":"+tag.getName());
+					System.out.println("                                                                          Tag Id/Name "+tag.getId()+"/"+tag.getName());
 			}
-			
 		}
 		return account;
 	}
