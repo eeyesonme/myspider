@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalplay.network.ireader.domain.Account;
-import com.digitalplay.network.ireader.domain.BookSubscribe;
+import com.digitalplay.network.ireader.domain.AccountSubscribe;
+import com.digitalplay.network.ireader.domain.Author;
+import com.digitalplay.network.ireader.domain.Book;
+import com.digitalplay.network.ireader.domain.Category;
+import com.digitalplay.network.ireader.domain.Role;
+import com.digitalplay.network.ireader.domain.Tag;
 import com.digitalplay.network.ireader.service.AccountService;
 import com.digitalplay.network.ireader.util.MediaTypes;
 
@@ -34,13 +39,27 @@ public class AccountEndPoint {
 	@RequestMapping(value = "/api/account/{id}", produces = MediaTypes.JSON_UTF_8)
 	public Account  getMyAccount(@PathVariable("id") Long id){
 		Account account =accountServcie.findOne(id);
-		/*List<BookSubscribe> subscribes = account.getSubscribes();
-		System.out.println(subscribes.size() +" had been subscribed!");
-		Iterator<BookSubscribe> bsiter = subscribes.iterator();
-		while(bsiter.hasNext()){
-			BookSubscribe subscribe =bsiter.next();
-			System.out.println("-------------------"+subscribe.getId() +"--"+subscribe.getSubscribe_time());
-		}*/
+		List<Role> roles = account.getRoles();
+		Iterator<Role> roleIter = roles.iterator();
+		while (roleIter.hasNext()){
+			Role role = roleIter.next();
+			System.out.println(role.getName()+":"+ role.getPermissions());
+		}
+		List<AccountSubscribe> subscribes = account.getSubscribes();
+		Iterator<AccountSubscribe> scribeIter = subscribes.iterator();
+		while(scribeIter.hasNext()){
+			AccountSubscribe subscribe = scribeIter.next();
+			Book book = subscribe.getBook();
+			Author author =book.getAuthor();
+			System.out.println("Book ID/Name : "+ author.getId() + "/"+ author.getName());
+			Category category =book.getCategory();
+			System.out.println("Book Category: "+category.getName());
+			List<Tag> bookTags= book.getBookTags();
+			for(Tag tag: bookTags){
+				System.out.println(tag.getId()+":"+tag.getName());
+			}
+			
+		}
 		return account;
 	}
 }

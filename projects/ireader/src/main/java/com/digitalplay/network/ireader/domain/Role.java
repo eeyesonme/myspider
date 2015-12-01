@@ -19,10 +19,10 @@ public class Role {
 	
 	private String name;
 	
-	private String permission;
+	private String permissions;
 	
-	/*@ManyToMany(fetch = FetchType.LAZY,mappedBy="roles")
-	private List<Account> accounts;*/
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy="roles")
+	private List<Account> accounts;
 
 	public Long getId() {
 		return id;
@@ -40,14 +40,12 @@ public class Role {
 		this.name = name;
 	}
 
-	public String getPermission() {
-		return permission;
+	public String getPermissions() {
+		return permissions;
 	}
 
-	public void setPermission(String permission) {
-		this.permission = permission;
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
 	}
-	
-	
 
 }

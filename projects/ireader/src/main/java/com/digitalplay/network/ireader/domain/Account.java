@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name="ee_account")
@@ -26,7 +27,6 @@ public class Account {
 	
 	private String mobile;
 	
-	@Transient
 	private String password;
 	
 	private String salt;
@@ -36,13 +36,18 @@ public class Account {
 	private Date regist_date;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="account")
-	private List<BookSubscribe> subscribes;
+	private List<AccountSubscribe> subscribes;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="ee_account_role",joinColumns =@JoinColumn(name="account_id" ,referencedColumnName="id" ),
+			inverseJoinColumns =@JoinColumn (name="role_id" ,referencedColumnName="id" )
+	)
+	private List<Role> roles;
 	
 	/*@ManyToMany(fetch = FetchType.LAZY)
 	private List<Book> hits;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Role> roles;
+	
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	private List<Book> stars;*/
@@ -111,13 +116,22 @@ public class Account {
 		this.regist_date = regist_date;
 	}
 
-	public List<BookSubscribe> getSubscribes() {
+	public List<AccountSubscribe> getSubscribes() {
 		return subscribes;
 	}
 
-	public void setSubscribes(List<BookSubscribe> subscribes) {
+	public void setSubscribes(List<AccountSubscribe> subscribes) {
 		this.subscribes = subscribes;
 	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
 	
 	
 	

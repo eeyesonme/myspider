@@ -19,7 +19,7 @@ public class Tag {
 	
 	private String name;
 
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="tags")
+	@ManyToMany(fetch = FetchType.LAZY,mappedBy="bookTags")
 	private List<Book>  books;
 	
 	public Long getId() {

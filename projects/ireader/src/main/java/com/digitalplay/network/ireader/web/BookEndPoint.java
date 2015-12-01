@@ -17,7 +17,7 @@ import com.digitalplay.network.ireader.util.MediaTypes;
 
 @RestController
 @RequestMapping(value = "/api/book")
-public class BookController {
+public class BookEndPoint {
 
 	@Autowired
 	private BookService bookService;

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ee_book_subscribe")
-public class BookSubscribe {
+public class AccountSubscribe {
 
 	@Id
 	@GeneratedValue
@@ -23,8 +23,9 @@ public class BookSubscribe {
 	@JoinColumn(name="account_id" ,nullable=false, updatable=false)
 	private Account account;
 	
-	/*@ManyToOne
-	private Book book;*/
+	@ManyToOne(optional=false)
+	@JoinColumn(name="book_id" ,nullable=false, updatable=false)
+	private Book book;
 
 	
 	public long getId() {
@@ -41,6 +42,14 @@ public class BookSubscribe {
 	
 	public void setSubscribe_time(Date subscribe_time) {
 		this.subscribe_time = subscribe_time;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
 	}
 	
 	

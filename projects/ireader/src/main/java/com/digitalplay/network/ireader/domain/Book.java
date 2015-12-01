@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,25 +23,27 @@ public class Book {
 	private Long id;
 
 	@Column(nullable = false)
-	private String title;
+	private String name;
 
 	@Column(nullable = false)
 	private String description;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="category_id" ,nullable=false, updatable=false)
 	private Category category;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="author_id" ,nullable=false, updatable=false)
 	private Author author;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
 	private List<BookChapter> chapters;
 	
-/*	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
-	private List<BookSubscribe> subscribes;*/
-	
 	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Tag> tags;
+	@JoinTable(name="ee_book_tag",joinColumns =@JoinColumn(name="book_id" ,referencedColumnName="id" ),
+	inverseJoinColumns =@JoinColumn (name="tag_id" ,referencedColumnName="id" )
+)
+	private List<Tag> bookTags;
 	
 	public Book() {
 	}
@@ -56,12 +60,12 @@ public class Book {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -72,8 +76,37 @@ public class Book {
 		this.description = description;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
 
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	public List<BookChapter> getChapters() {
+		return chapters;
+	}
+
+	public void setChapters(List<BookChapter> chapters) {
+		this.chapters = chapters;
+	}
+
+	public List<Tag> getBookTags() {
+		return bookTags;
+	}
+
+	public void setBookTags(List<Tag> bookTags) {
+		this.bookTags = bookTags;
+	}
 	
 	
 }

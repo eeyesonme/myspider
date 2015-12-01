@@ -19,7 +19,7 @@
 	<!-- project default level -->
 	<logger name="com.digitalplay.network.ireader.web" level="DEBUG" /> -->
 
-	<root level="TRACE">
+	<root level="DEBUG">
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />
 	</root>
