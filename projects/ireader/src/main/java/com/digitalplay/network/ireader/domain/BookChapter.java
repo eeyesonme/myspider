@@ -2,9 +2,11 @@ package com.digitalplay.network.ireader.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,9 +22,11 @@ public class BookChapter {
 	
 	private String content;
 	
-	private Date updatetime;
+	@Column(name="update_time")
+	private Date update_time;
 	
 	@ManyToOne
+	@JoinColumn(name="book_id" ,nullable=false, updatable=false)
 	private Book book;
 
 	public Long getId() {
@@ -50,11 +54,11 @@ public class BookChapter {
 	}
 
 	public Date getUpdatetime() {
-		return updatetime;
+		return update_time;
 	}
 
 	public void setUpdatetime(Date updatetime) {
-		this.updatetime = updatetime;
+		this.update_time = updatetime;
 	}
 	
 	

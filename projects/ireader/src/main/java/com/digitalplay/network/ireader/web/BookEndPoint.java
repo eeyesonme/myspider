@@ -41,16 +41,6 @@ public class BookEndPoint {
 	@RequestMapping(value="/api/book/{id}" ,method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
 	public Book getBook(@PathVariable("id") Long id){
 		Book book= bookService.findOne(id);
-		System.out.println("														 The Book Id/Name "+ book.getId()+ "/"+ book.getName());
-		Author author =book.getAuthor();
-		System.out.println("														 The Book Author Id/Name : "+ author.getId() + "/"+ author.getName());
-		Category category =book.getCategory();
-		System.out.println("														 The Book Category: "+category.getName());
-		System.out.println("														 The Book Tags: ");
-		List<Tag> bookTags= book.getBookTags();
-		for(Tag tag: bookTags){
-				System.out.println("                                                                          Tag Id/Name "+tag.getId()+"/"+tag.getName());
-		}
 		return book;
 	}
 }
