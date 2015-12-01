@@ -28,11 +28,11 @@ public class Book {
 	@Column(nullable = false)
 	private String description;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="category_id" ,nullable=false, updatable=false)
 	private Category category;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="author_id" ,nullable=false, updatable=false)
 	private Author author;
 	
