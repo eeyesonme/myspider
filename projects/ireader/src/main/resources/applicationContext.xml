@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"  
-	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -13,115 +13,59 @@
 	default-lazy-init="true">
 
 	<description>Spring common configuration </description>
-	<context:component-scan base-package="com.digitalplay.network.ireader">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-	</context:component-scan>
+
+	<context:property-placeholder ignore-unresolvable="true"	location="classpath*:/application.properties" />	
 	
-	<!-- Jpa Entity Manager 配置 -->
-	 <bean id="entityManagerFactory"
-          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.digitalplay.network.ireader"/>
-        <property name="persistenceProvider">
-            <bean class="org.hibernate.ejb.HibernatePersistence"/>
-        </property>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="generateDdl" value="false"/>
-                <property name="database" value="H2"/>
-                <property name="databasePlatform" value="org.hibernate.dialect.H2Dialect"/>
-            </bean>
-        </property>
-        <property name="jpaDialect">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
-        </property>
-        <property name="jpaPropertyMap">
-            <map>
-          		 <entry key="hibernate.show_sql" value="true" />
-          		 <entry key="hibernate.format_sql" value="true" />
-            	<entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
-                <entry key="hibernate.query.substitutions" value="true 1, false 0"/>
-                <entry key="hibernate.default_batch_fetch_size" value="16"/>
-                <entry key="hibernate.max_fetch_depth" value="2"/>
-                <entry key="hibernate.generate_statistics" value="true"/>
-                <entry key="hibernate.bytecode.use_reflection_optimizer" value="true"/>
-                <entry key="hibernate.cache.use_second_level_cache" value="false"/>
-                <entry key="hibernate.cache.use_query_cache" value="false"/>
-            </map>
-        </property>
-    </bean>
-	
-	<!-- Spring Data Jpa配置 -->
- 	<jpa:repositories base-package="com.digitalplay.network.ireader"  transaction-manager-ref="transactionManager" entity-manager-factory-ref="entityManagerFactory"/>
- 	
- 	<!-- Jpa 事务配置 -->
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	<context:component-scan base-package="com.digitalplay.network.ireader.service" />
+
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+		destroy-method="close">
+		<!-- Connection Info -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- Connection Pooling Info -->
+		<property name="maxActive" value="${jdbc.pool.maxActive}" />
+		<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
+		<property name="minIdle" value="0" />
+		<property name="defaultAutoCommit" value="false" />
 	</bean>
-	
- 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-	
-	<!-- production环境 -->
- 	<beans profile="production">
- 		<context:property-placeholder ignore-unresolvable="true"
-			location="classpath*:/application.properties" />	
-		
-		<!-- 数据源配置, 使用Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
-			<!-- Connection Info -->
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-		
-			<!-- Connection Pooling Info -->
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			<property name="maxIdle" value="${jdbc.pool.maxIdle}" />
-			<property name="minIdle" value="0" />
-			<property name="defaultAutoCommit" value="false" />
-		</bean>
-		
-		<!-- 数据源配置,使用应用服务器的数据库连接池 -->
-		<!--<jee:jndi-lookup id="dataSource" jndi-name="java:comp/env/jdbc/ExampleDB" />-->
-	</beans>
-	
-	<!-- local development环境 -->
-	<beans profile="development">
-		<context:property-placeholder ignore-resource-not-found="true"
-			location="classpath*:/application.properties,
-          			  classpath*:/application.development.properties" />	
 
-		<!-- Tomcat JDBC连接池 -->
-		<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-			<property name="defaultAutoCommit" value="false" />
-		</bean>
-	</beans>
-	
-	<!-- unit test环境 -->
-	<beans profile="test">
-	 	<context:property-placeholder ignore-resource-not-found="true"
-			location="classpath*:/application.properties,
-          			  classpath*:/application.test.properties" />	
-		
-		<!-- Spring Simple连接池 -->
-		<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-			<property name="driverClass" value="${jdbc.driver}" />
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-		</bean>
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.digitalplay.network.ireader.domain" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="false" />
+				<property name="database" value="H2" />
+				<property name="databasePlatform" value="org.hibernate.dialect.H2Dialect" />
+			</bean>
+		</property>
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="hibernate.show_sql" value="true" />
+				<entry key="hibernate.format_sql" value="true" />
+				<entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+			</map>
+		</property>
+	</bean>
 
-		<!-- 初始化数据表结构 与默认数据-->
-		<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
-			<jdbc:script location="classpath:sql/h2/schema.sql" />
-			<jdbc:script location="classpath:sql/h2/import.sql" encoding="UTF-8"/>
-		</jdbc:initialize-database>
-	</beans>
-	
+	<jpa:repositories base-package="com.digitalplay.network.ireader.repository"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
+
+	<!-- Jpa 事务配置 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
 </beans>

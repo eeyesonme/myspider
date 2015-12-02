@@ -324,7 +324,7 @@
 						<configuration>
 							<target>
 								<property
-									file="src/main/resources/application.development.properties" />
+									file="src/main/resources/application.properties" />
 								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}"
 									password="${jdbc.password}" onerror="continue"
 									encoding="${project.build.sourceEncoding}">
