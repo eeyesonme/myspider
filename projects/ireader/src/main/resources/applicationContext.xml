@@ -51,6 +51,8 @@
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+				<entry key="net.sf.ehcache.configurationResourceName" value="cache/ehcache.xml" />
 			</map>
 		</property>
 	</bean>
