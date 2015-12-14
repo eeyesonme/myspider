@@ -16,10 +16,5 @@ public class AccountRepositoryTestCase extends SpringTransactionalTestCase {
 	@Test
 	public void findOne(){
 		Account account = accountRepository.findOne(1L);
-		
-		account = accountRepository.findOne(2L);
-		
-		account = accountRepository.findOne(1L);
-		
 	}
 }

@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="ee_author")
@@ -32,7 +34,9 @@ public class Author {
 	
 	private String status;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="author")
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="author")
+	@Fetch(FetchMode.SUBSELECT)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<Book> books;
 	
 	public Long getId() {
@@ -75,5 +79,14 @@ public class Author {
 		this.status = status;
 	}
 
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+
+	
 	
 }

@@ -26,15 +26,5 @@ public class BookRepositoryTestCase extends SpringTransactionalTestCase {
 	@Test
 	public void findTasksByUserId() throws Exception {
 		Book book = bookRepository.findOne(1L);
-		System.out.println("														 The Book Id/Name "+ book.getId()+ "/"+ book.getName());
-		Author author =book.getAuthor();
-		System.out.println("														 The Book Author Id/Name : "+ author.getId() + "/"+ author.getName());
-		Category category =book.getCategory();
-		System.out.println("														 The Book Category: "+category.getName());
-		System.out.println("														 The Book Tags: ");
-		List<Tag> bookTags= book.getBookTags();
-		for(Tag tag: bookTags){
-				System.out.println("                                                                          Tag Id/Name "+tag.getId()+"/"+tag.getName());
-		}
 	}
 }

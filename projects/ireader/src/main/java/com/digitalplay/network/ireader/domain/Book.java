@@ -32,23 +32,23 @@ public class Book {
 	@Column(nullable = false)
 	private String description;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="category_id" ,nullable=false, updatable=false)
-	private Category category;
+	private Category category;*/
 	
 	@ManyToOne
 	@JoinColumn(name="author_id" ,nullable=false, updatable=false)
 	private Author author;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
-	private List<BookChapter> chapters;
+/*	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
+	private List<BookChapter> chapters;*/
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	/*@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="ee_book_tag",joinColumns =@JoinColumn(name="book_id" ,referencedColumnName="id" ),
 	inverseJoinColumns =@JoinColumn (name="tag_id" ,referencedColumnName="id" )
 )
 	private List<Tag> bookTags;
-	
+	*/
 	public Book() {
 	}
 
@@ -80,13 +80,13 @@ public class Book {
 		this.description = description;
 	}
 
-	public Category getCategory() {
+	/*public Category getCategory() {
 		return category;
 	}
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
+	}*/
 
 	public Author getAuthor() {
 		return author;
@@ -96,7 +96,7 @@ public class Book {
 		this.author = author;
 	}
 
-	public List<BookChapter> getChapters() {
+	/*public List<BookChapter> getChapters() {
 		return chapters;
 	}
 
@@ -110,7 +110,7 @@ public class Book {
 
 	public void setBookTags(List<Tag> bookTags) {
 		this.bookTags = bookTags;
-	}
+	}*/
 	
 	
 }
