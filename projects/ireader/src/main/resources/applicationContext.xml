@@ -51,8 +51,20 @@
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
+				<!-- 开启二级缓存 -->  
+				<entry key="hibernate.cache.use_second_level_cache" value="true"/>
+				<!-- 开启查询缓存 --> 
+				<entry key="hibernate.cache.use_query_cache" value="true"/>
+				<!-- 二级缓存区域名的前缀 -->  
+				<!--<property name="hibernate.cache.region_prefix">h3test</property>-->  
+				<!-- 高速缓存提供程序 -->
 				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+				<!-- 指定缓存配置文件位置 -->  
 				<entry key="net.sf.ehcache.configurationResourceName" value="cache/ehcache.xml" />
+				<!-- 强制Hibernate以更人性化的格式将数据存入二级缓存 -->  
+				<entry key="hibernate.cache.use_structured_entries"  value="true" />  
+				<!-- Hibernate将收集有助于性能调节的统计数据 -->  
+				<entry key="hibernate.generate_statistics" value="true" />  
 			</map>
 		</property>
 	</bean>

@@ -9,8 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name="ee_category")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Category {
 
 	@Id

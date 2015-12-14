@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ehcache updateCheck="false" name="ireader-cache">
+	<!-- http://ehcache.org/ehcache.xml -->
+	<diskStore path="java.io.tmpdir/ehcache/ireader" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		overflowToDisk="true" maxEntriesLocalDisk="100000" />
+
+	<!-- Special objects setting. -->
+	<cache name="com.digitalplay.network.ireader.domain.Account" maxEntriesLocalHeap="1000" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="com.digitalplay.network.ireader.domain.Account.subscribes" maxEntriesLocalHeap="1000" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="com.digitalplay.network.ireader.domain.Account.roles" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />
+	<cache name="com.digitalplay.network.ireader.domain.AccountSubscribe" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />
+	<cache name="com.digitalplay.network.ireader.domain.Author" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+	<cache name="com.digitalplay.network.ireader.domain.Book" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+	<cache name="com.digitalplay.network.ireader.domain.BookChapter" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+	<cache name="com.digitalplay.network.ireader.domain.Category" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+	<cache name="com.digitalplay.network.ireader.domain.Role" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+	<cache name="com.digitalplay.network.ireader.domain.Tag" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+</ehcache>

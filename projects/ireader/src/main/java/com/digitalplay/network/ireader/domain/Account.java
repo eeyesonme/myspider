@@ -1,5 +1,6 @@
 package com.digitalplay.network.ireader.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,11 +11,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 @Entity
 @Table(name="ee_account")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Account {
 
 	@Id
@@ -35,22 +43,15 @@ public class Account {
 	
 	private Date regist_date;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="account")
-	private List<AccountSubscribe> subscribes;
+	/*@OneToMany(fetch = FetchType.LAZY,mappedBy="account")
+	private List<AccountSubscribe> subscribes;*/
 	
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="ee_account_role",joinColumns =@JoinColumn(name="account_id" ,referencedColumnName="id" ),
-			inverseJoinColumns =@JoinColumn (name="role_id" ,referencedColumnName="id" )
-	)
-	private List<Role> roles;
-	
-	/*@ManyToMany(fetch = FetchType.LAZY)
-	private List<Book> hits;
-	
-	
-	
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Book> stars;*/
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="ee_account_role",joinColumns ={@JoinColumn(name="account_id")},inverseJoinColumns ={@JoinColumn (name="role_id")}	)
+	@Fetch(FetchMode.SUBSELECT)
+	@OrderBy("id ASC")
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	private List<Role> roles = new ArrayList();
 	
 	public Long getId() {
 		return id;
@@ -116,13 +117,13 @@ public class Account {
 		this.regist_date = regist_date;
 	}
 
-	public List<AccountSubscribe> getSubscribes() {
+	/*public List<AccountSubscribe> getSubscribes() {
 		return subscribes;
 	}
 
 	public void setSubscribes(List<AccountSubscribe> subscribes) {
 		this.subscribes = subscribes;
-	}
+	}*/
 
 	public List<Role> getRoles() {
 		return roles;

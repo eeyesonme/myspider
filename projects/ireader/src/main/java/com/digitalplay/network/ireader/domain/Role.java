@@ -1,16 +1,16 @@
 package com.digitalplay.network.ireader.domain;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name="ee_role")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role {
 	
 	@Id
@@ -21,9 +21,6 @@ public class Role {
 	
 	private String permissions;
 	
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy="roles")
-	private List<Account> accounts;
-
 	public Long getId() {
 		return id;
 	}
