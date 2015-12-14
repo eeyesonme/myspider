@@ -12,6 +12,8 @@ insert into ee_account_role(account_id,role_id) values (1,3);
 insert into ee_account_role(account_id,role_id) values (2,2);
 insert into ee_account_role(account_id,role_id) values (2,3);
 insert into ee_account_role(account_id,role_id) values (3,3);
+insert into ee_account_role(account_id,role_id) values (2,1);
+insert into ee_account_role(account_id,role_id) values (3,1);
 
 insert into ee_author(name, email,sex,status) values ('柳下挥 ', 'liuxiahui@163.com','F','Active');
 insert into ee_author(name, email,sex,status) values ('关中老人', 'gzlr@163.com','M','Active');

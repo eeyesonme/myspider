@@ -32,6 +32,7 @@ create table ee_account (
 ) ;
 
  create table ee_account_role (
+ 		id bigint auto_increment,
         account_id bigint not null,
         role_id bigint not null,
         primary key (account_id, role_id)

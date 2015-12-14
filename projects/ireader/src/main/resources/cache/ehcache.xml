@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <ehcache updateCheck="false" name="ireader-cache">
 	<!-- http://ehcache.org/ehcache.xml -->
-	<diskStore path="java.io.tmpdir/ehcache/ireader" />
+	<diskStore path="/ehcache/ireader" />
 
 	<!-- DefaultCache setting. -->
 	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"

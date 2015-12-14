@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -46,12 +44,10 @@ public class Account {
 	/*@OneToMany(fetch = FetchType.LAZY,mappedBy="account")
 	private List<AccountSubscribe> subscribes;*/
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="ee_account_role",joinColumns ={@JoinColumn(name="account_id")},inverseJoinColumns ={@JoinColumn (name="role_id")}	)
+	@OneToMany(mappedBy="account")
 	@Fetch(FetchMode.SUBSELECT)
-	@OrderBy("id ASC")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<Role> roles = new ArrayList();
+	private List<AccountRole> account_roles = new ArrayList();
 	
 	public Long getId() {
 		return id;
@@ -77,7 +73,7 @@ public class Account {
 		this.email = email;
 	}
 
-	public String getMobile() {
+	public String getMobile() { 
 		return mobile;
 	}
 
@@ -125,12 +121,12 @@ public class Account {
 		this.subscribes = subscribes;
 	}*/
 
-	public List<Role> getRoles() {
-		return roles;
+	public List<AccountRole> getAccountRoles() {
+		return account_roles;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setAccountRoles(List<AccountRole> account_roles) {
+		this.account_roles = account_roles;
 	}
 	
 	
