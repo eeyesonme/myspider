@@ -1,6 +1,7 @@
 package com.digitalplay.network.ireader.web;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Validator;
@@ -28,12 +29,13 @@ public class BookEndPoint {
 	@Autowired
 	private Validator validator;
 	
-	@RequestMapping(value="/api/books/" ,method = RequestMethod.GET, produces = MediaTypes.JSON_UTF_8)
+	@RequestMapping(value="/api/books" ,produces = MediaTypes.JSON_UTF_8)
 	public List<Book> list(Pageable pageable){
 		Iterable<Book> book= bookService.findAll(pageable);
 		ArrayList<Book> books= new ArrayList<Book>();
-		while(book.iterator().hasNext()){
-			books.add(book.iterator().next());
+		Iterator<Book> iter= book.iterator();
+		while(iter.hasNext()){
+			books.add(iter.next());
 		}
 		return books;
 	}

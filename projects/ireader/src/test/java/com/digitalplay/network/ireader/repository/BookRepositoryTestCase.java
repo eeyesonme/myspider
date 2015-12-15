@@ -1,20 +1,15 @@
 package com.digitalplay.network.ireader.repository;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.util.List;
+import java.util.Iterator;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.digitalplay.network.ireader.domain.Author;
 import com.digitalplay.network.ireader.domain.Book;
-import com.digitalplay.network.ireader.domain.Category;
-import com.digitalplay.network.ireader.domain.Tag;
 import com.digitalplay.network.ireader.test.spring.SpringTransactionalTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })
@@ -24,7 +19,14 @@ public class BookRepositoryTestCase extends SpringTransactionalTestCase {
 	private BookRepository bookRepository;
 
 	@Test
-	public void findTasksByUserId() throws Exception {
-		Book book = bookRepository.findOne(1L);
+	public void list() throws Exception {
+		PageRequest page = new PageRequest(0,5);
+		Page<Book> bookPage =bookRepository.findAll(page);
+		Iterator<Book> iter = bookPage.iterator();
+		while (iter.hasNext()){
+			Book book= iter.next();
+			Author author =  book.getAuthor();
+			System.out.println("Book:                 id[" + book.getId()+"] ,Name["+ book.getName()+"] ,Author["+ author.getName()+"]");
+		}
 	}
 }

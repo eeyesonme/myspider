@@ -15,6 +15,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="ee_author")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -37,6 +40,7 @@ public class Author {
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="author")
 	@Fetch(FetchMode.SUBSELECT)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+	@JsonManagedReference
 	private List<Book> books;
 	
 	public Long getId() {

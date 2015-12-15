@@ -1,6 +1,7 @@
 package com.digitalplay.network.ireader.web;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,9 @@ public class AccountEndPoint {
 	public List<Account> listAllUser(Pageable pageable){
 		Iterable<Account> accountIter =accountServcie.findAll(pageable);
 		List<Account> accounts = new ArrayList<Account>();
-		while(accountIter.iterator().hasNext()){
-			accounts.add(accountIter.iterator().next());
+		Iterator<Account> iter = accountIter.iterator();
+		while(iter.hasNext()){
+			accounts.add(iter.next());
 		}
 		return accounts;
 	}
