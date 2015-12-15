@@ -19,23 +19,44 @@ public class HibernateCacheDemo extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void testHibernateCache(){
-		Session session1 = sessionFactory.openSession();
-		Transaction t1 =session1.beginTransaction();
-		Author author = getAuthor(1L,session1);
-		t1.commit();
-		session1.close();
+		System.out.println("GET Author, ATTEMPT #1");
+		Author author = getAuthor(1L);
+		printStats();
+		
+		System.out.println("GET Author, ATTEMPT #2");
+		 author = getAuthor(1L);
+		printStats();
+		
+		System.out.println("GET Author, ATTEMPT #3");
+		 author = getAuthor(1L);
+		printStats();
+		
 	}
 	
-	public Author getAuthor(long id ,final Session s) {
+	protected Session openSession() {
+		return sessionFactory.openSession();
+	}
+	
+	public Author getAuthor(long id ) {
+		Session s= openSession();
 		final Author author = (Author) s.get( Author.class, id );
-		s.getTransaction().commit();
+		if (!s.getTransaction().wasCommitted())
+			s.getTransaction().commit();
 		return author;
 	}
 	
-	public Book getBook(long id ,final Session s) {
+	public Book getBook(long id ) {
+		Session s= openSession();
 		s.getTransaction().begin();
 		final Book book = (Book) s.get( Book.class, id );
-		s.getTransaction().commit();
+		if (!s.getTransaction().wasCommitted())
+				s.getTransaction().commit();
 		return book;
+	}
+	
+	public void printStats() {
+		System.out.println("2lc put count: " + sessionFactory.getStatistics().getSecondLevelCachePutCount());
+		System.out.println("2lc hit count: " + sessionFactory.getStatistics().getSecondLevelCacheHitCount());
+		System.out.println("2lc miss count: " + sessionFactory.getStatistics().getSecondLevelCacheMissCount());
 	}
 }
