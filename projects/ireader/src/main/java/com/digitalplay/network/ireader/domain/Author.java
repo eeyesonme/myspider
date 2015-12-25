@@ -37,7 +37,7 @@ public class Author {
 	
 	private String status;
 
-	@OneToMany(fetch=FetchType.EAGER,mappedBy="author")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="author")
 	@Fetch(FetchMode.SUBSELECT)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference
