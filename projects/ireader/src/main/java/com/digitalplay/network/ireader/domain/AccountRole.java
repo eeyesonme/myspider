@@ -24,7 +24,7 @@ public class AccountRole {
 	private Account account;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="role_id" ,nullable=false, updatable=false)
+	@JoinColumn(name="role_id")
 	private Role role;
 	
 	

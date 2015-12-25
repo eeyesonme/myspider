@@ -18,7 +18,8 @@
 
 	<!-- project default level -->
 	<logger name="com.digitalplay.network.ireader.web" level="DEBUG" /> 
-	<logger name="org.hibernate.cache" level="DEBUG" />
+	<logger name="org.hibernate" level="TRACE" />
+	<logger name="org.jboss.logging" level="TRACE" />
 
 	<root level="INFO">
 		<appender-ref ref="console" />
