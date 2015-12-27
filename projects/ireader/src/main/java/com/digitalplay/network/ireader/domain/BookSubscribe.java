@@ -15,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="ee_book_subscribe")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class AccountSubscribe {
+public class BookSubscribe {
 
 	@Id
 	@GeneratedValue

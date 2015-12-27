@@ -16,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name="ee_book_chapter")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class BookChapter {
+public class BookContent {
 
 	@Id
 	@GeneratedValue
@@ -27,7 +27,7 @@ public class BookChapter {
 	private String content;
 	
 	@Column(name="update_time")
-	private Date update_time;
+	private Date updatetime;
 	
 	@ManyToOne
 	@JoinColumn(name="book_id" ,nullable=false, updatable=false)
@@ -58,11 +58,11 @@ public class BookChapter {
 	}
 
 	public Date getUpdatetime() {
-		return update_time;
+		return updatetime;
 	}
 
 	public void setUpdatetime(Date updatetime) {
-		this.update_time = updatetime;
+		this.updatetime = updatetime;
 	}
 	
 	

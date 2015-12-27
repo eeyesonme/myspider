@@ -1,18 +1,23 @@
 package com.digitalplay.network.ireader.domain;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ee_book")
@@ -22,24 +27,21 @@ public class Book {
 	@Id
 	@GeneratedValue
 	private Long id;
-
-	@Column(nullable = false)
 	private String name;
-
-	@Column(nullable = false)
 	private String description;
 	
-	/*@ManyToOne
-	@JoinColumn(name="category_id" ,nullable=false, updatable=false)
-	private Category category;*/
+	@ManyToOne
+	@JoinColumn(name="category_id")
+	private Category category;
 	
 	@ManyToOne
-	@JoinColumn(name="author_id" ,nullable=false, updatable=false)
+	@JoinColumn(name="author_id")
 	@JsonBackReference
 	private Author author;
 	
-/*	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
-	private List<BookChapter> chapters;*/
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="book")
+	@Fetch(FetchMode.SUBSELECT)
+	private List<BookContent> bookContents =new ArrayList<BookContent>();
 	
 	/*@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="ee_book_tag",joinColumns =@JoinColumn(name="book_id" ,referencedColumnName="id" ),
@@ -78,13 +80,13 @@ public class Book {
 		this.description = description;
 	}
 
-	/*public Category getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}*/
+	}
 
 	public Author getAuthor() {
 		return author;
@@ -94,14 +96,15 @@ public class Book {
 		this.author = author;
 	}
 
-	/*public List<BookChapter> getChapters() {
-		return chapters;
+	public List<BookContent> getBookContents() {
+		return bookContents;
 	}
 
-	public void setChapters(List<BookChapter> chapters) {
-		this.chapters = chapters;
+	public void setBookContents(List<BookContent> bookContents) {
+		this.bookContents = bookContents;
 	}
 
+	/*
 	public List<Tag> getBookTags() {
 		return bookTags;
 	}

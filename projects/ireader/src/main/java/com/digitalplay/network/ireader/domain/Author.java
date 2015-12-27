@@ -1,21 +1,18 @@
 package com.digitalplay.network.ireader.domain;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -26,22 +23,16 @@ public class Author {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Column(nullable = false)
 	private String name;
-	
-	@Column(nullable = false)
 	private String email;
-	
 	private String sex;
-	
 	private String status;
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="author")
 	@Fetch(FetchMode.SUBSELECT)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference
-	private List<Book> books;
+	private List<Book> books = new ArrayList<Book>();
 	
 	public Long getId() {
 		return id;

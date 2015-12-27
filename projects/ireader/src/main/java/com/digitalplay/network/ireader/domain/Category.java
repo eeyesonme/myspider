@@ -1,5 +1,6 @@
 package com.digitalplay.network.ireader.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="ee_category")
@@ -25,8 +28,9 @@ public class Category {
 	
 	private String status;
 
-	/*@OneToMany(fetch = FetchType.LAZY,mappedBy="category")
-	private List<Book> books;*/
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="category")
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Book> books =new ArrayList<Book> ();
 	
 	public Long getId() {
 		return id;
