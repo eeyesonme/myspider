@@ -26,7 +26,7 @@ public class BookRepositoryTestCase extends SpringTransactionalTestCase {
 		while (iter.hasNext()){
 			Book book= iter.next();
 			Author author =  book.getAuthor();
-			System.out.println("Book:                 id[" + book.getId()+"] ,Name["+ book.getName()+"] ,Author["+ author.getName()+"]");
+			System.out.println("Book: id[" + book.getId()+"] ,Name["+ book.getName()+"] ,Author["+ author.getName()+"]");
 		}
 	}
 }
