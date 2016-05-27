@@ -1,5 +1,6 @@
 package com.digitalplay.network.ireader.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,11 +18,9 @@ public class Tag {
 	@GeneratedValue
 	private Long id;
 	
-	private String name;
+	@Column(name="name")
+	private String tagName;
 
-	/*@ManyToMany(fetch = FetchType.LAZY,mappedBy="bookTags")
-	private List<Book>  books;*/
-	
 	public Long getId() {
 		return id;
 	}
@@ -30,12 +29,13 @@ public class Tag {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTagName() {
+		return tagName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
 	}
+
 
 }

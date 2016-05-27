@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -43,12 +41,28 @@ public class Account {
 	
 	private Date regist_date;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "ee_account_role", joinColumns = { @JoinColumn(name = "account_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-	@Fetch(FetchMode.SUBSELECT)
-	@OrderBy("id ASC")
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="account",cascade = CascadeType.ALL, orphanRemoval = true)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-	private List<Role> roleList = new ArrayList<Role>();
+	@JsonManagedReference
+	private List<AccountRole> roles = new ArrayList<AccountRole>();
+	
+	public List<AccountRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<AccountRole> roles) {
+		this.roles = roles;
+	}
+
+	public void addRole(AccountRole role){
+		this.roles.add(role);
+		role.setAccount(this);
+	}
+	
+	public void removeRole(AccountRole role){
+		role.setAccount(null);
+		this.roles.remove(role);
+	}
 	
 	public Long getId() {
 		return id;
@@ -114,15 +128,6 @@ public class Account {
 		this.regist_date = regist_date;
 	}
 
-	public List<Role> getRoleList() {
-		return roleList;
-	}
 
-	public void setRoleList(List<Role> roleList) {
-		this.roleList = roleList;
-	}
-
-	
-	
 	
 }

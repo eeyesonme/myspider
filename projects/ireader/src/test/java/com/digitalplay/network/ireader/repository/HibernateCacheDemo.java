@@ -1,12 +1,12 @@
 package com.digitalplay.network.ireader.repository;
 
+import java.sql.Connection;
+import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.proxy.HibernateProxy;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,6 +14,10 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.digitalplay.network.ireader.domain.Author;
 import com.digitalplay.network.ireader.domain.Book;
+import com.digitalplay.network.ireader.domain.BookContent;
+import com.digitalplay.network.ireader.domain.Category;
+
+import net.sf.ehcache.hibernate.HibernateUtil;
 
 
 @ContextConfiguration(locations = { "/applicationContext_jdbc.xml"})
@@ -21,7 +25,6 @@ public class HibernateCacheDemo extends AbstractJUnit4SpringContextTests {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
 	
 //	@Test
 	public void testHibernateLoadAndGet(){
@@ -48,41 +51,50 @@ public class HibernateCacheDemo extends AbstractJUnit4SpringContextTests {
 		
 		
 	}
+
 	@Test
 	public void testHibernateCache(){
-		Author author = getAuthor(1L);
-		author.getBooks().get(0).getName();
+		 System.out.println("Get Author after Author Loaded, ATTEMPT #1");
+		 Session s = openSession();
+		Book book = getBook(2L,s);
+		Hibernate.initialize(book.getAuthor());
+		Hibernate.initialize(book.getBookContents());
+		Hibernate.initialize(book.getCategory());
+		Hibernate.initialize(book.getBookTags());
+		closeSession(s);
 		printStats();
+	
+		System.out.println("Get Author after Author Loaded, ATTEMPT #2");
+		s = openSession();
+		book = getBook(2L,s);
+		closeSession(s);
 		
-		author = getAuthor(1L);
-		author.getBooks().get(0).getName();
 		printStats();
-		
-		
 	}
 	
 	protected Session openSession() {
 		return sessionFactory.openSession();
 	}
 	
-	public Author getAuthor(long id ) {
-		Session s= openSession();
+	protected Connection  closeSession(Session s) {
+		return	s.close();
+	}
+	
+	public Author getAuthor(long id ,Session s ) {
 		s.getTransaction().begin();
 		final Author author = (Author) s.get( Author.class, id );
 		s.getTransaction().commit();
 		return author;
 	}
 	
-	public Author loadAuthor(long id ) {
-		Session s= openSession();
+	public Author loadAuthor(long id ,Session s) {
 		s.getTransaction().begin();
 		final Author author = (Author) s.load( Author.class, id );
 		s.getTransaction().commit();
 		return author;
 	}
 	
-	public Book getBook(long id ) {
-		Session s= openSession();
+	public Book getBook(long id ,Session s) {
 		s.getTransaction().begin();
 		final Book book = (Book) s.get( Book.class, id );
 		s.getTransaction().commit();

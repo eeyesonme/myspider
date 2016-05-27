@@ -3,6 +3,7 @@ package com.digitalplay.network.ireader.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,11 +24,11 @@ public class BookSubscribe {
 	
 	private Date subscribe_time;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="account_id" ,nullable=false, updatable=false)
 	private Account account;
 	
-	@ManyToOne(optional=false)
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="book_id" ,nullable=false, updatable=false)
 	private Book book;
 

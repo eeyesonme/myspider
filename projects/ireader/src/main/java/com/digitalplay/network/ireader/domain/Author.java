@@ -1,13 +1,15 @@
 package com.digitalplay.network.ireader.domain;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
@@ -32,7 +34,7 @@ public class Author {
 	@Fetch(FetchMode.SUBSELECT)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference
-	private List<Book> books = new ArrayList<Book>();
+	private Collection<Book> books = new ArrayList<Book>();
 	
 	public Long getId() {
 		return id;
@@ -74,14 +76,12 @@ public class Author {
 		this.status = status;
 	}
 
-	public List<Book> getBooks() {
+	public Collection<Book> getBooks() {
 		return books;
 	}
 
-	public void setBooks(List<Book> books) {
+	public void setBooks(Collection<Book> books) {
 		this.books = books;
 	}
-
-	
 	
 }

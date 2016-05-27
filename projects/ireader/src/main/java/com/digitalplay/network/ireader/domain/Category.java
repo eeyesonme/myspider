@@ -1,7 +1,7 @@
 package com.digitalplay.network.ireader.domain;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +30,7 @@ public class Category {
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="category")
 	@Fetch(FetchMode.SUBSELECT)
-	private List<Book> books =new ArrayList<Book> ();
+	private Collection<Book> books =new ArrayList<Book> ();
 	
 	public Long getId() {
 		return id;
@@ -55,6 +55,15 @@ public class Category {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public Collection<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(Collection<Book> books) {
+		this.books = books;
+	}
+	
 	
 	
 }

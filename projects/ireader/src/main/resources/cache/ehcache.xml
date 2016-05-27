@@ -8,20 +8,26 @@
 	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
 		overflowToDisk="true" maxEntriesLocalDisk="100000" />
 
+	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+	    maxElementsInMemory="5000" 
+	    eternal="true" 
+	    overflowToDisk="true" />
+	<cache name="org.hibernate.cache.StandardQueryCache"
+	    maxElementsInMemory="10000" 
+	    eternal="false" 
+	    timeToLiveSeconds="120"
+	    overflowToDisk="true" />
+	    
 	<!-- Special objects setting. -->
 	<cache name="com.digitalplay.network.ireader.domain.Account" maxEntriesLocalHeap="1000" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="10000" />
-	<cache name="com.digitalplay.network.ireader.domain.Account.subscribes" maxEntriesLocalHeap="1000" eternal="true"
-		overflowToDisk="true" maxEntriesLocalDisk="10000" />
-	<cache name="com.digitalplay.network.ireader.domain.Account.roles" maxEntriesLocalHeap="100" eternal="true"
-		overflowToDisk="true" maxEntriesLocalDisk="1000" />
-	<cache name="com.digitalplay.network.ireader.domain.AccountSubscribe" maxEntriesLocalHeap="100" eternal="true"
-		overflowToDisk="true" maxEntriesLocalDisk="1000" />
 	<cache name="com.digitalplay.network.ireader.domain.Author" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
 	<cache name="com.digitalplay.network.ireader.domain.Book" maxEntriesLocalHeap="100" eternal="true"
+		overflowToDisk="true" maxEntriesLocalDisk="1000" />
+	<cache name="com.digitalplay.network.ireader.domain.BookSubscribe" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="com.digitalplay.network.ireader.domain.BookChapter" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="com.digitalplay.network.ireader.domain.BookContent" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
 	<cache name="com.digitalplay.network.ireader.domain.Category" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	

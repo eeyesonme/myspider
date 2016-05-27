@@ -16,12 +16,14 @@
 		</encoder>
 	</appender>
 
-	<!-- project default level -->
-	<logger name="com.digitalplay.network.ireader.web" level="DEBUG" /> 
-	<logger name="org.hibernate" level="TRACE" />
-	<logger name="org.jboss.logging" level="TRACE" />
-
-	<root level="INFO">
+	<!-- project default level --> 
+    <logger name="org.hibernate.event.internal.DefaultLoadEventListener"    level="TRACE" />  
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder"    level="TRACE" />  
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor"  level="DEBUG" />  
+    <logger name="org.hibernate.SQL" level="DEBUG" />  
+    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />  
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />  
+	<root level="warn">
 		<appender-ref ref="console" />
 		<appender-ref ref="rollingFile" />
 	</root>

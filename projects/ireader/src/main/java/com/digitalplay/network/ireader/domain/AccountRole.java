@@ -1,6 +1,5 @@
 package com.digitalplay.network.ireader.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,40 +14,23 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="ee_book_content")
+@Table(name="ee_account_role")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class BookContent {
+public class AccountRole {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-		
-	@Column(name="title")
-	private String contentTitle;
 	
-	@Column(name="content")
-	private String contentMain;
-
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="book_id")
+	@JoinColumn(name="account_id")
 	@JsonBackReference
-	private  Book book;
+	private Account account;
 	
-	public String getContentTitle() {
-		return contentTitle;
-	}
-
-	public void setContentTitle(String contentTitle) {
-		this.contentTitle = contentTitle;
-	}
-
-	public String getContentMain() {
-		return contentMain;
-	}
-
-	public void setContentMain(String contentMain) {
-		this.contentMain = contentMain;
-	}
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="role_id")
+	@JsonBackReference
+	private Role role;
 
 	public Long getId() {
 		return id;
@@ -58,16 +40,21 @@ public class BookContent {
 		this.id = id;
 	}
 
-	public Book getBook() {
-		return book;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
-	
-	
-	
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	
 	
 }

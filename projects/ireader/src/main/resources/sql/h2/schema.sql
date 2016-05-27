@@ -70,7 +70,7 @@ create table ee_category(
 
 create table ee_tag(
 	id bigint auto_increment,
-    name varchar(64) not null,
+    tag_name varchar(64) not null,
 	primary key (id)
 );
 create table ee_book(
@@ -92,12 +92,11 @@ create table ee_book_subscribe(
 	primary key(id)
 );
 
-create table ee_book_chapter(
+create table ee_book_content(
 	id bigint auto_increment,
 	book_id bigint not null,
-	title varchar(64) not null,
-	content varchar(255) not null,
-	update_time timestamp not null default current_timestamp,
+	conent_title varchar(64) not null,
+	content_main varchar(255) not null,
 	primary key(id)
 );
 
