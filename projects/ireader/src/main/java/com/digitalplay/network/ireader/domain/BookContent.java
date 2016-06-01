@@ -4,10 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -15,12 +17,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="ee_book_content")
+@Table(name="T_BOOK_CONTENT")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BookContent {
 
+	@TableGenerator(name = "bookcontent_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="BOOKCONTENT_PK",allocationSize=1)
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="bookcontent_gen") 
 	private Long id;
 		
 	@Column(name="title")

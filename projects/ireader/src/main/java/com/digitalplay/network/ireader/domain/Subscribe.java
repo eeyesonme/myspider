@@ -5,22 +5,25 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@Table(name="ee_book_subscribe")
+@Table(name="T_SUBSCRIBE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class BookSubscribe {
+public class Subscribe {
 
+	@TableGenerator(name = "subscribe_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="SUBSCRIBE_PK",allocationSize=1)
 	@Id
-	@GeneratedValue
-	private long id;
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="subscribe_gen") 
+	private Long id;
 	
 	private Date subscribe_time;
 	
@@ -31,15 +34,6 @@ public class BookSubscribe {
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="book_id" ,nullable=false, updatable=false)
 	private Book book;
-
-	
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public Date getSubscribe_time() {
 		return subscribe_time;
@@ -55,6 +49,22 @@ public class BookSubscribe {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 	

@@ -7,9 +7,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -17,12 +19,13 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="ee_role")
+@Table(name="T_ROLE")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role {
 	
+	@TableGenerator(name = "role_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="ROLE_PK",allocationSize=1)
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="role_gen") 
 	private Long id;
 	
 	private String name;

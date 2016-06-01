@@ -47,6 +47,8 @@
 		</property>
 		<property name="jpaPropertyMap">
 			<map>
+			    <entry key="hibernate.jdbc.batch_size" value="50" />
+			    <entry key="hibernate.jdbc.fetch_size" value="50" />
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
@@ -68,9 +70,7 @@
 		</property>
 	</bean>
 
-	<jpa:repositories base-package="com.digitalplay.network.ireader.repository"
-		transaction-manager-ref="transactionManager"
-		entity-manager-factory-ref="entityManagerFactory" />
+	<jpa:repositories base-package="com.digitalplay.network.ireader.repository"	transaction-manager-ref="transactionManager" 		entity-manager-factory-ref="entityManagerFactory" />
 
 	<!-- Jpa 事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -78,7 +78,6 @@
 	</bean>
 
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 </beans>

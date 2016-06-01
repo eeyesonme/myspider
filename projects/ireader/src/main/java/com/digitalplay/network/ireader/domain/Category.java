@@ -6,9 +6,11 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -16,12 +18,13 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name="ee_category")
+@Table(name="T_CATEGORY")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Category {
 
+	@TableGenerator(name = "category_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="CATEGORY_PK",allocationSize=1)
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="category_gen") 
 	private Long id;
 	
 	private String name;
