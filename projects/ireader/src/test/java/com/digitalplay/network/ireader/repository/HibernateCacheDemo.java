@@ -1,10 +1,10 @@
 package com.digitalplay.network.ireader.repository;
 
 import java.sql.Connection;
-import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
@@ -14,10 +14,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.digitalplay.network.ireader.domain.Author;
 import com.digitalplay.network.ireader.domain.Book;
-import com.digitalplay.network.ireader.domain.BookContent;
 import com.digitalplay.network.ireader.domain.Category;
-
-import net.sf.ehcache.hibernate.HibernateUtil;
 
 
 @ContextConfiguration(locations = { "/applicationContext_jdbc.xml"})
@@ -54,21 +51,33 @@ public class HibernateCacheDemo extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testHibernateCache(){
-		 System.out.println("Get Author after Author Loaded, ATTEMPT #1");
-		 Session s = openSession();
-		Book book = getBook(2L,s);
-		Hibernate.initialize(book.getAuthor());
-		Hibernate.initialize(book.getBookContents());
-		Hibernate.initialize(book.getCategory());
-		Hibernate.initialize(book.getBookTags());
-		closeSession(s);
+		Session s1= openSession();
+		s1.getTransaction().begin();
+		Category c4=(Category)s1.get(Category.class, 3L);
+		Category c5=(Category)s1.get(Category.class, 4L);
+		Category c6=(Category)s1.get(Category.class, 5L);
+		Category c7=(Category)s1.get(Category.class, 6L);
+		Category c3=(Category)s1.get(Category.class, 7L);
+		s1.getTransaction().commit();
+		s1.close();
 		printStats();
-	
-		System.out.println("Get Author after Author Loaded, ATTEMPT #2");
-		s = openSession();
-		book = getBook(2L,s);
-		closeSession(s);
 		
+		Session s2= openSession();
+		s2.getTransaction().begin();
+		String queryString = "update Category set name=? where id=?";
+		Query  q= s2.createQuery(queryString);
+		q.setString(0, "KKAK");
+		q.setLong(1, 3L);
+		q.setCacheable(true);
+		q.executeUpdate();
+		s2.get(Category.class, 3L);
+		s2.get(Category.class, 4L);
+		s2.get(Category.class, 5L);
+		s2.get(Category.class, 6L);
+		s2.get(Category.class, 7L);
+		
+		s2.getTransaction().commit();
+		s2.close();
 		printStats();
 	}
 	

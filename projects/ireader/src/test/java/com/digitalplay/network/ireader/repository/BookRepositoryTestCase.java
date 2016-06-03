@@ -76,9 +76,9 @@ public class BookRepositoryTestCase extends SpringTransactionalTestCase {
   @Test
   public void testBatch() throws Exception {
 	  Book bookFrom = bookDao.findOne(4L);
-	  Collection<Book> books = new ArrayList<Book>(10100);
+	  Collection<Book> books = new ArrayList<Book>(60);
 	  
-	  for(int i=0 ; i<10000; i++){
+	  for(int i=0 ; i<50; i++){
 		  Book book =copyBook(bookFrom);
 		  books.add(book);
 	  }
