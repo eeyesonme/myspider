@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="T_ROLE")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="role",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role {
 	
 	@TableGenerator(name = "role_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="ROLE_PK",allocationSize=1)

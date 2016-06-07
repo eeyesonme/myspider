@@ -57,7 +57,7 @@
 				<!-- 开启查询缓存 --> 
 				<entry key="hibernate.cache.use_query_cache" value="true"/>
 				<!-- 二级缓存区域名的前缀 -->  
-				<!--<property name="hibernate.cache.region_prefix">h3test</property>-->  
+			<!-- 	<entry key="hibernate.cache.region_prefix" value="ireader-l2c" /> -->
 				<!-- 高速缓存提供程序 -->
 				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
 				<!-- 指定缓存配置文件位置 -->  

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="T_ACCOUNT_ROLE")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region ="Account_Role" ,usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AccountRole {
 	@TableGenerator(name = "accountrole_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="ACCOUNTROLE_PK",allocationSize=1)
 	@Id

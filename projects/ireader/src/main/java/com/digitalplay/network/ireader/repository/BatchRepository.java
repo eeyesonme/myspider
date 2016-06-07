@@ -1,8 +1,11 @@
 package com.digitalplay.network.ireader.repository;
 
 import java.util.Collection;
-import java.util.List;
+
+import javax.transaction.Transactional;
+
 public interface BatchRepository<T> {
-	 List<T> batchInsert(Collection<T> entities);
-	 List<T> batchUpdate(Collection<T> entities);
+	@Transactional
+	 void batchInsert(Collection<T> entities);
+	 void batchUpdate(Collection<T> entities);
 }

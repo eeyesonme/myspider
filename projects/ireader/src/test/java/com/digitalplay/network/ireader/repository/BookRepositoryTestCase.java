@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.digitalplay.network.ireader.domain.Author;
 import com.digitalplay.network.ireader.domain.Book;
@@ -16,7 +16,7 @@ import com.digitalplay.network.ireader.domain.Category;
 import com.digitalplay.network.ireader.test.spring.SpringTransactionalTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })
-@TransactionConfiguration(defaultRollback=false)
+@Rollback(false)
 public class BookRepositoryTestCase extends SpringTransactionalTestCase {
 
 	@Autowired

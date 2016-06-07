@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="T_ACCOUNT")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Account", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Account {
 
 	@TableGenerator(name = "account_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="ACCOUNT_PK",allocationSize=1)

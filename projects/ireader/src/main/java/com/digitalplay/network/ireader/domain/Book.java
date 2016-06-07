@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name="T_BOOK")
 @DynamicUpdate
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Book",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Book {
 
 	@TableGenerator(name = "book_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="BOOK_PK",allocationSize=1)

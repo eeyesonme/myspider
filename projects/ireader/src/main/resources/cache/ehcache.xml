@@ -8,7 +8,7 @@
 	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
 		overflowToDisk="true" maxEntriesLocalDisk="100000" />
 
-	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+	<!-- <cache name="org.hibernate.cache.UpdateTimestampsCache"
 	    maxElementsInMemory="5000" 
 	    eternal="true" 
 	    overflowToDisk="true" />
@@ -16,23 +16,23 @@
 	    maxElementsInMemory="10000" 
 	    eternal="false" 
 	    timeToLiveSeconds="120"
-	    overflowToDisk="true" />
+	    overflowToDisk="true" /> -->
 	    
 	<!-- Special objects setting. -->
-	<cache name="com.digitalplay.network.ireader.domain.Account" maxEntriesLocalHeap="1000" eternal="true"
+	<cache name="Account" maxEntriesLocalHeap="1000" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="10000" />
-	<cache name="com.digitalplay.network.ireader.domain.Author" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="Author" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="com.digitalplay.network.ireader.domain.Book" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="Book" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />
-	<cache name="com.digitalplay.network.ireader.domain.BookSubscribe" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="Subscribe" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="com.digitalplay.network.ireader.domain.BookContent" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="BookContent" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="com.digitalplay.network.ireader.domain.Category" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="Category" maxEntriesLocalHeap="1000" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="com.digitalplay.network.ireader.domain.Role" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="Role" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="com.digitalplay.network.ireader.domain.Tag" maxEntriesLocalHeap="100" eternal="true"
+	<cache name="Tag" maxEntriesLocalHeap="100" eternal="true"
 		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
 </ehcache>

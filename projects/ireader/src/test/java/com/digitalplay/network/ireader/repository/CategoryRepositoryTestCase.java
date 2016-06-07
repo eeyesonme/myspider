@@ -2,6 +2,7 @@ package com.digitalplay.network.ireader.repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,22 @@ public class CategoryRepositoryTestCase extends SpringTransactionalTestCase {
 		categoryDao.save(category);
 	}
 	
-	@Test
+	//@Test
 	public void testBatchCreate(){
 		Category c= categoryDao.findOne(1L);
 		Collection<Category> categories = copyCategory(c);
 		categoryDao.batchInsert(categories);
 	}
 	
+	@Test
+	public void testFindByName(){
+		List<Category> ss =categoryDao.findByName("KKAK");
+		
+		
+	}
 	private Collection<Category> copyCategory(Category c){
 		Collection<Category> categories = new ArrayList<Category>(1);
-		for (int i =0 ; i<100;i++){
+		for (int i =0 ; i<1000;i++){
 			Category aCat= new Category();
 			aCat.setName(c.getName());
 			aCat.setStatus(c.getStatus());

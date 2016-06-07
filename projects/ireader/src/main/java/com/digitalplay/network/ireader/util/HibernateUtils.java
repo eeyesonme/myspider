@@ -4,9 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.hibernate.Cache;
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernateEntityManagerFactory;
+import org.hibernate.stat.Statistics;
 
 public class HibernateUtils {
 
@@ -18,6 +20,17 @@ public class HibernateUtils {
     public static Session getSession(EntityManager em) {  
         return (Session) em.getDelegate();  
     }  
+  
+    public static void manualCommit(EntityManager em){
+    		getSession(em).getTransaction().commit();
+    }
+    public static CacheMode getCacheMode(EntityManager em){
+    	return getSession(em).getCacheMode();
+    }
+    
+    public static void setCacheMode(EntityManager em,CacheMode mode){
+    	 getSession(em).setCacheMode(mode);
+    }
   
     /** 
      * 根据jpa EntityManager 获取 hibernate SessionFactory API 
@@ -61,7 +74,7 @@ public class HibernateUtils {
      * 清空一级缓存 
      * @param em 
      */  
-    public static void clear(EntityManager em) {  
+    public static void clearCache(EntityManager em) {  
         em.clear();  
     }  
   
@@ -72,9 +85,15 @@ public class HibernateUtils {
      * 3、查询缓存 
      * @param em 
      */  
-    public static void clearAll(EntityManager em) {  
+    public static void clearAllCache(EntityManager em) {  
     	  Cache cache = HibernateUtils.getCache(em.getEntityManagerFactory());  
     	  cache.evictAllRegions();
     }  
+    
+    public static void printStatics(EntityManager em){
+    	Statistics st = HibernateUtils.getSessionFactory(em).getStatistics();
+    	System.out.println(st.toString());
+    	System.out.println(st.getSecondLevelCacheStatistics("Category").toString());
+    }
   
 }
