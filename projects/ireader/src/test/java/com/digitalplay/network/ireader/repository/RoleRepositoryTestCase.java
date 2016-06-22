@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.digitalplay.network.ireader.domain.Role;
 import com.digitalplay.network.ireader.test.spring.SpringTransactionalTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })
@@ -15,6 +14,6 @@ public class RoleRepositoryTestCase extends SpringTransactionalTestCase {
 	
 	@Test
 	public void findOne(){
-		Role role = roleRepository.findOne(1L);
+		 roleRepository.findOne(1L);
 	}
 }

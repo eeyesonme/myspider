@@ -1,8 +1,9 @@
 package com.digitalplay.network.ireader.repository;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,7 +20,7 @@ public class AccountRepositoryTestCase extends SpringTransactionalTestCase {
 	private AccountRepository accountDao;
 	
 	
-	@Test
+//	@Test
 	public void  testDeleteAccount() throws Exception {
 		
 		Account account = accountDao.findOne(1L);
@@ -31,5 +32,27 @@ public class AccountRepositoryTestCase extends SpringTransactionalTestCase {
 		
 		accountDao.delete(account);
 		
+	}
+	
+	
+//	@Test
+	public void testCreateAccount() throws Exception {
+			Collection<Account> entities = generateTestAccounts(1000);
+			accountDao.batchInsert(entities);
+	}
+	
+	
+	private Collection<Account> generateTestAccounts(int size){
+		Collection<Account> accounts = new ArrayList<Account>(size);
+		for (int i = 0; i <size;i++){
+			Account account = new Account();
+			account.setEmail("account-test"+i+"@ireader.com");
+			account.setUsername("account-test"+i);
+			account.setMobile("xxx-xxxx-xxxx");
+			account.setPassword("ppppppp");
+			account.setSalt("ieiorjmdfasoe23dls0094");
+			accounts.add(account);
+		}
+		return accounts;
 	}
 }

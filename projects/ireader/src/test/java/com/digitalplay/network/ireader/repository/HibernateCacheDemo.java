@@ -53,11 +53,11 @@ public class HibernateCacheDemo extends AbstractJUnit4SpringContextTests {
 	public void testHibernateCache(){
 		Session s1= openSession();
 		s1.getTransaction().begin();
-		Category c4=(Category)s1.get(Category.class, 3L);
-		Category c5=(Category)s1.get(Category.class, 4L);
-		Category c6=(Category)s1.get(Category.class, 5L);
-		Category c7=(Category)s1.get(Category.class, 6L);
-		Category c3=(Category)s1.get(Category.class, 7L);
+		s1.get(Category.class, 3L);
+		s1.get(Category.class, 4L);
+		s1.get(Category.class, 5L);
+		s1.get(Category.class, 6L);
+		s1.get(Category.class, 7L);
 		s1.getTransaction().commit();
 		s1.close();
 		printStats();

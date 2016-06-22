@@ -57,7 +57,7 @@
 				<!-- 开启查询缓存 --> 
 				<entry key="hibernate.cache.use_query_cache" value="true"/>
 				<!-- 二级缓存区域名的前缀 -->  
-			<!-- 	<entry key="hibernate.cache.region_prefix" value="ireader-l2c" /> -->
+			 	<!-- <entry key="hibernate.cache.region_prefix" value="ireader-cache" />  -->
 				<!-- 高速缓存提供程序 -->
 				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
 				<!-- 指定缓存配置文件位置 -->  

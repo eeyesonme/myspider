@@ -35,10 +35,16 @@ public class CategoryRepositoryTestCase extends SpringTransactionalTestCase {
 	
 	@Test
 	public void testFindByName(){
-		List<Category> ss =categoryDao.findByName("KKAK");
-		
-		
+		List<Category> kkaks =categoryDao.findByName("KKAK");
+		for (Category c: kkaks){
+			System.out.println(c.getName());
+		}
+		List<Category> sadfs= categoryDao.findByName("KKAK");
+		for (Category c: sadfs){
+			System.out.println(c.getName());
+		}
 	}
+	
 	private Collection<Category> copyCategory(Category c){
 		Collection<Category> categories = new ArrayList<Category>(1);
 		for (int i =0 ; i<1000;i++){
