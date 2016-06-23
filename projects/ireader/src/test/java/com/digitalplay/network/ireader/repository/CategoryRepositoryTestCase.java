@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -34,14 +35,19 @@ public class CategoryRepositoryTestCase extends SpringTransactionalTestCase {
 	}
 	
 	@Test
-	public void testFindByName(){
-		List<Category> kkaks =categoryDao.findByName("KKAK");
-		for (Category c: kkaks){
-			System.out.println(c.getName());
+	public void testQueryCache(){
+		//Sort sort =new Sort(Direction.DESC, "id");
+		PageRequest pr = new PageRequest(0,1000);
+
+		List<Category> cates =categoryDao.findByNameOrderByIdDesc("东方玄幻",pr);
+		System.out.println("----------------Find data first time------------------");
+		for (Category c: cates){
+			System.out.println(c.getId()+":"+c.getName());
 		}
-		List<Category> sadfs= categoryDao.findByName("KKAK");
-		for (Category c: sadfs){
-			System.out.println(c.getName());
+		System.out.println("----------------Find data Second time------------------");
+		List<Category> cates2= categoryDao.findByNameOrderByIdDesc("东方玄幻",pr);
+		for (Category c: cates2){
+			System.out.println(c.getId()+":"+c.getName());
 		}
 	}
 	
