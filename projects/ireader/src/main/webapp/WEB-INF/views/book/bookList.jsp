@@ -9,9 +9,6 @@
 </head>
 
 <body>
-	<c:if test="${not empty message}">
-		<div id="message" class="alert alert-success"><button data-dismiss="alert" class="close">×</button>${message}</div>
-	</c:if>
 	<div class="row">
 		<div class="span4 offset7">
 			<form class="form-search" action="#">
@@ -23,7 +20,7 @@
 	</div>
 	
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>id</th><th>name</th><th>description></th><th>Category</th><th>Author</th></tr></thead>
+		<thead><tr><th>id</th><th>name</th><th>description</th><th>Category</th><th>Author</th></tr></thead>
 		<tbody>
 		<c:forEach items="${books.content}" var="book">
 			<tr>

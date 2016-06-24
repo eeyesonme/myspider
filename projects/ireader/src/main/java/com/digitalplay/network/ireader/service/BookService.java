@@ -34,7 +34,7 @@ public class BookService {
 		return bookDao.findOne(id);
 	}
 
-	public Page<Book> getAuthorBooks( Map<String, Object> searchParams, int pageNumber, int pageSize,
+	public Page<Book> listBooks( Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<Book> spec = buildSpecification( searchParams);
@@ -48,9 +48,9 @@ public class BookService {
 	private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
 		Sort sort = null;
 		if ("auto".equals(sortType)) {
-			sort = new Sort(Direction.DESC, "id");
-		} else if ("title".equals(sortType)) {
-			sort = new Sort(Direction.ASC, "title");
+			sort = new Sort(Direction.ASC, "id");
+		} else if ("name".equals(sortType)) {
+			sort = new Sort(Direction.ASC, "name");
 		}
 
 		return new PageRequest(pageNumber - 1, pagzSize, sort);
