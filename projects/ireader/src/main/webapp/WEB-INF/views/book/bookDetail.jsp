@@ -10,21 +10,21 @@
 
 <body>
 	<div class="row">
-		 <div class="panel panel-primary">
+		 <div class="panel panel-sucess">
             <div class="panel-heading">
-              <h3 class="panel-title">{book.name}</h3>
+              <h3 class="panel-title">${book.name}</h3>
             </div>
             <div class="panel-body">
              <table id="contentTable" class="table table-striped table-bordered table-condensed">
-				<thead><tr><th>id</th><th>title</th><th>main</th><th>Category</th><th>Author</th></tr></thead>
-				<tbody>
-					<c:forEach items="${book.bookContents}" var="bookContent">
-					<tr>
-						<td>${bookContent.id}</td>
-						<td>${bookContent.contentTitle}</td>
-						<td>${bookContent.contentMain}</td>
-					</tr>
-				</c:forEach>
+				<thead><tr><th>id</th><th>title</th><th>main</th></tr></thead>
+					<tbody>
+						<c:forEach items="${book.bookContents}" var="bookContent">
+							<tr>
+								<td>${bookContent.id}</td>
+								<td>${bookContent.contentTitle}</td>
+								<td>${bookContent.contentMain}</td>
+							</tr>
+					    </c:forEach>
 				</tbody>
 			</table>
             </div>
