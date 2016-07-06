@@ -13,7 +13,7 @@ import com.digitalplay.network.ireader.domain.Category;
 public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> ,BatchRepository<Category>{
 
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
-	public List<Category> findByNameOrderByIdDesc(String name,Pageable page);
+	public List<Category> findByNameOrderByIdAsc(String name,Pageable page);
 	
 	
 }

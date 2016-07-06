@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -74,6 +75,12 @@ public class BookRepositoryTestCase extends SpringTransactionalTestCase {
   }
   
   @Test
+  public void testfindByCategoryNameOrderByIdDesc() throws Exception{
+	  List<Book> books = bookDao.findByCategoryNameOrderByIdDesc("sadfs", new PageRequest(1,50));
+	  System.out.println(books.size());
+  }
+  
+  //@Test
   public void testBatch() throws Exception {
 	  Book bookFrom = bookDao.findOne(4L);
 	  Collection<Book> books = new ArrayList<Book>(60);

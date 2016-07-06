@@ -31,7 +31,7 @@ public class BookEndPoint {
 	@Autowired
 	private Validator validator;
 	
-	private static final String PAGE_SIZE = "50";
+	private static final String PAGE_SIZE = "10";
 	
 	private static Map<String, String> sortTypes = Maps.newLinkedHashMap();
 	static {

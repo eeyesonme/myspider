@@ -35,17 +35,32 @@ public class CategoryRepositoryTestCase extends SpringTransactionalTestCase {
 	}
 	
 	@Test
+	public void testFindByNameOrderByIdDesc() {
+		PageRequest pr = new PageRequest(0,1000);
+		List<Category> cates =categoryDao.findByNameOrderByIdAsc("sadfs",pr);
+		for(Category c: cates){
+			c.setName("都市");
+			categoryDao.save(c);
+		}
+		
+		cates =categoryDao.findByNameOrderByIdAsc("KKAK",pr);
+		for(Category c: cates){
+			c.setName("历史");
+			categoryDao.save(c);
+		}
+	}
+	//@Test
 	public void testQueryCache(){
 		//Sort sort =new Sort(Direction.DESC, "id");
-		PageRequest pr = new PageRequest(0,1000);
+		PageRequest pr = new PageRequest(1,1000);
 
-		List<Category> cates =categoryDao.findByNameOrderByIdDesc("东方玄幻",pr);
+		List<Category> cates =categoryDao.findByNameOrderByIdAsc("东方玄幻",pr);
 		System.out.println("----------------Find data first time------------------");
 		for (Category c: cates){
 			System.out.println(c.getId()+":"+c.getName());
 		}
 		System.out.println("----------------Find data Second time------------------");
-		List<Category> cates2= categoryDao.findByNameOrderByIdDesc("东方玄幻",pr);
+		List<Category> cates2= categoryDao.findByNameOrderByIdAsc("东方玄幻",pr);
 		for (Category c: cates2){
 			System.out.println(c.getId()+":"+c.getName());
 		}
