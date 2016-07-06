@@ -1,4 +1,3 @@
-use ireader;
 drop table if exists T_ACCOUNT;
 drop table if exists T_ROLE;
 drop table if exists T_GROUP;
@@ -70,7 +69,7 @@ create table T_CATEGORY(
 
 create table T_TAG(
 	id bigint,
-    tag_name varchar(64) not null,
+    name varchar(64) not null,
 	primary key (id)
 );
 create table T_BOOK(

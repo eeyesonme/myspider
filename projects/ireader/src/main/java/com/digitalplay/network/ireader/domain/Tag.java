@@ -1,6 +1,5 @@
 package com.digitalplay.network.ireader.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +20,7 @@ public class Tag {
 	@GeneratedValue(strategy=GenerationType.TABLE,generator="tag_gen") 
 	private Long id;
 	
-	@Column(name="name")
-	private String tagName;
+	private String name;
 
 	public Long getId() {
 		return id;
@@ -32,13 +30,14 @@ public class Tag {
 		this.id = id;
 	}
 
-	public String getTagName() {
-		return tagName;
+	public String getName() {
+		return name;
 	}
 
-	public void setTagName(String tagName) {
-		this.tagName = tagName;
+	public void setName(String name) {
+		this.name = name;
 	}
+
 
 
 }
