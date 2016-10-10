@@ -7,6 +7,7 @@ import javax.persistence.QueryHint;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -16,4 +17,8 @@ public interface BookRepository extends PagingAndSortingRepository<Book, Long> ,
 
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
 	public List<Book> findByCategoryNameOrderByIdDesc(String name,Pageable page);
+	
+	@Query("SELECT COUNT(*) FROM Book b WHERE b.category.id=?1")
+	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
+	public long countByCategoryId(Long categoryId);
 }

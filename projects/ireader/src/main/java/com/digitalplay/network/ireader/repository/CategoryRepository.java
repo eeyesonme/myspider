@@ -15,5 +15,4 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
 	public List<Category> findByNameOrderByIdAsc(String name,Pageable page);
 	
-	
 }

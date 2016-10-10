@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.digitalplay.network.ireader.domain.Account;
-import com.digitalplay.network.ireader.service.AccountService;
+import com.digitalplay.network.ireader.service.account.AccountService;
 import com.digitalplay.network.ireader.util.MediaTypes;
 
 @RestController

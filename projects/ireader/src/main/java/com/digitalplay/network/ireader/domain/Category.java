@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -34,6 +35,9 @@ public class Category {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="category")
 	@Fetch(FetchMode.SUBSELECT)
 	private Collection<Book> books =new ArrayList<Book> ();
+	
+	@Transient
+	private Long bookCount;
 	
 	public Long getId() {
 		return id;
@@ -65,6 +69,14 @@ public class Category {
 
 	public void setBooks(Collection<Book> books) {
 		this.books = books;
+	}
+
+	public Long getBookCount() {
+		return bookCount;
+	}
+
+	public void setBookCount(Long bookCount) {
+		this.bookCount = bookCount;
 	}
 	
 	

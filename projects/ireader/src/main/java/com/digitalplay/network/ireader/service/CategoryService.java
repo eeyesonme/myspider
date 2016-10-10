@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.hibernate.CacheMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +34,12 @@ public class CategoryService {
 	
 	@Transactional
 	public Category findOne(Long id){
-		CacheMode mode = HibernateUtils.getCacheMode(em);
-		System.out.println("Cache Mode :: "+ mode.name());
 		return categoryDao.findOne(id);
 	}
 	
 	
-	
+	@Transactional
+	public Iterable<Category> listAll(){
+		return categoryDao.findAll();
+	}
 }

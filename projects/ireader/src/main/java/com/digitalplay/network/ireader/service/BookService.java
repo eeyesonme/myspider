@@ -34,6 +34,7 @@ public class BookService {
 		return bookDao.findOne(id);
 	}
 
+	@Transactional(readOnly = true)
 	public Page<Book> listBooks( Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
@@ -42,6 +43,9 @@ public class BookService {
 		return bookDao.findAll(spec, pageRequest);
 	}
 
+	public long countBookByCategoryId(Long categoryId) {
+				return bookDao.countByCategoryId(categoryId);
+	}
 	/**
 	 * 创建分页请求.
 	 */
@@ -64,4 +68,6 @@ public class BookService {
 		Specification<Book> spec = DynamicSpecifications.bySearchFilter(filters.values(), Book.class);
 		return spec;
 	}
+	
+	
 }

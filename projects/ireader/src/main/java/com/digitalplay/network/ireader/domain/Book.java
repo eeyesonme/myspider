@@ -56,7 +56,7 @@ public class Book {
 	private List<BookContent> bookContents =new ArrayList<BookContent>();
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name = "ee_book_tag", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+	@JoinTable(name = "T_TAG", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id ASC")
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)

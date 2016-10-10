@@ -2,7 +2,7 @@ insert into T_IDGENERATOR(gen_name,gen_value) values ('ACCOUNT_PK',4);
 insert into T_IDGENERATOR(gen_name,gen_value) values('ACCOUNTROLE_PK',9);
 insert into T_IDGENERATOR(gen_name,gen_value) values('ROLE_PK',4);
 insert into T_IDGENERATOR(gen_name,gen_value) values('AUTHOR_PK',5);
-insert into T_IDGENERATOR(gen_name,gen_value) values('CATEGORY_PK',7);
+insert into T_IDGENERATOR(gen_name,gen_value) values('CATEGORY_PK',12);
 insert into T_IDGENERATOR(gen_name,gen_value) values('TAG_PK',6);
 
 
@@ -31,10 +31,16 @@ insert into T_AUTHOR(id,name, email,sex,status) values (4,'潇铭  ', 'xm@ireade
 
 insert into T_CATEGORY(id,name,status) values(1,'玄幻','Active');
 insert into T_CATEGORY(id,name,status) values(2,'奇幻','Active');
-insert into T_CATEGORY(id,name,status) values(3,'仙侠','Active');
-insert into T_CATEGORY(id,name,status) values(4,'都市','Active');
-insert into T_CATEGORY(id,name,status) values(5,'历史','Active');
-insert into T_CATEGORY(id,name,status) values(6,'军事','Active');
+insert into T_CATEGORY(id,name,status) values(3,'武侠','Active');
+insert into T_CATEGORY(id,name,status) values(4,'仙侠','Active');
+insert into T_CATEGORY(id,name,status) values(5,'都市','Active');
+insert into T_CATEGORY(id,name,status) values(6,'职场','Active');
+insert into T_CATEGORY(id,name,status) values(7,'军事','Active');
+insert into T_CATEGORY(id,name,status) values(8,'历史','Active');
+insert into T_CATEGORY(id,name,status) values(9,'游戏','Active');
+insert into T_CATEGORY(id,name,status) values(10,'体育','Active');
+insert into T_CATEGORY(id,name,status) values(11,'科幻','Active');
+insert into T_CATEGORY(id,name,status) values(12,'灵异','Active');
 
 insert into T_TAG(id,name) values (1,'扮猪吃虎');
 insert into T_TAG(id,name) values (2,'爽文');

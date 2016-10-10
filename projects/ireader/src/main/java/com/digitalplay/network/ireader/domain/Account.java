@@ -13,11 +13,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.google.common.collect.ImmutableList;
 
 
 @Entity
@@ -38,11 +42,13 @@ public class Account {
 	
 	private String password;
 	
+	private String plainPassword;
+	
 	private String salt;
 	
 	private String status;
 	
-	private Date regist_date;
+	private Date registerDate;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="account",cascade = CascadeType.ALL, orphanRemoval = true)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -53,6 +59,16 @@ public class Account {
 		return roles;
 	}
 
+	@Transient
+	@JsonIgnore
+	public List<String> getRoleList() {
+		List<String> roleList = new ArrayList<String>(roles.size());
+		for(AccountRole role : roles){
+			roleList.add(role.getRole().getName());
+		}
+		return roleList;
+	}
+	
 	public void setRoles(List<AccountRole> roles) {
 		this.roles = roles;
 	}
@@ -98,6 +114,17 @@ public class Account {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+	
+	// 不持久化到数据库，也不显示在Restful接口的属性.
+	@Transient
+	@JsonIgnore
+	public String getPlainPassword() {
+		return plainPassword;
+	}
+
+	public void setPlainPassword(String plainPassword) {
+		this.plainPassword = plainPassword;
+	}
 
 	public String getPassword() {
 		return password;
@@ -123,12 +150,12 @@ public class Account {
 		this.status = status;
 	}
 
-	public Date getRegist_date() {
-		return regist_date;
+	public Date getRegisterDate() {
+		return registerDate;
 	}
 
-	public void setRegist_date(Date regist_date) {
-		this.regist_date = regist_date;
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
 	}
 
 
