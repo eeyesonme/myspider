@@ -36,8 +36,8 @@ public class AccountService {
 		return accountDao.findOne(id);
 	}
 	
-	public Account findAccountByLoginName(String loginName){
-		return null;
+	public Account findAccountByUsername(String username){
+		return accountDao.findByUsername(username);
 	}
 	
 	public void registerAccount(Account account){

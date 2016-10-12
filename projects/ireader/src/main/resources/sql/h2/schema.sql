@@ -10,6 +10,7 @@ drop table if exists T_BOOK;
 drop table if exists T_BOOK_CONTENT;
 drop table if exists T_BOOK_TAG;
 drop table if exists T_SUBSCRIBE;
+drop table if exisits T_IDGENERATOR;
 
 create table T_ROLE(
  id bigint,

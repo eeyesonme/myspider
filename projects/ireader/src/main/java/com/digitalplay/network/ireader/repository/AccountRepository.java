@@ -9,4 +9,6 @@ public interface AccountRepository extends PagingAndSortingRepository<Account, L
 	public Account findByMobile(String mobile);
 	
 	public Account findByEmail(String email);
+	
+	public Account findByUsername(String username);
 }

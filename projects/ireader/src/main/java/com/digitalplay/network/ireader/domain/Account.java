@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -42,12 +43,17 @@ public class Account {
 	
 	private String password;
 	
+
+	// 不持久化到数据库，也不显示在Restful接口的属性.
+	@Transient
+	@JsonIgnore
 	private String plainPassword;
 	
 	private String salt;
 	
 	private String status;
 	
+	@Column(name="REGIST_DATE")
 	private Date registerDate;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="account",cascade = CascadeType.ALL, orphanRemoval = true)
@@ -115,9 +121,6 @@ public class Account {
 		this.mobile = mobile;
 	}
 	
-	// 不持久化到数据库，也不显示在Restful接口的属性.
-	@Transient
-	@JsonIgnore
 	public String getPlainPassword() {
 		return plainPassword;
 	}

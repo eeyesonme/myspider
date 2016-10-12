@@ -9,16 +9,16 @@
 	<script>
 		$(document).ready(function() {
 			//聚焦第一个输入框
-			$("#loginName").focus();
+			$("#username").focus();
 			//为inputForm注册validate函数
 			$("#inputForm").validate({
 				rules: {
-					loginName: {
-						remote: "${ctx}/register/checkLoginName"
+					username: {
+						remote: "${ctx}/register/checkUsername"
 					}
 				},
 				messages: {
-					loginName: {
+					username: {
 						remote: "用户登录名已存在"
 					}
 				}
@@ -33,15 +33,15 @@
 		<fieldset>
 			<legend><small>用户注册</small></legend>
 			<div class="control-group">
-				<label for="loginName" class="control-label">登录名:</label>
+				<label for="username" class="control-label">登录名:</label>
 				<div class="controls">
-					<input type="text" id="loginName" name="loginName" class="input-large required" minlength="3"/>
+					<input type="text" id="username" name="username" class="input-large required" minlength="3"/>
 				</div>
 			</div>
 			<div class="control-group">
-				<label for="name" class="control-label">用户名:</label>
+				<label for="name" class="control-label">EMAIL:</label>
 				<div class="controls">
-					<input type="text" id="name" name="name" class="input-large required"/>
+					<input type="text" id="email" name="email" class="input-large required"/>
 				</div>
 			</div>
 			<div class="control-group">

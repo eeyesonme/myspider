@@ -35,7 +35,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		Account account = accountService.findAccountByLoginName(token.getUsername());
+		Account account = accountService.findAccountByUsername(token.getUsername());
 		if (account != null) {
 			byte[] salt = Encodes.decodeHex(account.getSalt());
 			return new SimpleAuthenticationInfo(new ShiroUser(account.getId(), account.getUsername(), account.getEmail()),
@@ -51,7 +51,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-		Account account = accountService.findAccountByLoginName(shiroUser.loginName);
+		Account account = accountService.findAccountByUsername(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		info.addRoles(account.getRoleList());
 		return info;

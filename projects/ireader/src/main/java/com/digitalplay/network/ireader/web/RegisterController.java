@@ -40,10 +40,10 @@ public class RegisterController {
 	/**
 	 * Ajax请求校验loginName是否唯一。
 	 */
-	@RequestMapping(value = "checkLoginName")
+	@RequestMapping(value = "checkUsername")
 	@ResponseBody
-	public String checkLoginName(@RequestParam("loginName") String loginName) {
-		if (accountService.findAccountByLoginName(loginName) == null) {
+	public String checkLoginName(@RequestParam("username") String username) {
+		if (accountService.findAccountByUsername(username) == null) {
 			return "true";
 		} else {
 			return "false";
