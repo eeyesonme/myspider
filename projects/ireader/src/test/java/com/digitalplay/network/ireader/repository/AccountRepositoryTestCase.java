@@ -23,7 +23,7 @@ public class AccountRepositoryTestCase extends SpringTransactionalTestCase {
 //	@Test
 	public void  testDeleteAccount() throws Exception {
 		
-		Account account = accountDao.findOne(1L);
+		User account = accountDao.findOne(1L);
 		List<AccountRole> roles = account.getRoles();
 		for(AccountRole role : roles){
 			assert(role != null);
@@ -37,15 +37,15 @@ public class AccountRepositoryTestCase extends SpringTransactionalTestCase {
 	
 //	@Test
 	public void testCreateAccount() throws Exception {
-			Collection<Account> entities = generateTestAccounts(1000);
+			Collection<User> entities = generateTestAccounts(1000);
 			accountDao.batchInsert(entities);
 	}
 	
 	
-	private Collection<Account> generateTestAccounts(int size){
-		Collection<Account> accounts = new ArrayList<Account>(size);
+	private Collection<User> generateTestAccounts(int size){
+		Collection<User> accounts = new ArrayList<User>(size);
 		for (int i = 0; i <size;i++){
-			Account account = new Account();
+			User account = new User();
 			account.setEmail("account-test"+i+"@ireader.com");
 			account.setUsername("account-test"+i);
 			account.setMobile("xxx-xxxx-xxxx");

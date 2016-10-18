@@ -28,19 +28,19 @@ public class AccountService {
 	
 	
 	@Transactional(readOnly = true)
-	public Iterable<Account> findAll(Pageable pageable) {
+	public Iterable<User> findAll(Pageable pageable) {
 		return accountDao.findAll(pageable);
 	}
 	
-	public Account findOne(Long id){
+	public User findOne(Long id){
 		return accountDao.findOne(id);
 	}
 	
-	public Account findAccountByUsername(String username){
+	public User findAccountByUsername(String username){
 		return accountDao.findByUsername(username);
 	}
 	
-	public void registerAccount(Account account){
+	public void registerAccount(User account){
 		entryptPassword(account);
 		account.setRegisterDate(clock.getCurrentDate());
 		accountDao.save(account);
@@ -49,7 +49,7 @@ public class AccountService {
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */
-	private void entryptPassword(Account account) {
+	private void entryptPassword(User account) {
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
 		account.setSalt(Encodes.encodeHex(salt));
 

@@ -29,7 +29,7 @@ public class Subscribe {
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="account_id" ,nullable=false, updatable=false)
-	private Account account;
+	private User account;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="book_id" ,nullable=false, updatable=false)
@@ -59,11 +59,11 @@ public class Subscribe {
 		this.id = id;
 	}
 
-	public Account getAccount() {
+	public User getAccount() {
 		return account;
 	}
 
-	public void setAccount(Account account) {
+	public void setAccount(User account) {
 		this.account = account;
 	}
 	

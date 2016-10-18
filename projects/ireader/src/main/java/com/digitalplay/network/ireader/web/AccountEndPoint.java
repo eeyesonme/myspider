@@ -21,10 +21,10 @@ public class AccountEndPoint {
 	private AccountService accountServcie;
 	
 	@RequestMapping(value = "/api/accounts", produces = MediaTypes.JSON_UTF_8)
-	public List<Account> listAllUser(Pageable pageable){
-		Iterable<Account> accountIter =accountServcie.findAll(pageable);
-		List<Account> accounts = new ArrayList<Account>();
-		Iterator<Account> iter = accountIter.iterator();
+	public List<User> listAllUser(Pageable pageable){
+		Iterable<User> accountIter =accountServcie.findAll(pageable);
+		List<User> accounts = new ArrayList<User>();
+		Iterator<User> iter = accountIter.iterator();
 		while(iter.hasNext()){
 			accounts.add(iter.next());
 		}
@@ -32,8 +32,8 @@ public class AccountEndPoint {
 	}
 	
 	@RequestMapping(value = "/api/account/{id}", produces = MediaTypes.JSON_UTF_8)
-	public Account  getMyAccount(@PathVariable("id") Long id){
-		Account account =accountServcie.findOne(id);
+	public User  getMyAccount(@PathVariable("id") Long id){
+		User account =accountServcie.findOne(id);
 		return account;
 	}
 }
