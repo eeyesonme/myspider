@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.service.account;
+package com.digitalplay.network.ireader.service.sys;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.digitalplay.network.ireader.domain.Account;
-import com.digitalplay.network.ireader.repository.AccountRepository;
+import com.digitalplay.network.ireader.domain.sys.User;
+import com.digitalplay.network.ireader.repository.sys.AccountRepository;
 import com.digitalplay.network.ireader.util.Clock;
 import com.digitalplay.network.ireader.util.Digests;
 import com.digitalplay.network.ireader.util.Encodes;
@@ -42,7 +42,7 @@ public class AccountService {
 	
 	public void registerAccount(User account){
 		entryptPassword(account);
-		account.setRegisterDate(clock.getCurrentDate());
+		account.setCreateDate(clock.getCurrentDate());
 		accountDao.save(account);
 	}
 	

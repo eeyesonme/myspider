@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.digitalplay.network.ireader.domain.Author;
-import com.digitalplay.network.ireader.service.AuthorService;
+import com.digitalplay.network.ireader.domain.book.Author;
+import com.digitalplay.network.ireader.service.book.AuthorService;
 import com.digitalplay.network.ireader.util.MediaTypes;
 
 @RestController

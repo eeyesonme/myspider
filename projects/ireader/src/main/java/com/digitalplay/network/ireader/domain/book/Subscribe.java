@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.domain;
+package com.digitalplay.network.ireader.domain.book;
 
 import java.util.Date;
 
@@ -15,6 +15,8 @@ import javax.persistence.TableGenerator;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.digitalplay.network.ireader.domain.sys.User;
+
 @Entity
 @Table(name="T_SUBSCRIBE")
 @Cache(region="Subscribe",usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -28,7 +30,7 @@ public class Subscribe {
 	private Date subscribe_time;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="account_id" ,nullable=false, updatable=false)
+	@JoinColumn(name="user_id" ,nullable=false, updatable=false)
 	private User account;
 	
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)

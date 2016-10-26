@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.repository;
+package com.digitalplay.network.ireader.repository.sys;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

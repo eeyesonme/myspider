@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.repository;
+package com.digitalplay.network.ireader.repository.book;
 
 
 import java.util.List;
@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.digitalplay.network.ireader.domain.Book;
+import com.digitalplay.network.ireader.domain.book.Book;
+import com.digitalplay.network.ireader.repository.BatchRepository;
 
 public interface BookRepository extends PagingAndSortingRepository<Book, Long> , JpaSpecificationExecutor<Book>,BatchRepository<Book>{
 

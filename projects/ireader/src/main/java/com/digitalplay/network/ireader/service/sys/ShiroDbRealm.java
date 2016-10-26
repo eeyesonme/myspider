@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  *******************************************************************************/
-package com.digitalplay.network.ireader.service.account;
+package com.digitalplay.network.ireader.service.sys;
 
 import java.io.Serializable;
 
@@ -21,7 +21,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
-import com.digitalplay.network.ireader.domain.Account;
+import com.digitalplay.network.ireader.domain.sys.User;
 import com.digitalplay.network.ireader.util.Encodes;
 import com.google.common.base.Objects;
 

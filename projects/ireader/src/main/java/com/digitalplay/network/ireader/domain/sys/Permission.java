@@ -3,12 +3,11 @@ package com.digitalplay.network.ireader.domain.sys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.digitalplay.network.ireader.domain.IdEntity;
 
 /**
  * 权限表
@@ -16,11 +15,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "sys_permission")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Permission {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class Permission extends IdEntity<Long>{
+	
     private String name;
     private String permission;
     private String description;

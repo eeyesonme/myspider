@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.digitalplay.network.ireader.domain.Account;
-import com.digitalplay.network.ireader.service.account.AccountService;
+import com.digitalplay.network.ireader.domain.sys.User;
+import com.digitalplay.network.ireader.service.sys.AccountService;
 
 /**
  * 用户注册的Controller.

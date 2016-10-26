@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.digitalplay.network.ireader.domain.Book;
-import com.digitalplay.network.ireader.service.BookService;
+import com.digitalplay.network.ireader.domain.book.Book;
+import com.digitalplay.network.ireader.service.book.BookService;
 import com.digitalplay.network.ireader.util.Servlets;
 import com.google.common.collect.Maps;
 

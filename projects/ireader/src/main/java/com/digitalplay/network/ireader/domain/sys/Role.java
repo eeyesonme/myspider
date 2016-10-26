@@ -8,9 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -19,6 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.digitalplay.network.ireader.domain.IdEntity;
 import com.google.common.collect.Lists;
 
 /**
@@ -27,11 +25,8 @@ import com.google.common.collect.Lists;
 @Entity
 @Table(name = "sys_role")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Role {
+public class Role extends IdEntity<Long>{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
     /**
      * 前端显示名称
      */
@@ -64,15 +59,6 @@ public class Role {
     @Column(name = "is_show")
     private Boolean show = Boolean.FALSE;
 
-    
-    
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
         return name;

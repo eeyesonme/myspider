@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.service;
+package com.digitalplay.network.ireader.service.book;
 
 import java.util.Collection;
 
@@ -9,8 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.digitalplay.network.ireader.domain.Category;
-import com.digitalplay.network.ireader.repository.CategoryRepository;
+import com.digitalplay.network.ireader.domain.book.Category;
+import com.digitalplay.network.ireader.repository.book.CategoryRepository;
 import com.digitalplay.network.ireader.util.HibernateUtils;
 
 @Service

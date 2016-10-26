@@ -1,12 +1,12 @@
-package com.digitalplay.network.ireader.service;
+package com.digitalplay.network.ireader.service.book;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.digitalplay.network.ireader.domain.Author;
-import com.digitalplay.network.ireader.repository.AuthorRepository;
+import com.digitalplay.network.ireader.domain.book.Author;
+import com.digitalplay.network.ireader.repository.book.AuthorRepository;
 
 @Service
 public class AuthorService {

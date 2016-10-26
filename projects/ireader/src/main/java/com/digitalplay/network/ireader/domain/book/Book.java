@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.domain;
+package com.digitalplay.network.ireader.domain.book;
 
 import java.util.ArrayList;
 import java.util.List;

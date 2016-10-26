@@ -3,22 +3,18 @@ package com.digitalplay.network.ireader.domain.sys;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
 
+import com.digitalplay.network.ireader.domain.IdEntity;
+
 @Entity
 @Table(name = "sys_resource")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Resource  {
+public class Resource extends IdEntity<Long>  {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
     private String name;
 
@@ -63,15 +59,6 @@ public class Resource  {
     private Boolean show = Boolean.FALSE;
 
     
-    
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 
         return name;

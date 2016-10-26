@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.digitalplay.network.ireader.domain.Author;
+import com.digitalplay.network.ireader.domain.book.Author;
+import com.digitalplay.network.ireader.repository.book.AuthorRepository;
 import com.digitalplay.network.ireader.test.spring.SpringTransactionalTestCase;
 
 @ContextConfiguration(locations = { "/applicationContext.xml" })

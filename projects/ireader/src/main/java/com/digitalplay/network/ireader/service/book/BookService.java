@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.service;
+package com.digitalplay.network.ireader.service.book;
 
 import java.util.Map;
 
@@ -12,8 +12,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.digitalplay.network.ireader.domain.Book;
-import com.digitalplay.network.ireader.repository.BookRepository;
+import com.digitalplay.network.ireader.domain.book.Book;
+import com.digitalplay.network.ireader.repository.book.BookRepository;
 import com.digitalplay.network.ireader.util.DynamicSpecifications;
 import com.digitalplay.network.ireader.util.SearchFilter;
 

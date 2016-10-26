@@ -5,13 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
+
+import com.digitalplay.network.ireader.domain.IdEntity;
 
 /**
  * 组织机构树
@@ -19,11 +18,7 @@ import org.hibernate.annotations.Formula;
 @Entity
 @Table(name = "sys_organization")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Organization {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class Organization extends IdEntity<Long> {
 
 	private String name;
 
@@ -55,15 +50,6 @@ public class Organization {
     public Organization(Long id) {
         setId(id);
     }
-
-    
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
         return name;
