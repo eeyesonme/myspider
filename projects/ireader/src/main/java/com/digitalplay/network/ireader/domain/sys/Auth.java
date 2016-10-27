@@ -14,6 +14,7 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.digitalplay.network.ireader.domain.IdEntity;
 import com.digitalplay.network.ireader.util.CollectionToStringUserType;
 import com.google.common.collect.Sets;
 
@@ -52,7 +53,7 @@ import com.google.common.collect.Sets;
 @Entity
 @Table(name = "sys_auth")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Auth  {
+public class Auth extends IdEntity<Long> {
 
     /**
      * 组织机构

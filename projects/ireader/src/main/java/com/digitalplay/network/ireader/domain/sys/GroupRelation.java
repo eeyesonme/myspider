@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.digitalplay.network.ireader.domain.IdEntity;
+
 /**
  * 分组与 用户/组织机构关系表
  * <p/>
@@ -17,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "sys_group_relation")
 //@EnableQueryCache
 //@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class GroupRelation  {
+public class GroupRelation extends IdEntity<Long> {
 
     @Column(name = "group_id")
     private Long groupId;

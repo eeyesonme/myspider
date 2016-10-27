@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,6 +28,7 @@ public class UserOrganizationPosition extends IdEntity<Long> {
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @Basic(optional = true, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
+    @JoinColumn(name="user_id")
     private User user;
 
     @Column(name = "organization_id")

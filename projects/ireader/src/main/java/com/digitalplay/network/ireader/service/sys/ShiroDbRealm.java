@@ -53,7 +53,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
 		User account = accountService.findAccountByUsername(shiroUser.loginName);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.addRoles(account.getRoleList());
+//		info.addRoles(account.getRoleList());
 		return info;
 	}
 
