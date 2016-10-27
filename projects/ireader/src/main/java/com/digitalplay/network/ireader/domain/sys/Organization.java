@@ -11,6 +11,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
 
 import com.digitalplay.network.ireader.domain.IdEntity;
+import com.digitalplay.network.ireader.util.Treeable;
 
 /**
  * 组织机构树
@@ -18,7 +19,7 @@ import com.digitalplay.network.ireader.domain.IdEntity;
 @Entity
 @Table(name = "sys_organization")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Organization extends IdEntity<Long> {
+public class Organization extends IdEntity<Long> implements Treeable<Long>{
 
 	private String name;
 
@@ -116,6 +117,48 @@ public class Organization extends IdEntity<Long> {
     public void setShow(Boolean show) {
         this.show = show;
     }
+
+	@Override
+	public String getSeparator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String makeSelfAsNewParentIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRoot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isLeaf() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getRootDefaultIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getBranchDefaultIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLeafDefaultIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

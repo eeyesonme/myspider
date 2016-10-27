@@ -27,6 +27,7 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.digitalplay.network.ireader.domain.Searchable;
 import com.google.common.collect.Sets;
 
 public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaRepository<M, ID>
@@ -65,10 +66,6 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
         repositoryHelper = new RepositoryHelper(entityClass);
     }
     	
-    @Override
-    public boolean support(String modelType) {
-        return entityClass.getName().equals(modelType);
-    }
 
 
     /////////////////////////////////////////////////
@@ -256,5 +253,17 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
     public boolean exists(ID id) {
         return findOne(id) != null;
     }
+
+	@Override
+	public Page<M> findAll(Searchable searchable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long count(Searchable searchable) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

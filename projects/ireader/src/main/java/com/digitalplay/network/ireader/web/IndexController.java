@@ -24,7 +24,7 @@ import com.google.common.collect.Maps;
 
 @Controller
 @Transactional
-public class IndexEndPoint {
+public class IndexController {
 
 	@Autowired
 	private BookService bookService;
@@ -40,7 +40,7 @@ public class IndexEndPoint {
 		sortTypes.put("name", "标题");
 	}
 	
-	@RequestMapping(value = "/index",method = RequestMethod.GET)
+	/*@RequestMapping(value = "/index",method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, Model model,
@@ -61,7 +61,7 @@ public class IndexEndPoint {
 		model.addAttribute("searchParams", Servlets.encodeParameterStringWithPrefix(searchParams, "search_"));
 
 		return "index";
-	}
+	}*/
 	
 	
 }

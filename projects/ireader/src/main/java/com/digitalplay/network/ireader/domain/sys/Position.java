@@ -12,18 +12,17 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
 
+import com.digitalplay.network.ireader.domain.IdEntity;
+import com.digitalplay.network.ireader.util.Treeable;
+
 /**
  * 组织机构树
  */
 @Entity
 @Table(name = "sys_position")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Position {
+public class Position extends IdEntity<Long> implements Treeable<Long> {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
     /**
      * 标题
      */
@@ -63,14 +62,6 @@ public class Position {
         setId(id);
     }
 
-    
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
         return name;
@@ -130,5 +121,47 @@ public class Position {
     public void setShow(Boolean show) {
         this.show = show;
     }
+
+	@Override
+	public String getSeparator() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String makeSelfAsNewParentIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRoot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isLeaf() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getRootDefaultIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getBranchDefaultIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLeafDefaultIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

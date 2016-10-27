@@ -6,7 +6,7 @@ delete from `sys_user` where id>=1 and id<=1000;;
 insert into `sys_user`
 (`id`, `username`, `email`, `mobile`, `password`, `salt`, `create_date`, `status`, `admin`, `deleted`)
   values
-  (1, 'admin', 'admin@sishuok.com', '13412345671', 'ec21fa1738f39d5312c6df46002d403d', 'yDd1956wn1', sysdate(), 'normal', 1, 0);;
+  (1, 'admin', 'admin@sishuok.com', '13412345671', '691b14d79bf0fa2215f155235df5e670b64394cc', '7efbd59d9741d34f', sysdate(), 'normal', 1, 0);;
 
 insert into `sys_user`
 (`id`, `username`, `email`, `mobile`, `password`, `salt`, `create_date`, `status`, `admin`, `deleted`)

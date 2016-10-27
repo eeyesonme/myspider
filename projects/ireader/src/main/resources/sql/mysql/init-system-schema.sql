@@ -23,7 +23,7 @@ create table `sys_user`(
   `email`  varchar(100),
   `mobile`  varchar(20),
   `password`  varchar(100),
-  `salt`       varchar(10),
+  `salt`       varchar(64),
   `create_date` timestamp default 0,
   `status`    varchar(50),
   `deleted`   bool,

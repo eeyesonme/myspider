@@ -108,7 +108,7 @@ public class User extends IdEntity<Long> implements LogicDeleteable{
     private List<UserOrganizationPosition> organizationJobs;
     
     
-    public List<UserOrganizationPosition> getOrganizationJobs() {
+    public List<UserOrganizationPosition> getOrganizationPositions() {
         if (organizationJobs == null) {
             organizationJobs = Lists.newArrayList();
         }
@@ -117,7 +117,7 @@ public class User extends IdEntity<Long> implements LogicDeleteable{
 
     public void addOrganizationJob(UserOrganizationPosition userOrganizationJob) {
         userOrganizationJob.setUser(this);
-        getOrganizationJobs().add(userOrganizationJob);
+        getOrganizationPositions().add(userOrganizationJob);
     }
 
     public void setOrganizationJobs(List<UserOrganizationPosition> organizationJobs) {
