@@ -11,7 +11,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.digitalplay.network.ireader.domain.book.Category;
 import com.digitalplay.network.ireader.repository.BatchRepository;
 
-public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> ,BatchRepository<Category>{
+public interface CategoryRepository extends PagingAndSortingRepository<Category, Long>{
 
 	@QueryHints({ @QueryHint(name = "org.hibernate.cacheable", value ="true") })
 	public List<Category> findByNameOrderByIdAsc(String name,Pageable page);

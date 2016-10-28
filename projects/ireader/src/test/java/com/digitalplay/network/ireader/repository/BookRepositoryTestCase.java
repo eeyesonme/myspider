@@ -84,19 +84,6 @@ public class BookRepositoryTestCase extends SpringTransactionalTestCase {
 	  System.out.println(books.size());
   }
   
-  //@Test
-  public void testBatch() throws Exception {
-	  Book bookFrom = bookDao.findOne(4L);
-	  Collection<Book> books = new ArrayList<Book>(60);
-	  
-	  for(int i=0 ; i<50; i++){
-		  Book book =copyBook(bookFrom);
-		  books.add(book);
-	  }
-	  System.out.println("befroe save ,time: "+System.currentTimeMillis());
-	  bookDao.batchInsert(books);
-	  System.out.println("After save ,time: "+System.currentTimeMillis());
-  }
   
  // @Test
   public void testUpdate() throws Exception {

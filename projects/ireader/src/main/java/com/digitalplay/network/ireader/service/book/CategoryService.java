@@ -25,7 +25,6 @@ public class CategoryService {
 	@Transactional
 	public void bulkAdd(Collection<Category> entities){
 		//HibernateUtils.setCacheMode(em,CacheMode.IGNORE);
-		categoryDao.batchInsert(entities);
 	}
 	
 	public void printStatics(){

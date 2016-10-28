@@ -5,20 +5,21 @@
  */
 package com.digitalplay.network.ireader.service.sys;
 
-import com.digitalplay.network.ireader.domain.SearchOperator;
-import com.digitalplay.network.ireader.domain.Searchable;
+import java.util.Map;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.digitalplay.network.ireader.domain.sys.Group;
 import com.digitalplay.network.ireader.repository.GroupRepository;
+import com.digitalplay.network.ireader.search.SearchOperator;
+import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseService;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
-import java.util.Set;
 
 /**
  * <p>User: Zhang Kaitao

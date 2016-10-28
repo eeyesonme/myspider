@@ -16,11 +16,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.digitalplay.network.ireader.domain.SearchOperator;
-import com.digitalplay.network.ireader.domain.Searchable;
 import com.digitalplay.network.ireader.domain.sys.Menu;
 import com.digitalplay.network.ireader.domain.sys.Resource;
 import com.digitalplay.network.ireader.domain.sys.User;
+import com.digitalplay.network.ireader.search.SearchOperator;
+import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseTreeableService;
 
 @Service

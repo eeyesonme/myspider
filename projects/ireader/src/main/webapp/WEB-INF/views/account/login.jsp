@@ -20,7 +20,6 @@
             </div>
 
             <form id="loginForm" method="post" class="form-horizontal">
-            <es:BackURL hiddenInput="true"/>
             <div class="control-group">
                 <label for="username">用户名、邮箱或手机号</label>
                 <div class="input-prepend">
@@ -60,10 +59,24 @@
         </div>
     </div>
 </div>
-	<script>
-		$(document).ready(function() {
-			$("#loginForm").validate();
-		});
-	</script>
+	<script type="text/javascript">
+    $(function() {
+        $("#username").focus();
+        $(".jcaptcha-btn").click(function() {
+            var img = $(".jcaptcha-img");
+            var imageSrc = img.attr("src");
+            if(imageSrc.indexOf("?") > 0) {
+                imageSrc = imageSrc.substr(0, imageSrc.indexOf("?"));
+            }
+            imageSrc = imageSrc + "?" + new Date().getTime();
+            img.attr("src", imageSrc);
+        });
+        $.validationEngineLanguage.allRules.ajaxJcaptchaCall={
+            "url": "${ctx}/jcaptcha-validate",
+            "alertTextLoad": "* 正在验证，请稍等。。。"
+        };
+        $("#loginForm").validationEngine({scroll:false});
+    });
+</script>
 </body>
 </html>

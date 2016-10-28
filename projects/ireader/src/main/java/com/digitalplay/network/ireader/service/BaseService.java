@@ -14,9 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import com.digitalplay.network.ireader.domain.IdEntity;
-import com.digitalplay.network.ireader.domain.Searchable;
 import com.digitalplay.network.ireader.repository.BaseRepository;
+import com.digitalplay.network.ireader.search.Searchable;
 import com.google.common.collect.Lists;
+
 
 /**
  * <p>抽象service层基类 提供一些简便方法

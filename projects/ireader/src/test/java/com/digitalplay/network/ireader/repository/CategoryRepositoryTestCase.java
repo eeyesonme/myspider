@@ -28,13 +28,6 @@ public class CategoryRepositoryTestCase extends SpringTransactionalTestCase {
 		categoryDao.save(category);
 	}
 	
-	//@Test
-	public void testBatchCreate(){
-		Category c= categoryDao.findOne(1L);
-		Collection<Category> categories = copyCategory(c);
-		categoryDao.batchInsert(categories);
-	}
-	
 	@Test
 	public void testFindByNameOrderByIdDesc() {
 		PageRequest pr = new PageRequest(0,1000);

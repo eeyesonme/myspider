@@ -14,7 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import com.digitalplay.network.ireader.domain.Searchable;
+import com.digitalplay.network.ireader.search.Searchable;
 
 /**
  * <p>抽象DAO层基类 提供一些简便方法<br/>

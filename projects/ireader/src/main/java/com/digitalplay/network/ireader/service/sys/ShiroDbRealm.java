@@ -12,37 +12,77 @@ import javax.annotation.PostConstruct;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import com.digitalplay.network.ireader.domain.sys.User;
-import com.digitalplay.network.ireader.util.Encodes;
+import com.digitalplay.network.ireader.domain.sys.UserBlockedException;
+import com.digitalplay.network.ireader.domain.sys.UserException;
+import com.digitalplay.network.ireader.domain.sys.UserNotExistsException;
+import com.digitalplay.network.ireader.domain.sys.UserPasswordNotMatchException;
+import com.digitalplay.network.ireader.domain.sys.UserPasswordRetryLimitExceedException;
+import com.digitalplay.network.ireader.repository.BaseRepository;
+import com.digitalplay.network.ireader.repository.SimpleBaseRepositoryFactoryBean;
 import com.google.common.base.Objects;
 
 public class ShiroDbRealm extends AuthorizingRealm {
 
+	@Autowired
 	protected AccountService accountService;
+
+	@Autowired
+	private UserAuthService userAuthService;
+	
+	 @Autowired
+	    public ShiroDbRealm(ApplicationContext ctx) {
+	        super();
+	        //不能注入 因为获取bean依赖顺序问题造成可能拿不到某些bean报错
+	        //why？
+	        //因为spring在查找findAutowireCandidates时对FactoryBean做了优化，即只获取Bean，但不会autowire属性，
+	        //所以如果我们的bean在依赖它的bean之前初始化，那么就得不到ObjectType（永远是Repository）
+	        //所以此处我们先getBean一下 就没有问题了
+	        ctx.getBeansOfType(BaseRepository.class);
+	    }
 
 	/**
 	 * 认证回调函数,登录时调用.
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		User account = accountService.findAccountByUsername(token.getUsername());
-		if (account != null) {
-			byte[] salt = Encodes.decodeHex(account.getSalt());
-			return new SimpleAuthenticationInfo(new ShiroUser(account.getId(), account.getUsername(), account.getEmail()),
-					account.getPassword(), ByteSource.Util.bytes(salt), getName());
-		} else {
-			return null;
-		}
+		UsernamePasswordToken upToken = (UsernamePasswordToken) authcToken;
+        String username = upToken.getUsername().trim();
+        String password = "";
+        if (upToken.getPassword() != null) {
+            password = new String(upToken.getPassword());
+        }
+
+        User user = null;
+        try {
+            user = accountService.login(username, password);
+        } catch (UserNotExistsException e) {
+            throw new UnknownAccountException(e.getMessage(), e);
+        } catch (UserPasswordNotMatchException e) {
+            throw new AuthenticationException(e.getMessage(), e);
+        } catch (UserPasswordRetryLimitExceedException e) {
+            throw new ExcessiveAttemptsException(e.getMessage(), e);
+        } catch (UserBlockedException e) {
+            throw new LockedAccountException(e.getMessage(), e);
+        } catch (Exception e) {
+            throw new AuthenticationException(new UserException("user.unknown.error", null));
+        }
+
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUsername(), password.toCharArray(), getName());
+        return info;
 	}
 
 	/**
@@ -50,11 +90,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-		User account = accountService.findAccountByUsername(shiroUser.loginName);
-		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//		info.addRoles(account.getRoleList());
-		return info;
+		String username = (String) principals.getPrimaryPrincipal();
+		User user = accountService.findByUsername(username);
+
+		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+		authorizationInfo.setRoles(userAuthService.findStringRoles(user));
+		authorizationInfo.setStringPermissions(userAuthService.findStringPermissions(user));
+
+		return authorizationInfo;
 	}
 
 	/**

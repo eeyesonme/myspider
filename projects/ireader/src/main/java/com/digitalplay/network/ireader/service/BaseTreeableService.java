@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+	 * Copyright (c) 2005-2012 https://github.com/zhangkaitao
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
@@ -14,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.digitalplay.network.ireader.domain.IdEntity;
-import com.digitalplay.network.ireader.domain.SearchFilter;
-import com.digitalplay.network.ireader.domain.SearchFilterHelper;
-import com.digitalplay.network.ireader.domain.SearchOperator;
-import com.digitalplay.network.ireader.domain.Searchable;
 import com.digitalplay.network.ireader.repository.RepositoryHelper;
+import com.digitalplay.network.ireader.search.SearchFilter;
+import com.digitalplay.network.ireader.search.SearchFilterHelper;
+import com.digitalplay.network.ireader.search.SearchOperator;
+import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.util.Reflections;
 import com.digitalplay.network.ireader.util.Treeable;
 import com.google.common.base.Function;

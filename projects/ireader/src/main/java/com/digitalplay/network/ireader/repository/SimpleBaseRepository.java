@@ -1,5 +1,9 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package com.digitalplay.network.ireader.repository;
-
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,10 +30,19 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
-import com.digitalplay.network.ireader.domain.Searchable;
+import com.digitalplay.network.ireader.search.QueryJoin;
+import com.digitalplay.network.ireader.search.SearchCallback;
+import com.digitalplay.network.ireader.search.Searchable;
 import com.google.common.collect.Sets;
 
+/**
+ * <p>抽象基础Custom Repository 实现</p>
+ * <p>User: Zhang Kaitao
+ * <p>Date: 13-1-15 下午7:33
+ * <p>Version: 1.0
+ */
 public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaRepository<M, ID>
         implements BaseRepository<M, ID> {
 
@@ -41,17 +54,26 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
     private final EntityManager em;
     private final JpaEntityInformation<M, ID> entityInformation;
 
+    private final RepositoryHelper repositoryHelper;
+
+
     private Class<M> entityClass;
     private String entityName;
     private String idName;
 
-    private final RepositoryHelper repositoryHelper;
 
+    /**
+     * 查询所有的QL
+     */
     private String findAllQL;
-
+    /**
+     * 统计QL
+     */
     private String countAllQL;
 
+    private QueryJoin[] joins;
 
+    private SearchCallback searchCallback = SearchCallback.DEFAULT;
 
     public SimpleBaseRepository(JpaEntityInformation<M, ID> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
@@ -61,12 +83,45 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
         this.entityName = this.entityInformation.getEntityName();
         this.idName = this.entityInformation.getIdAttributeNames().iterator().next();
         this.em = entityManager;
+
+        repositoryHelper = new RepositoryHelper(entityClass);
+
         findAllQL = String.format(FIND_QUERY_STRING, entityName);
         countAllQL = String.format(COUNT_QUERY_STRING, entityName);
-        repositoryHelper = new RepositoryHelper(entityClass);
     }
-    	
 
+
+
+    /**
+     * 设置searchCallback
+     *
+     * @param searchCallback
+     */
+    public void setSearchCallback(SearchCallback searchCallback) {
+        this.searchCallback = searchCallback;
+    }
+
+    /**
+     * 设置查询所有的ql
+     *
+     * @param findAllQL
+     */
+    public void setFindAllQL(String findAllQL) {
+        this.findAllQL = findAllQL;
+    }
+
+    /**
+     * 设置统计的ql
+     *
+     * @param countAllQL
+     */
+    public void setCountAllQL(String countAllQL) {
+        this.countAllQL = countAllQL;
+    }
+
+    public void setJoins(QueryJoin[] joins) {
+        this.joins = joins;
+    }
 
     /////////////////////////////////////////////////
     ////////覆盖默认spring data jpa的实现////////////
@@ -240,8 +295,130 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
     ////////根据Specification查询 直接从SimpleJpaRepository复制过来的///////////////////////////////////
 
 
-    
 
+    /**
+     * Creates a new count query for the given {@link org.springframework.data.jpa.domain.Specification}.
+     *
+     * @param spec can be {@literal null}.
+     * @return
+     */
+    protected TypedQuery<Long> getCountQuery(Specification<M> spec) {
+
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+
+
+        Root<M> root = applySpecificationToCriteria(spec, query);
+
+        if (query.isDistinct()) {
+            query.select(builder.countDistinct(root));
+        } else {
+            query.select(builder.count(root));
+        }
+
+        TypedQuery<Long> q = em.createQuery(query);
+        repositoryHelper.applyEnableQueryCache(q);
+        return q;
+    }
+
+    /**
+     * Creates a new {@link javax.persistence.TypedQuery} from the given {@link org.springframework.data.jpa.domain.Specification}.
+     *
+     * @param spec     can be {@literal null}.
+     * @param pageable can be {@literal null}.
+     * @return
+     */
+    protected TypedQuery<M> getQuery(Specification<M> spec, Pageable pageable) {
+
+        Sort sort = pageable == null ? null : pageable.getSort();
+        return getQuery(spec, sort);
+    }
+
+
+    private void applyJoins(Root<M> root) {
+        if(joins == null) {
+            return;
+        }
+
+        for(QueryJoin join : joins) {
+            root.join(join.property(), join.joinType());
+        }
+    }
+
+
+    /**
+     * Applies the given {@link org.springframework.data.jpa.domain.Specification} to the given {@link javax.persistence.criteria.CriteriaQuery}.
+     *
+     * @param spec  can be {@literal null}.
+     * @param query must not be {@literal null}.
+     * @return
+     */
+    private <S> Root<M> applySpecificationToCriteria(Specification<M> spec, CriteriaQuery<S> query) {
+
+        Assert.notNull(query);
+        Root<M> root = query.from(entityClass);
+
+        if (spec == null) {
+            return root;
+        }
+
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        Predicate predicate = spec.toPredicate(root, query, builder);
+
+        if (predicate != null) {
+            query.where(predicate);
+        }
+
+        return root;
+    }
+
+    ///////直接从SimpleJpaRepository复制过来的///////////////////////////////
+
+
+    @Override
+    public List<M> findAll() {
+        return repositoryHelper.findAll(findAllQL);
+    }
+
+    @Override
+    public List<M> findAll(final Sort sort) {
+        return repositoryHelper.findAll(findAllQL, sort);
+    }
+
+    @Override
+    public Page<M> findAll(final Pageable pageable) {
+        return new PageImpl<M>(
+                repositoryHelper.<M>findAll(findAllQL, pageable),
+                pageable,
+                repositoryHelper.count(countAllQL)
+        );
+    }
+
+    @Override
+    public long count() {
+        return repositoryHelper.count(countAllQL);
+    }
+
+
+    /////////////////////////////////////////////////
+    ///////////////////自定义实现////////////////////
+    /////////////////////////////////////////////////
+
+    @Override
+    public Page<M> findAll(final Searchable searchable) {
+        List<M> list = repositoryHelper.findAll(findAllQL, searchable, searchCallback);
+        long total = searchable.hasPageable() ? count(searchable) : list.size();
+        return new PageImpl<M>(
+                list,
+                searchable.getPage(),
+                total
+        );
+    }
+
+    @Override
+    public long count(final Searchable searchable) {
+        return repositoryHelper.count(countAllQL, searchable, searchCallback);
+    }
 
     /**
      * 重写默认的 这样可以走一级/二级缓存
@@ -253,17 +430,5 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
     public boolean exists(ID id) {
         return findOne(id) != null;
     }
-
-	@Override
-	public Page<M> findAll(Searchable searchable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long count(Searchable searchable) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

@@ -70,7 +70,14 @@
 		</property>
 	</bean>
 
-	<jpa:repositories base-package="com.digitalplay.network.ireader.repository"	 factory-class="com.digitalplay.network.ireader.repository.SimpleBaseRepositoryFactoryBean" transaction-manager-ref="transactionManager" 		entity-manager-factory-ref="entityManagerFactory" />
+<!--设置BaseRepositoryImplHelper辅助类所需的entityManagerFactory-->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod"
+                  value="com.digitalplay.network.ireader.repository.RepositoryHelper.setEntityManagerFactory"/>
+        <property name="arguments" ref="entityManagerFactory"/>
+    </bean>
+    
+	<jpa:repositories base-package="com.digitalplay.network.ireader.repository"	 repository-impl-postfix="Impl"  factory-class="com.digitalplay.network.ireader.repository.SimpleBaseRepositoryFactoryBean" transaction-manager-ref="transactionManager" 		entity-manager-factory-ref="entityManagerFactory" />
 
 	<!-- Jpa 事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -80,4 +87,6 @@
 	<!-- 使用annotation定义事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
+    
+    
 </beans>

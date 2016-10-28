@@ -37,7 +37,7 @@ public class UserAuthService {
     private OrganizationService organizationService;
 
     @Autowired
-    private PositionService jobService;
+    private PositionService positionService;
 
     @Autowired
     private AuthService authService;
@@ -80,11 +80,11 @@ public class UserAuthService {
         //找组织机构祖先
         organizationIds.addAll(organizationService.findAncestorIds(organizationIds));
         //找工作职务的祖先
-        jobIds.addAll(jobService.findAncestorIds(jobIds));
+        jobIds.addAll(positionService.findAncestorIds(jobIds));
 
         //过滤组织机构 仅获取目前可用的组织机构数据
         organizationService.filterForCanShow(organizationIds, organizationJobIds);
-        jobService.filterForCanShow(jobIds, organizationJobIds);
+        positionService.filterForCanShow(jobIds, organizationJobIds);
 
         //过滤工作职务 仅获取目前可用的工作职务数据
 

@@ -20,8 +20,9 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformationSuppo
 import org.springframework.orm.jpa.SharedEntityManagerCreator;
 import org.springframework.util.Assert;
 
-import com.digitalplay.network.ireader.domain.SearchCallback;
-import com.digitalplay.network.ireader.domain.Searchable;
+import com.digitalplay.network.ireader.search.SearchCallback;
+import com.digitalplay.network.ireader.search.Searchable;
+
 
 /**
  * 仓库辅助类
