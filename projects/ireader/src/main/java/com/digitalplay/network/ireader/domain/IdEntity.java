@@ -10,7 +10,7 @@ import java.io.Serializable;
 public abstract class IdEntity<ID extends Serializable> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private ID id;
 
     public ID getId() {

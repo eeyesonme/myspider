@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalplay.network.ireader.domain.sys.Group;
-import com.digitalplay.network.ireader.repository.GroupRepository;
+import com.digitalplay.network.ireader.repository.sys.GroupRepository;
 import com.digitalplay.network.ireader.search.SearchOperator;
 import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseService;

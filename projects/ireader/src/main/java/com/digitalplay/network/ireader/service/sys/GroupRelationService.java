@@ -6,7 +6,7 @@
 package com.digitalplay.network.ireader.service.sys;
 
 import com.digitalplay.network.ireader.domain.sys.GroupRelation;
-import com.digitalplay.network.ireader.repository.GroupRelationRepository;
+import com.digitalplay.network.ireader.repository.sys.GroupRelationRepository;
 import com.digitalplay.network.ireader.service.BaseService;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.ArrayUtils;

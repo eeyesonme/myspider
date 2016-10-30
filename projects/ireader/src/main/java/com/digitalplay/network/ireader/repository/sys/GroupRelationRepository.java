@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.digitalplay.network.ireader.repository;
+package com.digitalplay.network.ireader.repository.sys;
 
 import java.util.List;
 import java.util.Set;
@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.digitalplay.network.ireader.domain.sys.GroupRelation;
+import com.digitalplay.network.ireader.repository.BaseRepository;
 
 /**
  * <p>User: Zhang Kaitao

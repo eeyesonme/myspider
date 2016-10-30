@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.digitalplay.network.ireader.domain.sys.Role;
 import com.digitalplay.network.ireader.domain.sys.RoleResourcePermission;
-import com.digitalplay.network.ireader.repository.RoleRepository;
+import com.digitalplay.network.ireader.repository.sys.RoleRepository;
 import com.digitalplay.network.ireader.service.BaseService;
 import com.google.common.collect.Sets;
 

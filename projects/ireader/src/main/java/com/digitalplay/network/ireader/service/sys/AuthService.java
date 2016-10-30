@@ -5,6 +5,8 @@
  */
 package com.digitalplay.network.ireader.service.sys;
 
+import java.util.Set;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,8 @@ import org.springframework.stereotype.Service;
 import com.digitalplay.network.ireader.domain.sys.Auth;
 import com.digitalplay.network.ireader.domain.sys.Group;
 import com.digitalplay.network.ireader.domain.sys.User;
-import com.digitalplay.network.ireader.repository.AuthRepository;
+import com.digitalplay.network.ireader.repository.sys.AuthRepository;
 import com.digitalplay.network.ireader.service.BaseService;
-
-import java.util.Set;
 
 /**
  * <p>User: Zhang Kaitao

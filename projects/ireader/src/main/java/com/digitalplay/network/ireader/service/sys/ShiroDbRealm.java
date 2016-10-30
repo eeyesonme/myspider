@@ -51,7 +51,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	        //因为spring在查找findAutowireCandidates时对FactoryBean做了优化，即只获取Bean，但不会autowire属性，
 	        //所以如果我们的bean在依赖它的bean之前初始化，那么就得不到ObjectType（永远是Repository）
 	        //所以此处我们先getBean一下 就没有问题了
-	        ctx.getBeansOfType(BaseRepository.class);
+	        ctx.getBeansOfType(SimpleBaseRepositoryFactoryBean.class);
 	    }
 
 	/**

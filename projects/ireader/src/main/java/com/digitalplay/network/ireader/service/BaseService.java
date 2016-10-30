@@ -30,6 +30,7 @@ import com.google.common.collect.Lists;
  */
 public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
 
+	 
     protected BaseRepository<M, ID> baseRepository;
 
     @Autowired

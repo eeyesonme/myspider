@@ -3,11 +3,12 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.digitalplay.network.ireader.repository;
+package com.digitalplay.network.ireader.repository.sys;
 
 import java.util.Set;
 
 import com.digitalplay.network.ireader.domain.sys.Auth;
+import com.digitalplay.network.ireader.repository.BaseRepository;
 
 /**
  * <p>User: Zhang Kaitao

@@ -125,7 +125,7 @@ public class AccountService extends BaseService<User, Long>{
         passwordService.validate(user, password);
 
         if (user.getStatus() == UserStatus.blocked) {
-            throw new UserBlockedException(/*userStatusHistoryService.getLastReason(user)*/"test");
+            throw new UserBlockedException(/*userStatusHistoryService.getLastReason(user)*/"s");
         }
 
         return user;
