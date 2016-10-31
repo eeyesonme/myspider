@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<div class="main-nav-wrap" data-l1="3">
-	<div class="main-nav box-center cf">
+<div class="main-nav-wrap">
+	<div class="main-nav box-center">
 		<ul>
 		<li class="first"><span><em><i></i><i></i><i></i></em>作品分类</span></li>
 		<li class="nav-li"><a href="#" data-aid="qd_A15">全部作品</a></li>

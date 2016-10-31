@@ -6,6 +6,7 @@
 package com.digitalplay.network.ireader.web;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -37,6 +38,13 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
         request.setAttribute(getFailureKeyAttribute(), ae);
     }
 
+    @Override
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        if(request.getAttribute(getFailureKeyAttribute()) != null) {  
+            return true;  
+        }  
+        return super.onAccessDenied(request, response);  
+    }  
     /**
      * 默认的成功地址
      */

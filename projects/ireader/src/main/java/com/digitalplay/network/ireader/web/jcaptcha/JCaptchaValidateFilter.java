@@ -6,9 +6,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.util.WebUtils;
+
+import com.digitalplay.network.ireader.domain.sys.JCaptchaCodeNotMatchException;
 
 /**
  * 验证码过滤器
@@ -69,16 +73,8 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-//        redirectToLogin(request, response);
-    	request.setAttribute("jcaptchaError", 1);
-//    	ShiroHttpServletRequest shiroRequest = (ShiroHttpServletRequest) request;
-//    	shiroRequest.getRequest().setAttribute("jcaptchaError", 1);
+    	request.setAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, new JCaptchaCodeNotMatchException());
         return true;
     }
-
-
-   /* protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
-        WebUtils.issueRedirect(request, response, getJcapatchaErrorUrl());
-    }*/
 
 }

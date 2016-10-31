@@ -8,7 +8,6 @@
 </head>
 
 <body>
-<div class="container">
     <div class="login">
         <div class="title">用户登录</div>
         <div class="form">
@@ -56,7 +55,6 @@
         </form>
         </div>
     </div>
-</div>
 	<script type="text/javascript">
     $(function() {
         $("#username").focus();

@@ -91,10 +91,10 @@ public class LoginController {
         //如果用户直接到登录页面 先退出一下
         //原因：isAccessAllowed实现是subject.isAuthenticated()---->即如果用户验证通过 就允许访问
         // 这样会导致登录一直死循环
-      /*  Subject subject = SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject();
         if (subject != null && subject.isAuthenticated()) {
             subject.logout();
-        }*/
+        }
 
 
         //如果同时存在错误消息 和 普通消息  只保留错误消息
