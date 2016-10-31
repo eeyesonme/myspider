@@ -76,7 +76,8 @@ public class PasswordService {
     }
     
     public String encryptPassword(String username, String password, String salt) {
-		byte[] hashPassword = Digests.sha1(password.getBytes(), salt.getBytes(), HASH_INTERATIONS);
+    	byte[] salts = Encodes.decodeHex(salt);
+		byte[] hashPassword = Digests.sha1(password.getBytes(), salts, HASH_INTERATIONS);
 		return Encodes.encodeHex(hashPassword);
     }
 

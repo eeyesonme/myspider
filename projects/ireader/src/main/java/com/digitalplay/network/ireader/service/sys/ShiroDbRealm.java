@@ -7,8 +7,6 @@ package com.digitalplay.network.ireader.service.sys;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -17,7 +15,6 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -31,7 +28,6 @@ import com.digitalplay.network.ireader.domain.sys.UserException;
 import com.digitalplay.network.ireader.domain.sys.UserNotExistsException;
 import com.digitalplay.network.ireader.domain.sys.UserPasswordNotMatchException;
 import com.digitalplay.network.ireader.domain.sys.UserPasswordRetryLimitExceedException;
-import com.digitalplay.network.ireader.repository.BaseRepository;
 import com.digitalplay.network.ireader.repository.SimpleBaseRepositoryFactoryBean;
 import com.google.common.base.Objects;
 
@@ -103,13 +99,13 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	/**
 	 * 设定Password校验的Hash算法与迭代次数.
 	 */
-	@PostConstruct
+	/*@PostConstruct
 	public void initCredentialsMatcher() {
 		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(AccountService.HASH_ALGORITHM);
 		matcher.setHashIterations(AccountService.HASH_INTERATIONS);
 
 		setCredentialsMatcher(matcher);
-	}
+	}*/
 
 	public void setAccountService(AccountService accountService) {
 		this.accountService = accountService;

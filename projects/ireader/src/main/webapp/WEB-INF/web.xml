@@ -54,16 +54,17 @@
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
+		 <dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 
   <!-- 验证码过滤器需要放到Shiro之后 因为Shiro将包装HttpSession 如果不 可能造成两次的sesison id 不一样 -->
     <filter>
         <filter-name>JCaptchaFilter</filter-name>
-        <filter-class>com.sishuok.es.common.web.jcaptcha.JCaptchaFilter</filter-class>
+        <filter-class>com.digitalplay.network.ireader.web.jcaptcha.JCaptchaFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>JCaptchaFilter</filter-name>
-        <url-pattern>/jcaptcha.jpg</url-pattern>
+        <url-pattern>jcaptcha.jpg</url-pattern>
     </filter-mapping>
 	
 	 <filter>

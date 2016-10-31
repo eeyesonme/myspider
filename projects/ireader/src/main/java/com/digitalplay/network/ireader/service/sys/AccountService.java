@@ -35,8 +35,8 @@ public class AccountService extends BaseService<User, Long>{
 	@Autowired
 	private PasswordService passwordService;
 	
-	/*@Autowired
-	private UserStatusHistoryService userStatusHistoryService;*/
+	@Autowired
+	private UserStatusHistoryService userStatusHistoryService;
 	
 	@Autowired
 	private AccountRepository getUserRepository() {
@@ -125,7 +125,7 @@ public class AccountService extends BaseService<User, Long>{
         passwordService.validate(user, password);
 
         if (user.getStatus() == UserStatus.blocked) {
-            throw new UserBlockedException(/*userStatusHistoryService.getLastReason(user)*/"s");
+            throw new UserBlockedException(userStatusHistoryService.getLastReason(user));
         }
 
         return user;

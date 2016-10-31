@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
-<%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
-<%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@include file="/WEB-INF/views/common/taglibs.jspf" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -37,18 +35,18 @@
                 </div>
             </div>
             <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
-            <c:if test="${jcaptchaEbabled}">
+           <%--  <c:if test="${jcaptchaEnabled}"> --%>
                 <div class="control-group">
                     <label for="jcaptchaCode">验证码</label>
                     <div class="input-prepend">
                         <span class="add-on icon-circle-blank"></span>
                         <input type="text" id="jcaptchaCode" name="jcaptchaCode"
-                                class="input-medium validate[required,ajax[ajaxJcaptchaCall]]" placeholder="请输入验证码">
+                                class="input-medium ajaxJcaptchaCall" placeholder="请输入验证码">
                     </div>
                      <img class="jcaptcha-btn jcaptcha-img" style="margin-left: 10px;" src="${ctx}/jcaptcha.jpg" title="点击更换验证码">
                      <a class="jcaptcha-btn btn btn-link">换一张</a>
                 </div>
-            </c:if>
+            <%-- </c:if> --%>
 
             <div class="control-group">
                 <label class="checkbox remember"><input type="checkbox" name="rememberMe" value="true">下次自动登录</label>
@@ -71,11 +69,6 @@
             imageSrc = imageSrc + "?" + new Date().getTime();
             img.attr("src", imageSrc);
         });
-        $.validationEngineLanguage.allRules.ajaxJcaptchaCall={
-            "url": "${ctx}/jcaptcha-validate",
-            "alertTextLoad": "* 正在验证，请稍等。。。"
-        };
-        $("#loginForm").validationEngine({scroll:false});
     });
 </script>
 </body>
