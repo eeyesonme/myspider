@@ -19,6 +19,8 @@ import org.springframework.util.StringUtils;
 import com.digitalplay.network.ireader.domain.sys.Menu;
 import com.digitalplay.network.ireader.domain.sys.Resource;
 import com.digitalplay.network.ireader.domain.sys.User;
+import com.digitalplay.network.ireader.repository.sys.AccountRepository;
+import com.digitalplay.network.ireader.repository.sys.ResourceRepository;
 import com.digitalplay.network.ireader.search.SearchOperator;
 import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseTreeableService;
@@ -28,6 +30,11 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
 
     @Autowired
     private UserAuthService userAuthService;
+    
+    @Autowired
+	private ResourceRepository getResourceRepository() {
+		return (ResourceRepository) baseRepository;
+	}
 
     /**
      * 得到真实的资源标识  即 父亲:儿子
@@ -98,6 +105,10 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
         }
 
         return convertToMenus(resources);
+    }
+    
+    public List<Menu> findMenu(User user){
+    	this.baseRepository.f
     }
 
     private boolean hasPermission(Resource resource, Set<String> userPermissions) {

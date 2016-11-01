@@ -6,18 +6,37 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
+import com.digitalplay.network.ireader.search.SearchFilter;
+import com.digitalplay.network.ireader.search.Searchable;
 import com.google.common.collect.Lists;
 
 public class DynamicSpecifications {
 
-	public static <T> Specification<T> bySearchFilter(final Collection<SearchFilter> filters, final Class<T> entityClazz) {
+	public static <T> Specification<T> bySearchable(final Searchable searchable) {
+		return new Specification<T>() {
+			@Override
+			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				List<Predicate> predicates = Lists.newArrayList();
+				if (searchable.hasSearchFilter()){
+					final Collection<SearchFilter> filters = searchable.getSearchFilters();
+					for (SearchFilter filter :filters){
+						
+					}
+				}
+				return builder.conjunction();
+			}
+		};
+	}
+	
+	
+	
+	
+	/*public static <T> Specification<T> bySearchFilter(final Collection<SearchFilter> filters, final Class<T> entityClazz) {
 		return new Specification<T>() {
 			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
@@ -64,5 +83,5 @@ public class DynamicSpecifications {
 				return builder.conjunction();
 			}
 		};
-	}
+	}*/
 }
