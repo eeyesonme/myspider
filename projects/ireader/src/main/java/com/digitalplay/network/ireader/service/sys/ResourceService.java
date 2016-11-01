@@ -16,13 +16,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.digitalplay.network.ireader.common.search.SearchOperator;
+import com.digitalplay.network.ireader.common.search.SearchRequest;
 import com.digitalplay.network.ireader.domain.sys.Menu;
 import com.digitalplay.network.ireader.domain.sys.Resource;
 import com.digitalplay.network.ireader.domain.sys.User;
-import com.digitalplay.network.ireader.repository.sys.AccountRepository;
 import com.digitalplay.network.ireader.repository.sys.ResourceRepository;
-import com.digitalplay.network.ireader.search.SearchOperator;
-import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseTreeableService;
 
 @Service
@@ -88,12 +87,12 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
     }
 
     public List<Menu> findMenus(User user) {
-        Searchable searchable =
-                Searchable.newSearchable()
-                        .addSearchFilter("show", SearchOperator.eq, true)
-                        .addSort(new Sort(Sort.Direction.DESC, "parentId", "weight"));
+        SearchRequest searchRequest =new SearchRequest();
+        
+        searchRequest .addSearchFilter("show", SearchOperator.eq, true);
+        searchRequest.addSort(new Sort(Sort.Direction.DESC, "parentId", "weight"));
 
-        List<Resource> resources = findAllWithSort(searchable);
+        List<Resource> resources = findAll(searchRequest);
 
         Set<String> userPermissions = userAuthService.findStringPermissions(user);
 
@@ -107,9 +106,6 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
         return convertToMenus(resources);
     }
     
-    public List<Menu> findMenu(User user){
-    	this.baseRepository.f
-    }
 
     private boolean hasPermission(Resource resource, Set<String> userPermissions) {
         String actualResourceIdentity = findActualResourceIdentity(resource);

@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.search;
+package com.digitalplay.network.ireader.common.search;
 
 
 import java.util.Collection;
@@ -6,10 +6,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.util.CollectionUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -21,7 +29,7 @@ import com.google.common.collect.Maps;
  * <p>Version: 1.0
  */
 
-public final class SearchRequest extends Searchable {
+public final class SearchRequest  {
 
     private final Map<String, SearchFilter> searchFilterMap = Maps.newHashMap();
     /**
@@ -47,35 +55,14 @@ public final class SearchRequest extends Searchable {
         this(null, null, null);
     }
 
-    /**
-     * @param searchParams
-     * @see SearchRequest#SearchRequest(java.util.Map<java.lang.String,java.lang.Object>)
-     */
     public SearchRequest(final Map<String, Object> searchParams, final Pageable page) {
         this(searchParams, page, null);
     }
 
-    /**
-     * @param searchParams
-     * @see SearchRequest#SearchRequest(java.util.Map<java.lang.String,java.lang.Object>)
-     */
     public SearchRequest(final Map<String, Object> searchParams, final Sort sort) throws SearchException {
         this(searchParams, null, sort);
     }
 
-
-    /**
-     * <p>根据查询参数拼Search<br/>
-     * 查询参数格式：property_op=value 或 customerProperty=value<br/>
-     * customerProperty查找规则是：1、先查找domain的属性，2、如果找不到查找domain上的SearchPropertyMappings映射规则
-     * 属性、操作符之间用_分割，op可省略/或custom，省略后值默认为custom，即程序中自定义<br/>
-     * 如果op=custom，property也可以自定义（即可以与domain的不一样）,
-     * </p>
-     *
-     * @param searchParams 查询参数组
-     * @param page         分页
-     * @param sort         排序
-     */
     public SearchRequest(final Map<String, Object> searchParams, final Pageable page, final Sort sort)
             throws SearchException {
 
@@ -93,40 +80,32 @@ public final class SearchRequest extends Searchable {
             String key = entry.getKey();
             Object value = entry.getValue();
 
-            addSearchFilter(SearchFilterHelper.newCondition(key, value));
+            addSearchFilter(SearchFilter.newSearchFilter(key, value));
         }
     }
 
 
-    @Override
-    public Searchable addSearchParam(final String key, final Object value) throws SearchException {
-        addSearchFilter(SearchFilterHelper.newCondition(key, value));
+    public SearchRequest addSearchParam(final String key, final Object value) throws SearchException {
+    	addSearchFilter(SearchFilter.newSearchFilter(key, value));
         return this;
     }
 
-    @Override
-    public Searchable addSearchParams(Map<String, Object> searchParams) throws SearchException {
+    public SearchRequest addSearchParams(Map<String, Object> searchParams) throws SearchException {
         toSearchFilters(searchParams);
         return this;
     }
 
 
-    @Override
-    public Searchable addSearchFilter(final String searchProperty, final SearchOperator operator, final Object value) {
-        SearchFilter searchFilter = SearchFilterHelper.newCondition(searchProperty, operator, value);
+    public SearchRequest addSearchFilter(final String searchProperty, final SearchOperator operator, final Object value) {
+        SearchFilter searchFilter = SearchFilter.newSearchFilter(searchProperty, operator, value);
         return addSearchFilter(searchFilter);
     }
 
-    @Override
-    public Searchable addSearchFilter(SearchFilter searchFilter) {
+    public SearchRequest addSearchFilter(SearchFilter searchFilter) {
         if (searchFilter == null) {
             return this;
         }
-        if (searchFilter instanceof Condition) {
-            Condition condition = (Condition) searchFilter;
-            String key = condition.getKey();
-            searchFilterMap.put(key, condition);
-        }
+        searchFilterMap.put(searchFilter.getKey(), searchFilter);
         int index = searchFilters.indexOf(searchFilter);
         if(index != -1) {
             searchFilters.set(index, searchFilter);
@@ -138,8 +117,7 @@ public final class SearchRequest extends Searchable {
     }
 
 
-    @Override
-    public Searchable addSearchFilters(Collection<? extends SearchFilter> searchFilters) {
+    public SearchRequest addSearchFilters(Collection<? extends SearchFilter> searchFilters) {
         if (CollectionUtils.isEmpty(searchFilters)) {
             return this;
         }
@@ -149,32 +127,13 @@ public final class SearchRequest extends Searchable {
         return this;
     }
 
-    @Override
-    public Searchable or(final SearchFilter first, final SearchFilter... others) {
-        addSearchFilter(SearchFilterHelper.or(first, others));
+
+
+    public SearchRequest removeSearchFilter(final String searchProperty, final SearchOperator operator) {
+        this.removeSearchFilter(searchProperty + SearchFilter.separator + operator);
         return this;
     }
-
-    @Override
-    public Searchable and(final SearchFilter first, final SearchFilter... others) {
-
-        addSearchFilter(SearchFilterHelper.and(first, others));
-        return this;
-    }
-
-
-
-    @Override
-    public Searchable removeSearchFilter(final String searchProperty, final SearchOperator operator) {
-        this.removeSearchFilter(searchProperty + Condition.separator + operator);
-        return this;
-    }
-    /**
-     * @param key
-     * @return
-     */
-    @Override
-    public Searchable removeSearchFilter(final String key) {
+    public SearchRequest removeSearchFilter(final String key) {
         if (key == null) {
             return this;
         }
@@ -195,75 +154,111 @@ public final class SearchRequest extends Searchable {
     }
 
     private String getCustomKey(String key) {
-        return key + Condition.separator + SearchOperator.custom;
+        return key + SearchFilter.separator + SearchOperator.custom;
     }
 
-    @Override
-    public Searchable setPage(final Pageable page) {
+    public SearchRequest setPage(final Pageable page) {
         merge(sort, page);
         return this;
     }
 
-    @Override
-    public Searchable setPage(int pageNumber, int pageSize) {
+    public SearchRequest setPage(int pageNumber, int pageSize) {
         merge(sort, new PageRequest(pageNumber, pageSize));
         return this;
     }
 
-    @Override
-    public Searchable addSort(final Sort sort) {
+    public SearchRequest addSort(final Sort sort) {
         merge(sort, page);
         return this;
     }
 
-    @Override
-    public Searchable addSort(final Sort.Direction direction, final String property) {
+    public SearchRequest addSort(final Sort.Direction direction, final String property) {
         merge(new Sort(direction, property), page);
         return this;
     }
 
 
-    @Override
-    public <T> Searchable convert(final Class<T> entityClass) {
+    public <T> SearchRequest convert(final Class<T> entityClass) {
         SearchableConvertUtils.convertSearchValueToEntityValue(this, entityClass);
         markConverted();
         return this;
     }
 
 
-    @Override
-    public Searchable markConverted() {
+    public  <T> Specification<T> bySearchFilter( final Class<T> entityClazz) {
+    	return new Specification<T>() {
+			@Override
+			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
+				if (hasSearchFilter()){
+					List<Predicate> predicates = Lists.newArrayList();
+					final Collection<SearchFilter> filters = getSearchFilters();
+					for (SearchFilter filter : filters) {
+						// nested path translate, 如Task的名为"user.name"的filedName, 转换为Task.user.name属性
+						String[] names = StringUtils.split(filter.getFieldName(), ".");
+						Path expression = root.get(names[0]);
+						for (int i = 1; i < names.length; i++) {
+							expression = expression.get(names[i]);
+						}
+
+						// logic operator
+						switch (filter.getOperator()) {
+						case eq:
+							predicates.add(builder.equal(expression, filter.getValue()));
+							break;
+						case like:
+							predicates.add(builder.like(expression, "%" + filter.getValue() + "%"));
+							break;
+						case gt:
+							predicates.add(builder.greaterThan(expression, (Comparable) filter.getValue()));
+							break;
+						case lt:
+							predicates.add(builder.lessThan(expression, (Comparable) filter.getValue()));
+							break;
+						case gte:
+							predicates.add(builder.greaterThanOrEqualTo(expression, (Comparable) filter.getValue()));
+							break;
+						case lte:
+							predicates.add(builder.lessThanOrEqualTo(expression, (Comparable) filter.getValue()));
+							break;
+						}
+					}
+
+					// 将所有条件用 and 联合起来
+					if (!predicates.isEmpty()) {
+						return builder.and(predicates.toArray(new Predicate[predicates.size()]));
+					}
+				}
+
+				return builder.conjunction();
+			}
+		};
+    }
+    public SearchRequest markConverted() {
         this.converted = true;
         return this;
     }
 
 
-    @Override
     public Collection<SearchFilter> getSearchFilters() {
         return Collections.unmodifiableCollection(searchFilters);
     }
 
-    @Override
     public boolean isConverted() {
         return converted;
     }
 
-    @Override
     public boolean hasSearchFilter() {
         return searchFilters.size() > 0;
     }
 
-    @Override
     public boolean hashSort() {
         return this.sort != null && this.sort.iterator().hasNext();
     }
 
-    @Override
     public boolean hasPageable() {
         return this.page != null && this.page.getPageSize() > 0;
     }
 
-    @Override
     public void removeSort() {
         this.sort = null;
         if (this.page != null) {
@@ -271,7 +266,6 @@ public final class SearchRequest extends Searchable {
         }
     }
 
-    @Override
     public void removePageable() {
         this.page = null;
     }
@@ -284,7 +278,6 @@ public final class SearchRequest extends Searchable {
         return sort;
     }
 
-    @Override
     public boolean containsSearchKey(String key) {
         boolean contains =
                 searchFilterMap.containsKey(key) ||
@@ -301,29 +294,14 @@ public final class SearchRequest extends Searchable {
     private boolean containsSearchKey(List<SearchFilter> searchFilters, String key) {
         boolean contains = false;
         for(SearchFilter searchFilter : searchFilters) {
-            if(searchFilter instanceof OrCondition) {
-                OrCondition orCondition = (OrCondition) searchFilter;
-                contains = containsSearchKey(orCondition.getOrFilters(), key);
+                contains = searchFilter.getKey().equals(key) || searchFilter.getFieldName().equals(key);
+                if(contains) {
+                    return true;
+                }
             }
-            if(searchFilter instanceof AndCondition) {
-                AndCondition andCondition = (AndCondition) searchFilter;
-                contains = containsSearchKey(andCondition.getAndFilters(), key);
-            }
-
-            if(searchFilter instanceof Condition) {
-                Condition condition = (Condition) searchFilter;
-                contains = condition.getKey().equals(key) || condition.getSearchProperty().equals(key);
-            }
-
-            if(contains) {
-                return true;
-            }
-        }
-
         return contains;
     }
 
-    @Override
     public Object getValue(String key) {
         SearchFilter searchFilter = searchFilterMap.get(key);
         if (searchFilter == null) {
@@ -332,13 +310,7 @@ public final class SearchRequest extends Searchable {
         if (searchFilter == null) {
             return null;
         }
-
-        if (searchFilter instanceof Condition) {
-            Condition condition = (Condition) searchFilter;
-            return condition.getValue();
-        }
-
-        return null;
+            return searchFilter.getValue();
     }
 
 

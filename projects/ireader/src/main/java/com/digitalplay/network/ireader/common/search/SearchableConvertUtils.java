@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.search;
+package com.digitalplay.network.ireader.common.search;
 
 
 import java.util.Collection;
@@ -9,8 +9,6 @@ import org.springframework.beans.InvalidPropertyException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.util.CollectionUtils;
 
-import com.digitalplay.network.ireader.exception.InvalidSearchPropertyException;
-import com.digitalplay.network.ireader.exception.InvalidSearchValueException;
 import com.digitalplay.network.ireader.util.SpringUtils;
 import com.google.common.collect.Lists;
 
@@ -61,7 +59,7 @@ public final class SearchableConvertUtils {
      * @param entityClass 实体类型
      * @param <T>
      */
-    public static <T> void convertSearchValueToEntityValue(final Searchable search, final Class<T> entityClass) {
+    public static <T> void convertSearchValueToEntityValue(final SearchRequest search, final Class<T> entityClass) {
 
         if (search.isConverted()) {
             return;
@@ -74,52 +72,26 @@ public final class SearchableConvertUtils {
 
         for (SearchFilter searchFilter : searchFilters) {
             convertSearchValueToEntityValue(beanWrapper, searchFilter);
-
-
         }
     }
 
     private static void convertSearchValueToEntityValue(BeanWrapperImpl beanWrapper, SearchFilter searchFilter) {
-        if (searchFilter instanceof Condition) {
-            Condition condition = (Condition) searchFilter;
-            convert(beanWrapper, condition);
-            return;
-        }
-
-        if (searchFilter instanceof OrCondition) {
-            for (SearchFilter orFilter : ((OrCondition) searchFilter).getOrFilters()) {
-                convertSearchValueToEntityValue(beanWrapper, orFilter);
-            }
-            return;
-        }
-
-        if (searchFilter instanceof AndCondition) {
-            for (SearchFilter andFilter : ((AndCondition) searchFilter).getAndFilters()) {
-                convertSearchValueToEntityValue(beanWrapper, andFilter);
-            }
-            return;
-        }
-
-
-    }
-
-    private static void convert(BeanWrapperImpl beanWrapper, Condition condition) {
-        String searchProperty = condition.getSearchProperty();
+    	String searchProperty = searchFilter.getFieldName();
 
         //自定义的也不转换
-        if (condition.getOperator() == SearchOperator.custom) {
+        if (searchFilter.getOperator() == SearchOperator.custom) {
             return;
         }
 
         //一元运算符不需要计算
-        if (condition.isUnaryFilter()) {
+        if (searchFilter.isUnaryFilter()) {
             return;
         }
 
 
-        String entityProperty = condition.getEntityProperty();
+        String entityProperty = searchFilter.getFieldName();
 
-        Object value = condition.getValue();
+        Object value = searchFilter.getValue();
 
         Object newValue = null;
         boolean isCollection = value instanceof Collection;
@@ -139,8 +111,10 @@ public final class SearchableConvertUtils {
         } else {
             newValue = getConvertedValue(beanWrapper, searchProperty, entityProperty, value);
         }
-        condition.setValue(newValue);
+        searchFilter.setValue(newValue);
+
     }
+
 
     private static Object getConvertedValue(
             final BeanWrapperImpl beanWrapper,
@@ -162,44 +136,6 @@ public final class SearchableConvertUtils {
         return newValue;
     }
 
-/*    public static <T> void convertSearchValueToEntityValue(SearchRequest search, Class<T> domainClass) {
-        List<Condition> searchFilters = search.getSearchFilters();
-        for (Condition searchFilter : searchFilters) {
-            String property = searchFilter.getSearchProperty();
-            Class<? extends Comparable> targetPropertyType = getPropertyType(domainClass, property);
-            Object value = searchFilter.getValue();
-            Comparable newValue = convert(value, targetPropertyType);
-            searchFilter.setValue(newValue);
-        }
-    }*/
-/*
-    private static <T> Class getPropertyType(Class<T> domainClass, String property) {
-        String[] names = StringUtils.split(property, ".");
-        Class<?> clazz = null;
-
-        for (String name : names) {
-            if (clazz == null) {
-                clazz = BeanUtils.findPropertyType(name, ArrayUtils.toArray(domainClass));
-            } else {
-                clazz = BeanUtils.findPropertyType(name, ArrayUtils.toArray(clazz));
-            }
-        }
-
-        return clazz;
-    }*/
-
-/*
-
-    public static <S, T> T convert(S sourceValue, Class<T> targetClass) {
-        ConversionService conversionService = getConversionService();
-        if (!conversionService.canConvert(sourceValue.getClass(), targetClass)) {
-            throw new IllegalArgumentException(
-                    "search param can not convert value:[" + sourceValue + "] to target type:[" + targetClass + "]");
-        }
-
-        return conversionService.convert(sourceValue, targetClass);
-    }
-*/
 
 
 }

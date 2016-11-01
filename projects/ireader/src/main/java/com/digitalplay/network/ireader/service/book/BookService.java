@@ -12,9 +12,9 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.digitalplay.network.ireader.common.search.DynamicSpecifications;
 import com.digitalplay.network.ireader.domain.book.Book;
 import com.digitalplay.network.ireader.repository.book.BookRepository;
-import com.digitalplay.network.ireader.util.DynamicSpecifications;
 import com.digitalplay.network.ireader.util.SearchFilter;
 
 @Service
@@ -34,14 +34,14 @@ public class BookService {
 		return bookDao.findOne(id);
 	}
 
-	@Transactional(readOnly = true)
+	/*@Transactional(readOnly = true)
 	public Page<Book> listBooks( Map<String, Object> searchParams, int pageNumber, int pageSize,
 			String sortType) {
 		PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
 		Specification<Book> spec = buildSpecification( searchParams);
 
 		return bookDao.findAll(spec, pageRequest);
-	}
+	}*/
 
 	public long countBookByCategoryId(Long categoryId) {
 				return bookDao.countByCategoryId(categoryId);
@@ -63,11 +63,11 @@ public class BookService {
 	/**
 	 * 创建动态查询条件组合.
 	 */
-	private Specification<Book> buildSpecification(Map<String, Object> searchParams) {
+	/*private Specification<Book> buildSpecification(Map<String, Object> searchParams) {
 		Map<String, SearchFilter> filters = SearchFilter.parse(searchParams);
 		Specification<Book> spec = DynamicSpecifications.bySearchFilter(filters.values(), Book.class);
 		return spec;
-	}
+	}*/
 	
 	
 }

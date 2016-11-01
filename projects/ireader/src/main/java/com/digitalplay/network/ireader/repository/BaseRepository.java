@@ -4,20 +4,20 @@ package com.digitalplay.network.ireader.repository;
 import java.io.Serializable;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.digitalplay.network.ireader.search.Searchable;
+import com.digitalplay.network.ireader.common.search.SearchRequest;
 
 
 @NoRepositoryBean
-public interface BaseRepository<M, ID extends Serializable> extends PagingAndSortingRepository<M, ID>,JpaSpecificationExecutor<M> {
+public interface BaseRepository<M, ID extends Serializable> extends JpaRepository<M, ID>,JpaSpecificationExecutor<M> {
 
 	public void delete(final ID[] ids);
 	
-    public Page<M> findAll(Searchable searchable);
+    public Page<M> findAll(SearchRequest searchRequest);
 
-    public long count(Searchable searchable);
+    public long count(SearchRequest searchRequest);
 
 }

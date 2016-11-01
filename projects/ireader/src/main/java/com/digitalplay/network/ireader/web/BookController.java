@@ -37,7 +37,7 @@ public class BookController {
 		sortTypes.put("name", "标题");
 	}
 	
-	@RequestMapping(value = "/book",method = RequestMethod.GET)
+	/*@RequestMapping(value = "/book",method = RequestMethod.GET)
 	public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
 			@RequestParam(value = "page.size", defaultValue = PAGE_SIZE) int pageSize,
 			@RequestParam(value = "sortType", defaultValue = "auto") String sortType, Model model,
@@ -51,7 +51,7 @@ public class BookController {
 		model.addAttribute("searchParams", Servlets.encodeParameterStringWithPrefix(searchParams, "search_"));
 
 		return "book/bookList";
-	}
+	}*/
 	
 	
 	

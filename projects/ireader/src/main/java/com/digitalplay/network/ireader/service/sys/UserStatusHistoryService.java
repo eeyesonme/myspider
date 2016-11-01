@@ -11,10 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.digitalplay.network.ireader.common.search.SearchRequest;
 import com.digitalplay.network.ireader.domain.sys.User;
 import com.digitalplay.network.ireader.domain.sys.UserStatus;
 import com.digitalplay.network.ireader.domain.sys.UserStatusHistory;
-import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseService;
 
 @Service
@@ -31,10 +31,10 @@ public class UserStatusHistoryService extends BaseService<UserStatusHistory, Lon
     }
 
     public UserStatusHistory findLastHistory(final User user) {
-        Searchable searchable = Searchable.newSearchable()
-                .addSearchParam("user_eq", user)
-                .addSort(Sort.Direction.DESC, "opDate")
-                .setPage(0, 1);
+        SearchRequest searchable = new SearchRequest();
+        		searchable .addSearchParam("user_eq", user);
+        		searchable.addSort(Sort.Direction.DESC, "opDate");
+        		searchable.setPage(0, 1);
 
         Page<UserStatusHistory> page = baseRepository.findAll(searchable);
 

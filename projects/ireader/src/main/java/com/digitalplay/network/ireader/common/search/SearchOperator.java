@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.search;
+package com.digitalplay.network.ireader.common.search;
 
 
 import java.util.Arrays;

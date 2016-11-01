@@ -5,7 +5,6 @@
  */
 package com.digitalplay.network.ireader.service.sys;
 
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.digitalplay.network.ireader.domain.sys.Group;
 import com.digitalplay.network.ireader.repository.sys.GroupRepository;
-import com.digitalplay.network.ireader.search.SearchOperator;
-import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.service.BaseService;
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -37,7 +31,7 @@ public class GroupService extends BaseService<Group, Long> {
         return (GroupRepository) baseRepository;
     }
 
-    public Set<Map<String, Object>> findIdAndNames(Searchable searchable, String groupName) {
+   /* public Set<Map<String, Object>> findIdAndNames(SearchRequest searchable, String groupName) {
 
         searchable.addSearchFilter("name", SearchOperator.like, groupName);
 
@@ -55,7 +49,7 @@ public class GroupService extends BaseService<Group, Long> {
                         }
                 )
         );
-    }
+    }*/
 
     /**
      * 获取可用的的分组编号列表

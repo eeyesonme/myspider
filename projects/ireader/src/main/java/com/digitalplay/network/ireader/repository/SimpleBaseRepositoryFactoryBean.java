@@ -5,8 +5,6 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 
-import org.springframework.beans.BeanUtils;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
@@ -15,10 +13,6 @@ import org.springframework.data.repository.core.RepositoryInformation;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 import org.springframework.data.repository.query.QueryLookupStrategy;
-import org.springframework.util.StringUtils;
-
-import com.digitalplay.network.ireader.search.SearchCallback;
-import com.digitalplay.network.ireader.search.SearchableQuery;
 
 /**
  * 基础Repostory简单实现 factory bean
@@ -51,25 +45,8 @@ class SimpleBaseRepositoryFactory<M, ID extends Serializable> extends JpaReposit
 
             JpaEntityInformation<M, ID> entityInformation = getEntityInformation((Class<M>) information.getDomainType());
             SimpleBaseRepository repository = new SimpleBaseRepository<M, ID>(entityInformation, entityManager);
-            SearchableQuery searchableQuery = AnnotationUtils.findAnnotation(repositoryInterface, SearchableQuery.class);
-            if (searchableQuery != null) {
-                String countAllQL = searchableQuery.countAllQuery();
-                if (!StringUtils.isEmpty(countAllQL)) {
-                    repository.setCountAllQL(countAllQL);
-                }
-                String findAllQL = searchableQuery.findAllQuery();
-                if (!StringUtils.isEmpty(findAllQL)) {
-                    repository.setFindAllQL(findAllQL);
-                }
-                Class<? extends SearchCallback> callbackClass = searchableQuery.callbackClass();
-                if (callbackClass != null && callbackClass != SearchCallback.class) {
-                    repository.setSearchCallback(BeanUtils.instantiate(callbackClass));
-                }
-
-                repository.setJoins(searchableQuery.joins());
-
+            return repository;
             }
-        }
         return super.getTargetRepository(information);
     }
 

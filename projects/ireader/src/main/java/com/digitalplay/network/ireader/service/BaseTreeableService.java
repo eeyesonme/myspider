@@ -13,17 +13,18 @@ import java.util.Set;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.digitalplay.network.ireader.common.search.SearchFilter;
+import com.digitalplay.network.ireader.common.search.SearchOperator;
+import com.digitalplay.network.ireader.common.search.SearchRequest;
 import com.digitalplay.network.ireader.domain.IdEntity;
 import com.digitalplay.network.ireader.repository.RepositoryHelper;
-import com.digitalplay.network.ireader.search.SearchFilter;
-import com.digitalplay.network.ireader.search.SearchFilterHelper;
-import com.digitalplay.network.ireader.search.SearchOperator;
-import com.digitalplay.network.ireader.search.Searchable;
 import com.digitalplay.network.ireader.util.Reflections;
 import com.digitalplay.network.ireader.util.Treeable;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import net.sf.ehcache.config.Searchable;
 
 /**
  * <p>User: Zhang Kaitao
@@ -199,84 +200,9 @@ public abstract class BaseTreeableService<M extends IdEntity<ID> & Treeable<ID>,
     }
 
 
-    /**
-     * 查看与name模糊匹配的名称
-     *
-     * @param name
-     * @return
-     */
-    public Set<String> findNames(Searchable searchable, String name, ID excludeId) {
-        M excludeM = findOne(excludeId);
-
-        searchable.addSearchFilter("name", SearchOperator.like, name);
-        addExcludeSearchFilter(searchable, excludeM);
-
-        return Sets.newHashSet(
-                Lists.transform(
-                        findAll(searchable).getContent(),
-                        new Function<M, String>() {
-                            @Override
-                            public String apply(M input) {
-                                return input.getName();
-                            }
-                        }
-                )
-        );
-
-    }
 
 
-    /**
-     * 查询子子孙孙
-     *
-     * @return
-     */
-    public List<M> findChildren(List<M> parents, Searchable searchable) {
 
-        if (parents.isEmpty()) {
-            return Collections.EMPTY_LIST;
-        }
-
-        SearchFilter first = SearchFilterHelper.newCondition("parentIds", SearchOperator.prefixLike, parents.get(0).makeSelfAsNewParentIds());
-        SearchFilter[] others = new SearchFilter[parents.size() - 1];
-        for (int i = 1; i < parents.size(); i++) {
-            others[i - 1] = SearchFilterHelper.newCondition("parentIds", SearchOperator.prefixLike, parents.get(i).makeSelfAsNewParentIds());
-        }
-        searchable.or(first, others);
-
-        List<M> children = findAllWithSort(searchable);
-        return children;
-    }
-
-    public List<M> findAllByName(Searchable searchable, M excludeM) {
-        addExcludeSearchFilter(searchable, excludeM);
-        return findAllWithSort(searchable);
-    }
-
-    /**
-     * 查找根和一级节点
-     *
-     * @param searchable
-     * @return
-     */
-    public List<M> findRootAndChild(Searchable searchable) {
-        searchable.addSearchParam("parentId_eq", 0);
-        List<M> models = findAllWithSort(searchable);
-
-        if (models.size() == 0) {
-            return models;
-        }
-        List<ID> ids = Lists.newArrayList();
-        for (int i = 0; i < models.size(); i++) {
-            ids.add(models.get(i).getId());
-        }
-        searchable.removeSearchFilter("parentId_eq");
-        searchable.addSearchParam("parentId_in", ids);
-
-        models.addAll(findAllWithSort(searchable));
-
-        return models;
-    }
 
     public Set<ID> findAncestorIds(Iterable<ID> currentIds) {
         Set<ID> parents = Sets.newHashSet();
@@ -298,30 +224,6 @@ public abstract class BaseTreeableService<M extends IdEntity<ID> & Treeable<ID>,
             }
         }
         return ids;
-    }
-
-    /**
-     * 递归查询祖先
-     *
-     * @param parentIds
-     * @return
-     */
-    public List<M> findAncestor(String parentIds) {
-        if (StringUtils.isEmpty(parentIds)) {
-            return Collections.EMPTY_LIST;
-        }
-        String[] ids = StringUtils.tokenizeToStringArray(parentIds, "/");
-
-        return Lists.reverse(findAllWithNoPageNoSort(Searchable.newSearchable().addSearchFilter("id", SearchOperator.in, ids)));
-    }
-
-
-    public void addExcludeSearchFilter(Searchable searchable, M excludeM) {
-        if (excludeM == null) {
-            return;
-        }
-        searchable.addSearchFilter("id", SearchOperator.ne, excludeM.getId());
-        searchable.addSearchFilter("parentIds", SearchOperator.suffixNotLike, excludeM.makeSelfAsNewParentIds());
     }
 
 

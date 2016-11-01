@@ -46,12 +46,6 @@ public @interface SearchableQuery {
      */
     String countAllQuery() default "";
 
-    /**
-     * 给ql拼条件及赋值的回调类型
-     *
-     * @return com.sishuok.es.common.repository.callback.SearchCallback子类
-     */
-    Class<? extends SearchCallback> callbackClass() default SearchCallback.class;
 
 
     QueryJoin[] joins() default {};

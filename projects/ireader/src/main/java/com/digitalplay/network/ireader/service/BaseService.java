@@ -11,23 +11,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
+import com.digitalplay.network.ireader.common.search.SearchRequest;
 import com.digitalplay.network.ireader.domain.IdEntity;
 import com.digitalplay.network.ireader.repository.BaseRepository;
-import com.digitalplay.network.ireader.search.Searchable;
 import com.google.common.collect.Lists;
 
 
-/**
- * <p>抽象service层基类 提供一些简便方法
- * <p/>
- * <p>泛型 ： M 表示实体类型；ID表示主键类型
- * <p/>
- * <p>User: Zhang Kaitao
- * <p>Date: 13-1-12 下午4:43
- * <p>Version: 1.0
- */
 public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
 
 	 
@@ -121,25 +111,11 @@ public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
         return baseRepository.count();
     }
 
-    /**
-     * 查询所有实体
-     *
-     * @return
-     */
+
     public List<M> findAll() {
         return baseRepository.findAll();
     }
-
-    /**
-     * 按照顺序查询所有实体
-     *
-     * @param sort
-     * @return
-     */
-    public List<M> findAll(Sort sort) {
-        return baseRepository.findAll(sort);
-    }
-
+    
     /**
      * 分页及排序查询实体
      *
@@ -150,48 +126,39 @@ public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
         return baseRepository.findAll(pageable);
     }
 
-    /**
-     * 按条件分页并排序查询实体
-     *
-     * @param searchable 条件
-     * @return
-     */
-    public Page<M> findAll(Searchable searchable) {
-        return baseRepository.findAll(searchable);
-    }
 
     /**
      * 按条件不分页不排序查询实体
      *
-     * @param searchable 条件
+     * @param SearchRequest 条件
      * @return
      */
-    public List<M> findAllWithNoPageNoSort(Searchable searchable) {
-        searchable.removePageable();
-        searchable.removeSort();
-        return Lists.newArrayList(baseRepository.findAll(searchable).getContent());
+    public List<M> findAllWithNoPageNoSort(SearchRequest SearchRequest) {
+        SearchRequest.removePageable();
+        SearchRequest.removeSort();
+        return Lists.newArrayList(baseRepository.findAll(SearchRequest).getContent());
     }
 
     /**
      * 按条件排序查询实体(不分页)
      *
-     * @param searchable 条件
+     * @param SearchRequest 条件
      * @return
      */
-    public List<M> findAllWithSort(Searchable searchable) {
-        searchable.removePageable();
-        return Lists.newArrayList(baseRepository.findAll(searchable).getContent());
+    public List<M> findAll(SearchRequest searchRequest) {
+    	searchRequest.removePageable();
+        return Lists.newArrayList(baseRepository.findAll(searchRequest).getContent());
     }
 
 
     /**
      * 按条件分页并排序统计实体数量
      *
-     * @param searchable 条件
+     * @param SearchRequest 条件
      * @return
      */
-    public Long count(Searchable searchable) {
-        return baseRepository.count(searchable);
+    public Long count(SearchRequest SearchRequest) {
+        return baseRepository.count(SearchRequest);
     }
 
 

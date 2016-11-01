@@ -20,10 +20,6 @@ import org.springframework.data.jpa.repository.support.JpaEntityInformationSuppo
 import org.springframework.orm.jpa.SharedEntityManagerCreator;
 import org.springframework.util.Assert;
 
-import com.digitalplay.network.ireader.search.SearchCallback;
-import com.digitalplay.network.ireader.search.Searchable;
-
-
 /**
  * 仓库辅助类
  * <p>User: Zhang Kaitao
@@ -73,82 +69,8 @@ public class RepositoryHelper {
         getEntityManager().clear();
     }
 
-    /**
-     * <p>ql条件查询<br/>
-     * searchCallback默认实现请参考 {@see com.sishuok.es.common.repository.callback.DefaultSearchCallback}<br/>
-     * <p/>
-     * 测试用例请参考：{@see com.sishuok.es.common.repository.UserRepositoryImplForCustomSearchIT}
-     * 和{@see com.sishuok.es.common.repository.UserRepositoryImplForDefaultSearchIT}
-     *
-     * @param ql
-     * @param searchable     查询条件、分页 排序
-     * @param searchCallback 查询回调  自定义设置查询条件和赋值
-     * @return
-     */
-    public <M> List<M> findAll(final String ql, final Searchable searchable, final SearchCallback searchCallback) {
 
-        assertConverted(searchable);
-        StringBuilder s = new StringBuilder(ql);
-        searchCallback.prepareQL(s, searchable);
-        searchCallback.prepareOrder(s, searchable);
-        Query query = getEntityManager().createQuery(s.toString());
-        applyEnableQueryCache(query);
-        searchCallback.setValues(query, searchable);
-        searchCallback.setPageable(query, searchable);
 
-        return query.getResultList();
-    }
-
-    /**
-     * <p>按条件统计<br/>
-     * 测试用例请参考：{@see com.sishuok.es.common.repository.UserRepositoryImplForCustomSearchIT}
-     * 和{@see com.sishuok.es.common.repository.UserRepositoryImplForDefaultSearchIT}
-     *
-     * @param ql
-     * @param searchable
-     * @param searchCallback
-     * @return
-     */
-    public long count(final String ql, final Searchable searchable, final SearchCallback searchCallback) {
-
-        assertConverted(searchable);
-
-        StringBuilder s = new StringBuilder(ql);
-        searchCallback.prepareQL(s, searchable);
-        Query query = getEntityManager().createQuery(s.toString());
-        applyEnableQueryCache(query);
-        searchCallback.setValues(query, searchable);
-
-        return (Long) query.getSingleResult();
-    }
-
-    /**
-     * 按条件查询一个实体
-     *
-     * @param ql
-     * @param searchable
-     * @param searchCallback
-     * @return
-     */
-    public <M> M findOne(final String ql, final Searchable searchable, final SearchCallback searchCallback) {
-
-        assertConverted(searchable);
-
-        StringBuilder s = new StringBuilder(ql);
-        searchCallback.prepareQL(s, searchable);
-        searchCallback.prepareOrder(s, searchable);
-        Query query = getEntityManager().createQuery(s.toString());
-        applyEnableQueryCache(query);
-        searchCallback.setValues(query, searchable);
-        searchCallback.setPageable(query, searchable);
-        query.setMaxResults(1);
-        List<M> result = query.getResultList();
-
-        if (result.size() > 0) {
-            return result.get(0);
-        }
-        return null;
-    }
 
 
     /**
@@ -301,12 +223,6 @@ public class RepositoryHelper {
         return getMetadata(entityClass).getEntityName();
     }
 
-
-    private void assertConverted(Searchable searchable) {
-        if (!searchable.isConverted()) {
-            searchable.convert(this.entityClass);
-        }
-    }
 
 
     public void applyEnableQueryCache(Query query) {
