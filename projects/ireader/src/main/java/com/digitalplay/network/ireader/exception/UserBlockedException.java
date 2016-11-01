@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.digitalplay.network.ireader.domain.sys;
+package com.digitalplay.network.ireader.exception;
 
 /**
  * <p>User: Zhang Kaitao

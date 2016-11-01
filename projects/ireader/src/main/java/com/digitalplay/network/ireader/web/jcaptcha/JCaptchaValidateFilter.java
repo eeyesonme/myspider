@@ -12,7 +12,7 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.apache.shiro.web.util.WebUtils;
 
-import com.digitalplay.network.ireader.domain.sys.JCaptchaCodeNotMatchException;
+import com.digitalplay.network.ireader.exception.JCaptchaCodeNotMatchException;
 
 /**
  * 验证码过滤器

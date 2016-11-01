@@ -9,6 +9,8 @@ import org.springframework.beans.InvalidPropertyException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.util.CollectionUtils;
 
+import com.digitalplay.network.ireader.exception.InvalidSearchPropertyException;
+import com.digitalplay.network.ireader.exception.InvalidSearchValueException;
 import com.digitalplay.network.ireader.util.SpringUtils;
 import com.google.common.collect.Lists;
 

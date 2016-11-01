@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.digitalplay.network.ireader.domain.sys.User;
-import com.digitalplay.network.ireader.domain.sys.UserBlockedException;
-import com.digitalplay.network.ireader.domain.sys.UserNotExistsException;
-import com.digitalplay.network.ireader.domain.sys.UserPasswordNotMatchException;
 import com.digitalplay.network.ireader.domain.sys.UserStatus;
+import com.digitalplay.network.ireader.exception.UserBlockedException;
+import com.digitalplay.network.ireader.exception.UserNotExistsException;
+import com.digitalplay.network.ireader.exception.UserPasswordNotMatchException;
 import com.digitalplay.network.ireader.repository.sys.AccountRepository;
 import com.digitalplay.network.ireader.service.BaseService;
 import com.digitalplay.network.ireader.util.Clock;

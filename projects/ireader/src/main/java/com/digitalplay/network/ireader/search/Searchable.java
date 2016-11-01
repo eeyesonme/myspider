@@ -6,6 +6,9 @@ import java.util.Map;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.digitalplay.network.ireader.exception.InvalidSearchPropertyException;
+import com.digitalplay.network.ireader.exception.InvalidSearchValueException;
+
 /**
  * <p>查询条件接口</p>
  * <p>User: Zhang Kaitao

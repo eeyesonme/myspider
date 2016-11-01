@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.domain.sys;
+package com.digitalplay.network.ireader.exception;
 
 public class JCaptchaCodeNotMatchException extends UserException {
 

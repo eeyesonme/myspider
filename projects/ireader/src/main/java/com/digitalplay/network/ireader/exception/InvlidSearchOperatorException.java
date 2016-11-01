@@ -1,5 +1,7 @@
-package com.digitalplay.network.ireader.search;
+package com.digitalplay.network.ireader.exception;
 
+import com.digitalplay.network.ireader.search.SearchException;
+import com.digitalplay.network.ireader.search.SearchOperator;
 
 /**
  * <p>User: Zhang Kaitao

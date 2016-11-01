@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.digitalplay.network.ireader.domain.sys.User;
-import com.digitalplay.network.ireader.domain.sys.UserPasswordNotMatchException;
-import com.digitalplay.network.ireader.domain.sys.UserPasswordRetryLimitExceedException;
+import com.digitalplay.network.ireader.exception.UserPasswordNotMatchException;
+import com.digitalplay.network.ireader.exception.UserPasswordRetryLimitExceedException;
 import com.digitalplay.network.ireader.util.Digests;
 import com.digitalplay.network.ireader.util.Encodes;
 

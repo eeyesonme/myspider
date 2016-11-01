@@ -23,11 +23,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.digitalplay.network.ireader.domain.sys.User;
-import com.digitalplay.network.ireader.domain.sys.UserBlockedException;
-import com.digitalplay.network.ireader.domain.sys.UserException;
-import com.digitalplay.network.ireader.domain.sys.UserNotExistsException;
-import com.digitalplay.network.ireader.domain.sys.UserPasswordNotMatchException;
-import com.digitalplay.network.ireader.domain.sys.UserPasswordRetryLimitExceedException;
+import com.digitalplay.network.ireader.exception.UserBlockedException;
+import com.digitalplay.network.ireader.exception.UserException;
+import com.digitalplay.network.ireader.exception.UserNotExistsException;
+import com.digitalplay.network.ireader.exception.UserPasswordNotMatchException;
+import com.digitalplay.network.ireader.exception.UserPasswordRetryLimitExceedException;
 import com.digitalplay.network.ireader.repository.SimpleBaseRepositoryFactoryBean;
 import com.google.common.base.Objects;
 

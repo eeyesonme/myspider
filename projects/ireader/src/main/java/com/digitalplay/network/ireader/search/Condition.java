@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
+import com.digitalplay.network.ireader.exception.InvlidSearchOperatorException;
+
 /**
  * <p>查询过滤条件</p>
  * <p>User: Zhang Kaitao
