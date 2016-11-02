@@ -6,10 +6,12 @@
 package com.digitalplay.network.ireader.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
@@ -26,15 +28,16 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
     }
 
 
-
-
     @Override
-    public Page<M> findAll(final SearchRequest searchRequest) {
-    	
-        return  findAll(searchRequest.bySearchFilter(this.entityClass),searchRequest.getPage());
+    public Page<M> findAll(final SearchRequest searchRequest ,Pageable pageable) {
+        return  findAll(searchRequest.toSpecification(this.entityClass),pageable);
     }
 
-
+    @Override
+	public List<M> findAll(SearchRequest searchRequest) {
+		return  findAll(searchRequest.toSpecification(this.entityClass));
+	}
+    
 	@Override
 	public void delete(ID[] ids) {
 		
@@ -47,6 +50,14 @@ public class SimpleBaseRepository<M, ID extends Serializable> extends SimpleJpaR
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+	
+
+
+
+
+	
 
 
 }

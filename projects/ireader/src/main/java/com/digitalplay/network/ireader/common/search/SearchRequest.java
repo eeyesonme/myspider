@@ -54,7 +54,9 @@ public final class SearchRequest  {
     public SearchRequest() {
         this(null, null, null);
     }
-
+    public static SearchRequest newSearchRequest(){
+    	return new SearchRequest();
+    }
     public SearchRequest(final Map<String, Object> searchParams, final Pageable page) {
         this(searchParams, page, null);
     }
@@ -185,7 +187,7 @@ public final class SearchRequest  {
     }
 
 
-    public  <T> Specification<T> bySearchFilter( final Class<T> entityClazz) {
+    public  <T> Specification<T> toSpecification( final Class<T> entityClazz) {
     	return new Specification<T>() {
 			@Override
 			public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder builder) {

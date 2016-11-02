@@ -87,10 +87,9 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
     }
 
     public List<Menu> findMenus(User user) {
-        SearchRequest searchRequest =new SearchRequest();
-        
-        searchRequest .addSearchFilter("show", SearchOperator.eq, true);
-        searchRequest.addSort(new Sort(Sort.Direction.DESC, "parentId", "weight"));
+        SearchRequest searchRequest =SearchRequest.newSearchRequest()
+        .addSearchFilter("show", SearchOperator.eq, true)
+        .addSort(new Sort(Sort.Direction.DESC, "parentId", "weight"));
 
         List<Resource> resources = findAll(searchRequest);
 

@@ -84,10 +84,11 @@ public class UserAuthService {
 
         //过滤组织机构 仅获取目前可用的组织机构数据
         organizationService.filterForCanShow(organizationIds, organizationJobIds);
-        positionService.filterForCanShow(jobIds, organizationJobIds);
+        
 
         //过滤工作职务 仅获取目前可用的工作职务数据
-
+        positionService.filterForCanShow(jobIds, organizationJobIds);
+        
         //默认分组 + 根据用户编号 和 组织编号 找 分组
         Set<Long> groupIds = groupService.findShowGroupIds(userId, organizationIds);
 
@@ -124,7 +125,7 @@ public class UserAuthService {
     public Set<String> findStringPermissions(User user) {
         Set<String> permissions = Sets.newHashSet();
 
-        Set<Role> roles = ((UserAuthService) AopContext.currentProxy()).findRoles(user);
+        Set<Role> roles = findRoles(user);
         for (Role role : roles) {
             for (RoleResourcePermission rrp : role.getResourcePermissions()) {
                 Resource resource = resourceService.findOne(rrp.getResourceId());

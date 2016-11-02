@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import com.digitalplay.network.ireader.common.search.SearchRequest;
 import com.digitalplay.network.ireader.domain.IdEntity;
 import com.digitalplay.network.ireader.repository.BaseRepository;
-import com.google.common.collect.Lists;
 
 
 public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
@@ -126,30 +125,20 @@ public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
         return baseRepository.findAll(pageable);
     }
 
-
     /**
-     * 按条件不分页不排序查询实体
-     *
-     * @param SearchRequest 条件
-     * @return
-     */
-    public List<M> findAllWithNoPageNoSort(SearchRequest SearchRequest) {
-        SearchRequest.removePageable();
-        SearchRequest.removeSort();
-        return Lists.newArrayList(baseRepository.findAll(SearchRequest).getContent());
-    }
-
-    /**
-     * 按条件排序查询实体(不分页)
+     * 按条件分页排序查询实体
      *
      * @param SearchRequest 条件
      * @return
      */
     public List<M> findAll(SearchRequest searchRequest) {
-    	searchRequest.removePageable();
-        return Lists.newArrayList(baseRepository.findAll(searchRequest).getContent());
+    	return baseRepository.findAll(searchRequest);
     }
 
+    public Page<M> findAll(SearchRequest searchRequest ,Pageable pageable){
+    	return baseRepository.findAll(searchRequest,pageable);
+    }
+    
 
     /**
      * 按条件分页并排序统计实体数量

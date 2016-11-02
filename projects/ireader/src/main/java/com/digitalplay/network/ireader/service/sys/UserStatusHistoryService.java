@@ -36,7 +36,7 @@ public class UserStatusHistoryService extends BaseService<UserStatusHistory, Lon
         		searchable.addSort(Sort.Direction.DESC, "opDate");
         		searchable.setPage(0, 1);
 
-        Page<UserStatusHistory> page = baseRepository.findAll(searchable);
+        Page<UserStatusHistory> page = baseRepository.findAll(searchable,searchable.getPage());
 
         if (page.hasContent()) {
             return page.getContent().get(0);

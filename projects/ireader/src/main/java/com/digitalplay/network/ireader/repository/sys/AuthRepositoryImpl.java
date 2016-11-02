@@ -41,18 +41,18 @@ public class AuthRepositoryImpl {
 
         if (hasOrganizationIds) {
             hql.append(" or ");
-            hql.append(" (( organizationId in (:organizationIds) and jobId=0 )) ");
+            hql.append(" (( organizationId in (:organizationIds) and positionId=0 )) ");
         }
 
         if (hasJobIds) {
             hql.append(" or ");
-            hql.append(" (( organizationId=0 and jobId in (:jobIds) )) ");
+            hql.append(" (( organizationId=0 and positionId in (:jobIds) )) ");
         }
         if (hasOrganizationJobIds) {
             int i = 0, l = organizationJobIds.size();
             while (i < l) {
                 hql.append(" or ");
-                hql.append(" ( organizationId=:organizationId_" + i + " and jobId=:jobId_" + i + " ) ");
+                hql.append(" ( organizationId=:organizationId_" + i + " and positionId=:jobId_" + i + " ) ");
                 i++;
             }
         }

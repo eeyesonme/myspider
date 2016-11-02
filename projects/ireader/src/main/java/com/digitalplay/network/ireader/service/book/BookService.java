@@ -1,21 +1,15 @@
 package com.digitalplay.network.ireader.service.book;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.digitalplay.network.ireader.common.search.DynamicSpecifications;
 import com.digitalplay.network.ireader.domain.book.Book;
 import com.digitalplay.network.ireader.repository.book.BookRepository;
-import com.digitalplay.network.ireader.util.SearchFilter;
 
 @Service
 public class BookService {
