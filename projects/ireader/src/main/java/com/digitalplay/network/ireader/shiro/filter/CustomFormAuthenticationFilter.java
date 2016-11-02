@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.digitalplay.network.ireader.web;
+package com.digitalplay.network.ireader.shiro.filter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

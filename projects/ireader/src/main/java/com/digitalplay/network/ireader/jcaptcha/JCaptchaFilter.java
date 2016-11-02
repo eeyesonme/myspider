@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  */
-package com.digitalplay.network.ireader.web.jcaptcha;
+package com.digitalplay.network.ireader.jcaptcha;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

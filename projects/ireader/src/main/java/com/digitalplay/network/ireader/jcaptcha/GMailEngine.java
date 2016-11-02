@@ -1,4 +1,4 @@
-package com.digitalplay.network.ireader.web.jcaptcha;
+package com.digitalplay.network.ireader.jcaptcha;
 
 
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;

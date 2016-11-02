@@ -1,16 +1,11 @@
-package com.digitalplay.network.ireader.web.jcaptcha;
-
-import java.io.IOException;
+package com.digitalplay.network.ireader.jcaptcha;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
-import org.apache.shiro.web.util.WebUtils;
 
 import com.digitalplay.network.ireader.exception.JCaptchaCodeNotMatchException;
 
