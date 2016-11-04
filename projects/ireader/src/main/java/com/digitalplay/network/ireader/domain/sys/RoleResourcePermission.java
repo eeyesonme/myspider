@@ -6,6 +6,7 @@ import com.digitalplay.network.ireader.domain.IdEntity;
 import com.digitalplay.network.ireader.util.CollectionToStringUserType;
 import com.google.common.collect.Sets;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
@@ -28,13 +29,13 @@ import java.util.Set;
 )
 @Entity
 @Table(name = "sys_role_resource_permission")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="RoleResourcePermission",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class RoleResourcePermission extends IdEntity<Long> {
 
     /**
      * 角色id
      */
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name="role_id")
     @Fetch(FetchMode.SELECT)
     private Role role;

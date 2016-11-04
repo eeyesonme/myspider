@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.digitalplay.network.ireader.domain.IdEntity;
@@ -14,7 +15,7 @@ import com.digitalplay.network.ireader.domain.IdEntity;
  */
 @Entity
 @Table(name = "sys_permission")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Permission",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Permission extends IdEntity<Long>{
 	
     private String name;

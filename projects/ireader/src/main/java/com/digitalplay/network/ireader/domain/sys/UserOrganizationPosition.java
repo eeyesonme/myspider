@@ -8,12 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.digitalplay.network.ireader.domain.IdEntity;
-import com.digitalplay.network.ireader.repository.EnableQueryCache;
 
 /**
  * 为了提高连表性能 使用数据冗余 而不是 组织机构(1)-----(*)职务的中间表
@@ -21,11 +21,10 @@ import com.digitalplay.network.ireader.repository.EnableQueryCache;
  */
 @Entity
 @Table(name = "sys_user_organization_position")
-@EnableQueryCache
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="UserOrganizationPosition", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserOrganizationPosition extends IdEntity<Long> {
 
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @Basic(optional = true, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinColumn(name="user_id")

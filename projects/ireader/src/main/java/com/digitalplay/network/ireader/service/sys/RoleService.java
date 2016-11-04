@@ -57,14 +57,12 @@ public class RoleService extends BaseService<Role, Long> {
      * @return
      */
     public Set<Role> findShowRoles(Set<Long> roleIds) {
-
         Set<Role> roles = Sets.newHashSet();
-
-        //TODO 如果角色很多 此处应该写查询
-        for (Role role : findAll()) {
-            if (Boolean.TRUE.equals(role.getShow()) && roleIds.contains(role.getId())) {
-                roles.add(role);
-            }
+        for (Long roleId : roleIds){
+        	Role role = findOne(roleId);
+        	if ( Boolean.TRUE.equals(role.getShow())){
+        		roles.add(role);
+        	}
         }
         return roles;
     }

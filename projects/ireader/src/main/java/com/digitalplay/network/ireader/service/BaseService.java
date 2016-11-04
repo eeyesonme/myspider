@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.digitalplay.network.ireader.common.search.SearchRequest;
 import com.digitalplay.network.ireader.domain.IdEntity;
@@ -133,6 +134,10 @@ public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
      */
     public List<M> findAll(SearchRequest searchRequest) {
     	return baseRepository.findAll(searchRequest);
+    }
+    
+    public List<M> findAll(SearchRequest searchRequest, Sort sort){
+    	return baseRepository.findAll(searchRequest, sort);
     }
 
     public Page<M> findAll(SearchRequest searchRequest ,Pageable pageable){

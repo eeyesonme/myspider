@@ -22,7 +22,7 @@ public class AdminIndexController {
 	 @Autowired
 	    private ResourceService resourceService;
 	 
-	 @RequestMapping(value = "/index") //spring3.2.2 bug see  http://jinnianshilongnian.iteye.com/blog/1831408
+	 @RequestMapping(value = "/index") 
 	    public String index(@CurrentUser User user, Model model) {
 
 	        List<Menu> menus = resourceService.findMenus(user);

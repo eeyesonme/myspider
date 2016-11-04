@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -30,12 +32,13 @@ import com.digitalplay.network.ireader.domain.IdEntity;
  */
 @Entity
 @Table(name = "sys_user_status_history")
+@Cache(region="UserStatusHistory", usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserStatusHistory extends IdEntity<Long> {
 
     /**
      * 锁定的用户
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @Fetch(FetchMode.SELECT)
     private User user;
 

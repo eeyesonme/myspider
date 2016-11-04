@@ -20,7 +20,7 @@ import com.digitalplay.network.ireader.util.Treeable;
  */
 @Entity
 @Table(name = "sys_position")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Position",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Position extends IdEntity<Long> implements Treeable<Long> {
 
     /**

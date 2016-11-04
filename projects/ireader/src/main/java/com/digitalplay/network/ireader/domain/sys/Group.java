@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.digitalplay.network.ireader.domain.IdEntity;
@@ -17,7 +18,7 @@ import com.digitalplay.network.ireader.domain.IdEntity;
  */
 @Entity
 @Table(name = "sys_group")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Group",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Group extends IdEntity<Long>{
 	
     /**

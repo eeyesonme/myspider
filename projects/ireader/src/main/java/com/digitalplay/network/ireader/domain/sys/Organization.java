@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Formula;
 
@@ -18,7 +19,7 @@ import com.digitalplay.network.ireader.util.Treeable;
  */
 @Entity
 @Table(name = "sys_organization")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Organization",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Organization extends IdEntity<Long> implements Treeable<Long>{
 
 	private String name;

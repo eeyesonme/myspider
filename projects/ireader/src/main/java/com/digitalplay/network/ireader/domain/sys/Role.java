@@ -3,7 +3,6 @@ package com.digitalplay.network.ireader.domain.sys;
 
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -24,7 +24,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "sys_role")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Resource",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity<Long>{
 
     /**
@@ -45,9 +45,9 @@ public class Role extends IdEntity<Long>{
     /**
      * 用户 组织机构 工作职务关联表
      */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = RoleResourcePermission.class, mappedBy = "role", orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoleResourcePermission.class, mappedBy = "role", orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
-    @Basic(optional = true, fetch = FetchType.EAGER)
+//    @Basic(optional = true, fetch = FetchType.EAGER)
 //    @NotFound(action = NotFoundAction.IGNORE)
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)//集合缓存
     @OrderBy

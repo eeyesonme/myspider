@@ -9,7 +9,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -52,7 +54,8 @@ import com.google.common.collect.Sets;
 )
 @Entity
 @Table(name = "sys_auth")
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@DynamicUpdate
+@Cache(region="Auth",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Auth extends IdEntity<Long> {
 
     /**

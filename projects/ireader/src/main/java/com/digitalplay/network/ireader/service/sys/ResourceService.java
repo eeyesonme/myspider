@@ -87,14 +87,13 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
     }
 
     public List<Menu> findMenus(User user) {
-        SearchRequest searchRequest =SearchRequest.newSearchRequest()
-        .addSearchFilter("show", SearchOperator.eq, true)
-        .addSort(new Sort(Sort.Direction.DESC, "parentId", "weight"));
+    	
+    	SearchRequest searchRequest =SearchRequest.newSearchRequest().addSearchFilter("show", SearchOperator.eq, true);
+        List<Resource> resources = findAll(searchRequest ,new Sort(Sort.Direction.DESC, "parentId", "weight"));
 
-        List<Resource> resources = findAll(searchRequest);
-
-        Set<String> userPermissions = userAuthService.findStringPermissions(user);
-
+    	Set<String> userPermissions = userAuthService.findStringPermissions(user);
+    	
+      
         Iterator<Resource> iter = resources.iterator();
         while (iter.hasNext()) {
             if (!hasPermission(iter.next(), userPermissions)) {
