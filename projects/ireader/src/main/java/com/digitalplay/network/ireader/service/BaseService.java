@@ -18,7 +18,7 @@ import com.digitalplay.network.ireader.domain.IdEntity;
 import com.digitalplay.network.ireader.repository.BaseRepository;
 
 
-public abstract class BaseService<M extends IdEntity, ID extends Serializable> {
+public abstract class BaseService<M extends IdEntity<ID>, ID extends Serializable> {
 
 	 
     protected BaseRepository<M, ID> baseRepository;

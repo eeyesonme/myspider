@@ -7,7 +7,6 @@ package com.digitalplay.network.ireader.service.sys;
 
 import java.util.Set;
 
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -107,7 +106,7 @@ public class UserAuthService {
     }
 
     public Set<String> findStringRoles(User user) {
-        Set<Role> roles = ((UserAuthService) AopContext.currentProxy()).findRoles(user);
+        Set<Role> roles = findRoles(user);
         return Sets.newHashSet(Collections2.transform(roles, new Function<Role, String>() {
             @Override
             public String apply(Role input) {
