@@ -2,20 +2,33 @@
 <!DOCTYPE xml>
 <ehcache updateCheck="false" name="ireader-cache">
 	<!-- http://ehcache.org/ehcache.xml -->
-	<diskStore path="./ehcache/ireader" />
+	<diskStore path="java.io.tmpdir/ehcache/ireader" />
 
 	<!-- DefaultCache setting. -->
 	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"		overflowToDisk="true" maxEntriesLocalDisk="100000" />
 	<cache name="org.hibernate.cache.spi.UpdateTimestampsCache"     maxElementsInMemory="5000" 	    eternal="true"     overflowToDisk="true" />
 	<cache name="org.hibernate.cache.internal.StandardQueryCache"    maxElementsInMemory="10000"    eternal="false"     timeToLiveSeconds="120"	    overflowToDisk="true" /> 
 	<!-- Special objects setting. -->
-	<cache name="Account" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
-	<cache name="Author" maxEntriesLocalHeap="100" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="Book" maxEntriesLocalHeap="100" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />
-	<cache name="Subscribe" maxEntriesLocalHeap="100" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="BookContent" maxEntriesLocalHeap="100" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="Category" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="Role" maxEntriesLocalHeap="100" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
-	<cache name="Tag" maxEntriesLocalHeap="100" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="1000" />	
+	<cache name="Account" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="UserOrganizationPositionCollection" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Auth" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Group" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="GroupRelation" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Organization" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Resource" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Position" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Permission" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Role" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="RoleResoucePermissionCollcection" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="RoleResourcePermission" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="UserOrganizationPosition" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="UserStatusHistory" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	
+	<!-- <cache name="Author" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="Book" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
+	<cache name="Subscribe" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="BookContent" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="Category" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
+	<cache name="Tag" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	 -->
 	
 </ehcache>

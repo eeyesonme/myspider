@@ -19,7 +19,7 @@ import com.digitalplay.network.ireader.domain.sys.User;
 
 @Entity
 @Table(name="T_SUBSCRIBE")
-@Cache(region="Subscribe",usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(region="Subscribe",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Subscribe {
 
 	@TableGenerator(name = "subscribe_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="SUBSCRIBE_PK",allocationSize=1)

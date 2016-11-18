@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name="T_BOOK")
 @DynamicUpdate
-@Cache(region="Book",usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(region="Book",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Book {
 
 	@TableGenerator(name = "book_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="BOOK_PK",allocationSize=1)
@@ -51,7 +51,7 @@ public class Book {
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="book",cascade = CascadeType.ALL, orphanRemoval = true)
 	@Fetch(FetchMode.SUBSELECT)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference
 	private List<BookContent> bookContents =new ArrayList<BookContent>();
 	
@@ -59,7 +59,7 @@ public class Book {
 	@JoinTable(name = "T_TAG", joinColumns = { @JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
 	@Fetch(FetchMode.SUBSELECT)
 	@OrderBy("id ASC")
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	private List<Tag> bookTags = new ArrayList<Tag>();
 	
 	public Book() {

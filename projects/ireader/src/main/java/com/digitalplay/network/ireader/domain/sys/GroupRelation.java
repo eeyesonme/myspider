@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.digitalplay.network.ireader.domain.IdEntity;
 
 /**
@@ -17,8 +20,7 @@ import com.digitalplay.network.ireader.domain.IdEntity;
  */
 @Entity
 @Table(name = "sys_group_relation")
-//@EnableQueryCache
-//@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="GroupRelation",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GroupRelation extends IdEntity<Long> {
 
     @Column(name = "group_id")

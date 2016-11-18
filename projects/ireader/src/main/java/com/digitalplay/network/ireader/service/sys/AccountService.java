@@ -38,7 +38,6 @@ public class AccountService extends BaseService<User, Long>{
 	@Autowired
 	private UserStatusHistoryService userStatusHistoryService;
 	
-	@Autowired
 	private AccountRepository getUserRepository() {
 		return (AccountRepository) baseRepository;
 	}

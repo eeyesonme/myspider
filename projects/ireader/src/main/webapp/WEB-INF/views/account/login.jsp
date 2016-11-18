@@ -8,53 +8,43 @@
 </head>
 
 <body>
-    <div class="login">
-        <div class="title">用户登录</div>
-        <div class="form">
 
-            <div style="margin-right: 30px;">
-                <es:showMessage></es:showMessage>
-            </div>
-
-            <form id="loginForm" method="post" class="form-horizontal">
-            <div class="control-group">
-                <label for="username">用户名、邮箱或手机号</label>
-                <div class="input-prepend">
-                    <span class="add-on icon-user"></span>
-                    <input type="text" id="username" name="username" value="${param.username}"
-                            class="input-xlarge validate[required]" placeholder="请输入用户名、邮箱或手机号">
-                </div>
-            </div>
-            <div class="control-group">
-                <label for="password">密码</label>
-                <div class="input-prepend">
-                    <span class="add-on icon-key"></span>
-                    <input type="password" id="password" name="password"
-                            class="input-xlarge validate[required]" placeholder="请输入密码">
-                </div>
-            </div>
-            <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
-           <%--  <c:if test="${jcaptchaEnabled}"> --%>
-                <div class="control-group">
-                    <label for="jcaptchaCode">验证码</label>
-                    <div class="input-prepend">
-                        <span class="add-on icon-circle-blank"></span>
-                        <input type="text" id="jcaptchaCode" name="jcaptchaCode"
-                                class="input-medium ajaxJcaptchaCall" placeholder="请输入验证码">
+		<div class="form-box" id="login-box">
+            <div class="header">Sign In</div>
+            <form id="loginForm"  method="post">
+                <div class="body bg-gray">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="用户名、邮箱或手机号"/>
                     </div>
-                     <img class="jcaptcha-btn jcaptcha-img" style="margin-left: 10px;" src="${ctx}/jcaptcha.jpg" title="点击更换验证码">
-                     <a class="jcaptcha-btn btn btn-link">换一张</a>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="密码"/>
+                    </div>          
+                   <div class="form-group">
+	                        <input type="text" id="jcaptchaCode" name="jcaptchaCode"
+	                                class="input-medium ajaxJcaptchaCall" placeholder="请输入验证码">
+                   		  <img class="jcaptcha-btn jcaptcha-img" style="margin-left: 10px;" src="${ctx}/jcaptcha.jpg" title="点击更换验证码">
+                     	  <a class="jcaptcha-btn btn btn-link">换一张</a>
+               		 </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember_me"/> Remember me
+                    </div>
                 </div>
-            <%-- </c:if> --%>
+                <div class="footer">                     
+                	<input id="submitForm" type="submit" class="btn bg-olive btn-block" value="登录">                                          
+                    <p><a href="#">忘记密码</a></p>
+                    <a href="register.html" class="text-center">注册</a>
+                </div>
+            </form>
 
-            <div class="control-group">
-                <label class="checkbox remember"><input type="checkbox" name="rememberMe" value="true">下次自动登录</label>
-                <input id="submitForm" type="submit" class="btn btn-login pull-left" value="登录">
+            <div class="margin text-center">
+                <span>Sign in using social networks</span>
+                <br/>
+                <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button>
+                <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button>
+                <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
+
             </div>
-
-        </form>
         </div>
-    </div>
 	<script type="text/javascript">
     $(function() {
         $("#username").focus();

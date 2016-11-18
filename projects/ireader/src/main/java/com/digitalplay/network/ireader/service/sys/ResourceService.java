@@ -30,7 +30,6 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
     @Autowired
     private UserAuthService userAuthService;
     
-    @Autowired
 	private ResourceRepository getResourceRepository() {
 		return (ResourceRepository) baseRepository;
 	}

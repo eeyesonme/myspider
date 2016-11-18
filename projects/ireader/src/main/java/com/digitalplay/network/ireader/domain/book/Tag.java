@@ -12,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name="T_TAG")
-@Cache(region="Tag",usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(region="Tag",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Tag {
 
 	@TableGenerator(name = "tag_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="TAG_PK",allocationSize=1)

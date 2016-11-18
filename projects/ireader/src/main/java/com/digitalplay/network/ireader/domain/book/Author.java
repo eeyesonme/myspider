@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="T_AUTHOR")
-@Cache(region ="Author" ,usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(region ="Author" ,usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Author {
 
 	@TableGenerator(name = "author_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="AUTHOR_PK",allocationSize=1)
@@ -35,7 +35,7 @@ public class Author {
 
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="author")
 	@Fetch(FetchMode.SUBSELECT)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference
 	private Collection<Book> books = new ArrayList<Book>();
 	

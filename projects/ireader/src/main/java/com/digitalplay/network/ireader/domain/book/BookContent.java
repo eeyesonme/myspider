@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="T_BOOK_CONTENT")
-@Cache(region="BookContent" ,usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(region="BookContent" ,usage = CacheConcurrencyStrategy.READ_WRITE)
 public class BookContent {
 
 	@TableGenerator(name = "bookcontent_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="BOOKCONTENT_PK",allocationSize=1)

@@ -24,7 +24,7 @@ import com.google.common.collect.Lists;
  */
 @Entity
 @Table(name = "sys_role")
-@Cache(region="Resource",usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="Role",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends IdEntity<Long>{
 
     /**
@@ -47,9 +47,7 @@ public class Role extends IdEntity<Long>{
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = RoleResourcePermission.class, mappedBy = "role", orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
-//    @Basic(optional = true, fetch = FetchType.EAGER)
-//    @NotFound(action = NotFoundAction.IGNORE)
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)//集合缓存
+    @Cache(region="RoleResoucePermissionCollcection",usage = CacheConcurrencyStrategy.READ_WRITE)//集合缓存
     @OrderBy
     private List<RoleResourcePermission> resourcePermissions;
 

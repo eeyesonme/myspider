@@ -5,7 +5,7 @@
 <%@taglib prefix="es" tagdir="/WEB-INF/tags" %>
 <c:choose>
     <c:when test="${!menu.hasChildren}">
-        <li><a href="<%=menuUrl(request, menu.getUrl())%>">${menu.name}</a></li>
+        <li><a href="<%=menuUrl(request, menu.getUrl())%>"><i class="fa fa-angle-double-right"></i> ${menu.name}</a></li>
     </c:when>
     <c:otherwise>
         <li>

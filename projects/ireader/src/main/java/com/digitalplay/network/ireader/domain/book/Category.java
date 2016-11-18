@@ -20,7 +20,7 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="T_CATEGORY")
-@Cache(region="Category",usage = CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(region="Category",usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Category {
 
 	@TableGenerator(name = "category_gen" ,table="T_IDGENERATOR",pkColumnName="gen_name",valueColumnName="gen_value",pkColumnValue="CATEGORY_PK",allocationSize=1)

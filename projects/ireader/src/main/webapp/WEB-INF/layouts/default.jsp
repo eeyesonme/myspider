@@ -11,29 +11,33 @@
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>iReader<sitemesh:title/></title>
+
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
 <link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
-<link href="${ctx}/static/bootstrap/3.3.5/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="${ctx}/static/jquery-validation/1.11.1/validate.css" type="text/css" rel="stylesheet" />
-<link href="${ctx}/static/styles/default.css" type="text/css" rel="stylesheet" />
-<script src="${ctx}/static/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/jquery-validation/1.11.1/messages_bs_zh.js" type="text/javascript"></script>
+<link href="${ctx}/static/adminlte/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- font Awesome -->
+<link href="${ctx}/static/adminlte/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- Ionicons -->
+<link href="${ctx}/static/adminlte/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<!-- Theme style -->
+<link href="${ctx}/static/adminlte/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 <sitemesh:head/>
 </head>
 
 <body>
-		<div class="container">
-			<%@ include file="/WEB-INF/layouts/header.jsp"%>
-			<div id="content">
-				<sitemesh:body/>
-			</div>
-			<%@ include file="/WEB-INF/layouts/footer.jsp"%>
-		</div>
-	<script src="${ctx}/static/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+<%@ include file="/WEB-INF/layouts/header.jsp"%>
+<sitemesh:body/>
+<%-- <%@ include file="/WEB-INF/layouts/footer.jsp"%>
+ --%>	
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- jQuery UI 1.10.3 -->
+        <script src="${ctx}/static/adminlte/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
+        <!-- Bootstrap -->
+        <script src="${ctx}/static/adminlte/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
