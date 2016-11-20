@@ -34,10 +34,13 @@
 <sitemesh:body/>
 <%-- <%@ include file="/WEB-INF/layouts/footer.jsp"%>
  --%>	
-	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
+	 	<script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>
         <!-- jQuery UI 1.10.3 -->
         <script src="${ctx}/static/adminlte/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
         <!-- Bootstrap -->
         <script src="${ctx}/static/adminlte/js/bootstrap.min.js" type="text/javascript"></script>
+        
+         <script src="${ctx}/static/adminlte/js/AdminLTE/app.js" type="text/javascript"></script>
 </body>
 </html>

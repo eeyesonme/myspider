@@ -50,7 +50,7 @@
 			                            </ul>
 			                            </c:forEach>
 		                        </li>
-		                        </c:forEach>
+		                    </c:forEach>
 					   </ul>
                 </section>
                 <!-- /.sidebar -->
