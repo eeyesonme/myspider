@@ -5,7 +5,7 @@
 		<pattern>/api/*</pattern>
 	</excludes>
 	
-	<decorator name="default" page="default_admin.jsp">
+	<decorator name="admin_default" page="default_admin.jsp">
 		<pattern>/admin/*</pattern>
 	</decorator>
 	
