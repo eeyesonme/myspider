@@ -7,7 +7,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="${ctx}/static/adminlte/img/avatar.png" class="img-circle" alt="User Image" />
+                            <img src="${ctx}/static/img/avatar.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
                             <p>${user.username}</p>
@@ -27,14 +27,20 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="index.html">
+                    <li class="header">MAIN NAVIGATION</li>
+                        <li class="active treeview">
+                            <a href="#">
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
                           <c:forEach items="${menus}" var="m">
 		                        <li class="treeview">
-		                            <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>${m.name}</span> <i class="fa fa-angle-left pull-right"></i></a>
+		                            <a href="#"> <i class="fa fa-bar-chart-o"></i>
+			                             <span>${m.name}</span> 
+			                             <span class="pull-right-container">
+			                              <i class="fa fa-angle-left pull-right"></i>
+	           							 </span>
+           							</a>
 		                             <c:forEach items="${m.children}" var="c">
 			                            <ul class="treeview-menu">
 			                               	 <es:submenu menu="${c}"/>
