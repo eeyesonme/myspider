@@ -9,7 +9,7 @@
    
 <body>
 
-  <aside class="right-side">
+  <div class="content-wrapper" id="content">
 			       	   <section class="content-header">
 			                    <h1>
 			                       All Users
@@ -68,6 +68,6 @@
 				                        </div>
 				                    </div>
 				              </section>
-				          </aside>
+				          </div>
 
 </body>

@@ -7,7 +7,7 @@
 <%@taglib prefix="es" tagdir="/WEB-INF/tags"%>
 <c:choose>
 	<c:when test="${!menu.hasChildren}">
-		<li><a href="<%=menuUrl(request, menu.getUrl())%>"><i	class="fa fa-circle-o"></i> ${menu.name}	</a>	</li>
+		<li><a href="<%=menuUrl(request, menu.getUrl())%>" onclick="showAtRight('<%=menuUrl(request, menu.getUrl())%>')"><i	class="fa fa-circle-o"></i> ${menu.name}	</a>	</li>
 	</c:when>
 	<c:otherwise>
 		<li class="treeview"><a href="<%=menuUrl(request, menu.getUrl())%>"> <i  class="fa fa-bar-chart-o"></i> <span>${menu.name}</span>	 <span	class="pull-right-container">	<i class="fa fa-angle-left pull-right"></i>	</span></a>
