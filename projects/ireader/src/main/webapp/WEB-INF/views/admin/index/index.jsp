@@ -7,9 +7,8 @@
 	<title>Admin Index Page</title>
 </head>
    
-<body>
-
-  <aside class="right-side">
+<body >
+  <div class="content-wrapper">
 			       	   <section class="content-header">
 			                    <h1>
 			                        Simple Tables
@@ -52,6 +51,5 @@
 				                        </div>
 				                    </div>
 				              </section>
-				          </aside>
-
+</div>
 </body>

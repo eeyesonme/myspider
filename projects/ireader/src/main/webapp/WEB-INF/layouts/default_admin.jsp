@@ -9,7 +9,6 @@
 <head>
 <meta charset="utf-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>iReader<sitemesh:title/></title>
 
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -18,30 +17,21 @@
 <meta http-equiv="Expires" content="0" />
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-<link type="image/x-icon" href="${ctx}/static/images/favicon.ico" rel="shortcut icon">
-<link href="${ctx}/static/adminlte/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<!-- font Awesome -->
-<link href="${ctx}/static/adminlte/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<!-- Ionicons -->
-<link href="${ctx}/static/adminlte/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-<!-- Theme style -->
-<link href="${ctx}/static/adminlte/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+<link type="image/x-icon" href="${ctx}/static/img/icons.png" rel="shortcut icon">
+<link href="${ctx}/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${ctx}/static/css/skins/_all-skins.min.css">
 <sitemesh:head/>
 </head>
 
 <body>
 <%@ include file="/WEB-INF/layouts/head_admin.jsp"%>
 <%@ include file="/WEB-INF/layouts/left_admin.jsp"%>
+<%@ include file="/WEB-INF/layouts/footer.jsp"%>
 <sitemesh:body/>
-<%-- <%@ include file="/WEB-INF/layouts/footer.jsp"%>
- --%>	
-	 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
-	 	<script src="${ctx}/static/jquery/jquery-1.9.1.min.js"></script>
-        <!-- jQuery UI 1.10.3 -->
-        <script src="${ctx}/static/adminlte/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>
-        <!-- Bootstrap -->
-        <script src="${ctx}/static/adminlte/js/bootstrap.min.js" type="text/javascript"></script>
-        
-         <script src="${ctx}/static/adminlte/js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="${ctx}/static/plugins/jquery/jquery-2.2.3.min.js"></script>
+<script src="${ctx}/static/adminlte/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/app.min.js" type="text/javascript"></script>
 </body>
 </html>

@@ -1,8 +1,7 @@
-<%@ page language="java" pageEncoding="UTF-8" %>
-<div id="footer">
-			<p>
-				<span text-align=“center”>Copyright © 2002-2016 www.qidian.com All Right Reserved</span>版权所有	上海信息科技有限公司</span>
-			</p>
-			
-</div>
-
+<footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.8
+    </div>
+    <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+    reserved.
+  </footer>

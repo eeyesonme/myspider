@@ -7,9 +7,12 @@
 	<title>登录页</title>
 </head>
 
-<body>
-
-		<div class="form-box" id="login-box">
+<body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="../../index2.html"><b>Admin</b>LTE</a>
+  </div>
+		<div class="login-box-body">
             <div class="header">Sign In</div>
             <form id="loginForm"  method="post">
                 <div class="body bg-gray">
@@ -45,6 +48,7 @@
 
             </div>
         </div>
+       </div>
 	<script type="text/javascript">
     $(function() {
         $("#username").focus();

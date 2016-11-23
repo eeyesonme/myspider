@@ -1,7 +1,7 @@
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
   <%@include file="/WEB-INF/views/common/taglibs.jspf" %>
   
-  <aside class="left-side sidebar-offcanvas">
+  <aside class="main-sidebar">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- Sidebar user panel -->
