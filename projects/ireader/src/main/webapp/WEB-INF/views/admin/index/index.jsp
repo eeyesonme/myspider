@@ -1,106 +1,98 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@include file="/WEB-INF/views/common/taglibs.jspf" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Index Page</title>
-</head>
-   
-<body >
-<aside class="main-sidebar">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                    <!-- Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="${ctx}/static/img/avatar.png" class="img-circle" alt="User Image" />
-                        </div>
-                        <div class="pull-left info">
-                            <p>${user.username}</p>
+<meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="Cache-Control" content="no-store" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>iReader Admin Page</title>
 
-                            <a href="#"><i class="fa fa-circle text-success"></i> ${user.status}</a>
-                        </div>
-                    </div>
-                    <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn">
-                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            </span>
-                        </div>
-                    </form>
-                    <!-- /.search form -->
-                    <!-- sidebar menu: : style can be found in sidebar.less -->
-                    <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
-                        <li class="active treeview">
-                            <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
-                          <c:forEach items="${menus}" var="m">
-		                        <li class="treeview">
-		                            <a href="#"> <i class="fa fa-bar-chart-o"></i>
-			                             <span>${m.name}</span> 
-			                             <span class="pull-right-container">
-			                              <i class="fa fa-angle-left pull-right"></i>
-	           							 </span>
-           							</a>
-		                             <c:forEach items="${m.children}" var="c">
-			                            <ul class="treeview-menu">
-			                               	 <es:submenu menu="${c}"/>
-			                            </ul>
-			                            </c:forEach>
-		                        </li>
-		                    </c:forEach>
-					   </ul>
-                </section>
-                <!-- /.sidebar -->
-  </aside>
-  <div class="content-wrapper" id="content">
-			       	   <section class="content-header">
-			                    <h1>
-			                        Simple Tables
-			                        <small>preview of simple tables</small>
-			                    </h1>
-			                    <ol class="breadcrumb">
-			                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-			                        <li><a href="#">Tables</a></li>
-			                        <li class="active">Simple</li>
-			                    </ol>
-			              </section>
-              
-				              <section class="content">
-				              			<div class="row">
-				                        <div class="col-xs-12">
-				                            <div class="box">
-				                                <div class="box-header">
-				                                    <h3 class="box-title">Responsive Hover Table</h3>
-				                                    <div class="box-tools">
-				                                        <div class="input-group">
-				                                            <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-				                                            <div class="input-group-btn">
-				                                                <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-				                                            </div>
-				                                        </div>
-				                                    </div>
-				                                </div><!-- /.box-header -->
-				                                <div class="box-body table-responsive no-padding">
-				                                    <table class="table table-hover">
-				                                        <tr>
-				                                            <th>ID</th>
-				                                            <th>User</th>
-				                                            <th>Date</th>
-				                                            <th>Status</th>
-				                                            <th>Reason</th>
-				                                        </tr>
-				                                    </table>
-				                                </div><!-- /.box-body -->
-				                            </div><!-- /.box -->
-				                        </div>
-				                    </div>
-				              </section>
+<link type="image/x-icon" href="${ctx}/static/img/icons.png" rel="shortcut icon">
+<link href="${ctx}/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/static/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${ctx}/static/css/skins/_all-skins.min.css">
+ <!-- Font Awesome -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<%--  <!-- Font Awesome -->
+ <link rel="stylesheet" href="${ctx}/static/css/font-awesome.min.css">
+  <!-- Ionicons -->
+ <link rel="stylesheet" href="${ctx}/static/css/ionicons.min.css"> --%>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+<%@ include file="/WEB-INF/views/admin/index/header.jsp"%>
+<%@ include file="/WEB-INF/views/admin/index/menu.jsp"%>
+<%@ include file="/WEB-INF/views/admin/index/main.jsp"%>
 </div>
+<script src="${ctx}/static/plugins/jquery/jquery-2.2.3.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/plugins/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/js/app.min.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('li').click(function (e) {
+        e.preventDefault();    
+    });
+});
+function showAtRight(url) {
+    var xmlHttp;
+    
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlHttp=new XMLHttpRequest();    //创建 XMLHttpRequest对象
+    }
+    else {
+        // code for IE6, IE5
+        xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlHttp.onreadystatechange=function() {        
+        //onreadystatechange — 当readystate变化时调用后面的方法
+        
+        if (xmlHttp.readyState == 4) {
+            //xmlHttp.readyState == 4    ——    finished downloading response
+            
+            if (xmlHttp.status == 200) {
+                //xmlHttp.status == 200        ——    服务器反馈正常            
+                
+                document.getElementById("content").innerHTML=xmlHttp.responseText;    //重设页面中id="content"的div里的内容
+            }
+            //错误状态处理
+            else if (xmlHttp.status == 404){
+                alert("出错了☹   （错误代码：404 Not Found），……！"); 
+                /* 对404的处理 */
+                return;
+            }
+            else if (xmlHttp.status == 403) {  
+                alert("出错了☹   （错误代码：403 Forbidden），……"); 
+                /* 对403的处理  */ 
+                return;
+            }
+            else {
+                alert("出错了☹   （错误代码：" + request.status + "），……"); 
+                /* 对出现了其他错误代码所示错误的处理   */
+                return;
+            }   
+        } 
+            
+      }
+    
+    //把请求发送到服务器上的指定文件（url指向的文件）进行处理
+    xmlHttp.open("GET", url, true);        //true表示异步处理
+    xmlHttp.send();
+}        
+</script>
 </body>
+</html>

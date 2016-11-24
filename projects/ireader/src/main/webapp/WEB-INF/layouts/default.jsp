@@ -30,8 +30,8 @@
 
 <sitemesh:body/>
 
-<script src="${ctx}/static/plugins/jquery/jquery-2.2.3.min.js"></script>
-<script src="${ctx}/static/adminlte/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/plugins/jquery/jquery-2.2.3.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/plugins/jquery/jquery-ui.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/app.min.js" type="text/javascript"></script>
 </div>

@@ -25,24 +25,28 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<%--  <!-- Font Awesome -->
+ <link rel="stylesheet" href="${ctx}/static/css/font-awesome.min.css">
+  <!-- Ionicons -->
+ <link rel="stylesheet" href="${ctx}/static/css/ionicons.min.css"> --%>
 <sitemesh:head/>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-<%@ include file="/WEB-INF/layouts/head_admin.jsp"%>
 <sitemesh:body/>
 <%@ include file="/WEB-INF/layouts/footer.jsp"%>
 </div>
 <script src="${ctx}/static/plugins/jquery/jquery-2.2.3.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/plugins/jquery/jquery-ui.min.js" type="text/javascript"></script>
+<script src="${ctx}/static/plugins/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/app.min.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
 $(document).ready(function () {
     $('li').click(function (e) {
-        e.preventDefault();    加上这句则导航的<a>标签会失效
+        e.preventDefault();    
     });
 });
 function showAtRight(url) {
@@ -67,7 +71,6 @@ function showAtRight(url) {
                 //xmlHttp.status == 200        ——    服务器反馈正常            
                 
                 document.getElementById("content").innerHTML=xmlHttp.responseText;    //重设页面中id="content"的div里的内容
-                executeScript(xmlHttp.responseText);    //执行从服务器返回的页面内容里包含的JavaScript函数
             }
             //错误状态处理
             else if (xmlHttp.status == 404){
