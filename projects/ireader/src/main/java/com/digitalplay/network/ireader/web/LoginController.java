@@ -36,7 +36,7 @@ public class LoginController {
     
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
-		return "account/login";
+		return "front/login";
 	}
 
 	/*@RequestMapping(method = RequestMethod.POST)
@@ -102,6 +102,6 @@ public class LoginController {
             model.asMap().remove(Constants.MESSAGE);
         }
 
-        return "account/login";
+        return "front/login";
     }
 }

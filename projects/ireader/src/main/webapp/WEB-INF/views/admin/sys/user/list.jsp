@@ -58,7 +58,6 @@
 									<td>${u.createDate}</td>
 									<td>${u.status}</td>
 									<td>${u.admin}</td>
-									<td><a class="btn btn-app"> <i class="fa fa-edit"></i> Edit </a></td>
 							</c:forEach>
 						</table>
 					</div>
