@@ -28,7 +28,6 @@
                 </div>
             </div>
             <%-- jcaptchaEbabled 在JCaptchaValidateFilter设置 --%>
-            <c:if test="${jcaptchaEbabled}">
                 <div class="control-group">
                     <label for="jcaptchaCode">验证码</label>
                     <div class="input-prepend">
@@ -39,7 +38,6 @@
                      <img class="jcaptcha-btn jcaptcha-img" style="margin-left: 10px;" src="${ctx}/jcaptcha.jpg" title="点击更换验证码">
                      <a class="jcaptcha-btn btn btn-link">换一张</a>
                 </div>
-            </c:if>
 
             <div class="control-group">
                 <label class="checkbox remember"><input type="checkbox" name="rememberMe" value="true">下次自动登录</label>
