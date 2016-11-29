@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/views/common/taglibs.jspf"%>
 
+<es:contentHeader title="ireader" index="true"/>
+
 <div class="index-panel">
 
 	<div class="tabs-bar tabs-fix-top">
@@ -32,10 +34,13 @@
 	<div class="ui-layout-south">
 		<%@include file="footer.jsp"%>
 	</div>
+	
 	<div class="ui-layout-west menu">
 		<%@include file="menu.jsp"%>
 	</div>
+	
 </div>
+<es:contentFooter/>
 <script type="text/javascript">
     $(function() {
         $.app.initIndex();

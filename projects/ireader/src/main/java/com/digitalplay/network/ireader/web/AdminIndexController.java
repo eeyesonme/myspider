@@ -29,4 +29,14 @@ public class AdminIndexController {
 	        model.addAttribute("menus", menus);
 	        return "admin/index/index";
 	    }
+	 
+	 @RequestMapping(value = "/welcome")
+	    public String welcome(@CurrentUser User loginUser, Model model) {
+
+	        //未读消息
+	        Long messageUnreadCount = 5L;
+	        model.addAttribute("messageUnreadCount", messageUnreadCount);
+
+	        return "admin/index/welcome";
+	    }
 }
