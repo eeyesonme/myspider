@@ -76,7 +76,6 @@ input.search-query {
     font-size: 12px;
 }
 
-/*btn-group 嵌套 btn-group时*/
 
 .btn-group > .btn-group.last > .btn {
     border-bottom-left-radius: 0px;
@@ -287,7 +286,7 @@ html, body {
 
 .index-panel {
     margin:0 auto;
-    width:	1020px;
+    width:	100%;
     height:99.7%;
     border: 1px solid #eee;
     background: #fff;
@@ -837,11 +836,11 @@ iframe[tabs="true"] {
     background: #E9F3FF!important;
 }
 
-/*默认会偏移*/
+/*é»˜è®¤ä¼šå��ç§»*/
 .ui-spinner-input{
     margin: 0px;
 }
-/*默认会隐藏掉error提示*/
+/*é»˜è®¤ä¼šéš�è—�æŽ‰erroræ��ç¤º*/
 .ui-spinner{
     overflow: visible;
 }
@@ -1035,7 +1034,7 @@ iframe[tabs="true"] {
     color: #333;
 }
 
-/**系统管理 css start*/
+/**ç³»ç»Ÿç®¡ç�† css start*/
 .sys-icon-list .nav {
     margin: 0 0 5px 3px;
 }
@@ -1100,10 +1099,10 @@ iframe[tabs="true"] {
     height: 1.5em;
     line-height: 1.2em;
 }
-/**系统管理 css end*/
+/**ç³»ç»Ÿç®¡ç�† css end*/
 
-/*去除IE 虚线框*/
-a,input,textarea{blr:expression(this.onFocus=this.close());} /* 只支持IE，过多使用效率低 */
-a,input,textarea{blr:expression(this.onFocus=this.blur());} /* 只支持IE，过多使用效率低 */
-a:focus { -moz-outline-style: none; } /* IE不支持 */
+/*åŽ»é™¤IE è™šçº¿æ¡†*/
+a,input,textarea{blr:expression(this.onFocus=this.close());} /* å�ªæ”¯æŒ�IEï¼Œè¿‡å¤šä½¿ç”¨æ•ˆçŽ‡ä½Ž */
+a,input,textarea{blr:expression(this.onFocus=this.blur());} /* å�ªæ”¯æŒ�IEï¼Œè¿‡å¤šä½¿ç”¨æ•ˆçŽ‡ä½Ž */
+a:focus { -moz-outline-style: none; } /* IEä¸�æ”¯æŒ� */
 *:focus { outline: none; }
