@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package com.digitalplay.network.ireader.shiro;
 
 import java.io.IOException;
@@ -20,14 +15,6 @@ import com.digitalplay.network.ireader.sys.domain.UserStatus;
 import com.digitalplay.network.ireader.sys.service.UserService;
 import com.digitalplay.network.ireader.util.Constants;
 
-/**
- * 验证用户过滤器
- * 1、用户是否删除
- * 2、用户是否锁定
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-19 下午3:09
- * <p>Version: 1.0
- */
 public class SysUserFilter extends AccessControlFilter {
 
     @Autowired
@@ -39,7 +26,7 @@ public class SysUserFilter extends AccessControlFilter {
     private String userNotfoundUrl;
     /**
      * 用户锁定后重定向的地址
-     */
+     */  
     private String userBlockedUrl;
     /**
      * 未知错误

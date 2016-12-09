@@ -65,6 +65,7 @@
 		</property>
 		<property name="jpaPropertyMap">
 			<map>
+			    <entry key="javax.persistence.validation.factory" value-ref="validator"/>
 				<entry key="hibernate.jdbc.batch_size" value="50" />
 				<entry key="hibernate.jdbc.fetch_size" value="50" />
 				<entry key="hibernate.show_sql" value="true" />
@@ -89,7 +90,12 @@
 		</property>
 	</bean>
 
-
+	<!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->
+	    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+	        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+	        <property name="validationMessageSource" ref="messageSource"/>
+	    </bean>
 
 	<!--设置BaseRepositoryImplHelper辅助类所需的entityManagerFactory -->
 	<bean
