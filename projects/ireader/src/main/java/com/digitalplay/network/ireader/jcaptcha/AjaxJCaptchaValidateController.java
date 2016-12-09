@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.digitalplay.network.ireader.web.validate.ValidateResponse;
+import com.digitalplay.network.ireader.util.ValidateResponse;
 
 /**
  * jcaptcha 验证码验证

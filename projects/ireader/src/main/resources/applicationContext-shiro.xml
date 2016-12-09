@@ -13,13 +13,12 @@
 	</bean>
 
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="com.digitalplay.network.ireader.service.sys.ShiroDbRealm">
-		<property name="accountService" ref="accountService"/>
+	<bean id="shiroDbRealm" class="com.digitalplay.network.ireader.shiro.ShiroDbRealm">
 	</bean>
 	
 	    <!-- filter -->
     <!--替换默认的form 验证过滤器-->
-    <bean id="formAuthenticationFilter" class="com.digitalplay.network.ireader.shiro.filter.CustomFormAuthenticationFilter">
+    <bean id="formAuthenticationFilter" class="com.digitalplay.network.ireader.shiro.CustomFormAuthenticationFilter">
         <property name="defaultSuccessUrl" value="${shiro.default.success.url}"/>
         <property name="adminDefaultSuccessUrl" value="${shiro.admin.default.success.url}"/>
         <!--表单上的用户名/密码 下次自动登录的参数名-->
@@ -35,7 +34,7 @@
     </bean>
     
         <!--提取系统用户（User） 验证用户是否合法的过滤器（如是否删除了 是否锁定了） -->
-    <bean id="sysUserFilter" class=" com.digitalplay.network.ireader.shiro.filter.SysUserFilter">
+    <bean id="sysUserFilter" class=" com.digitalplay.network.ireader.shiro.SysUserFilter">
         <property name="userBlockedUrl" value="${shiro.user.blocked.url}"/>
         <property name="userNotfoundUrl" value="${shiro.user.notfound.url}"/>
         <property name="userUnknownErrorUrl" value="${shiro.user.unknown.error.url}"/>
@@ -67,7 +66,7 @@
 	</bean>
 	
 	<!-- 用户授权信息Cache, 采用EhCache -->
-	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+	 <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManagerConfigFile" value="classpath:cache/ehcache-shiro.xml"/>
 	</bean>
 	

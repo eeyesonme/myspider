@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<ehcache updateCheck="false" name="ireader-cache">
+<ehcache updateCheck="false" name="hibernate">
 	<!-- http://ehcache.org/ehcache.xml -->
-	<diskStore path="java.io.tmpdir/ehcache/ireader" />
+	<diskStore path="java.io.tmpdir/ehcache/ireader/hibernate" />
 
 	<!-- DefaultCache setting. -->
 	<defaultCache maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"		overflowToDisk="true" maxEntriesLocalDisk="100000" />
@@ -23,12 +23,5 @@
 	<cache name="RoleResourcePermission" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
 	<cache name="UserOrganizationPosition" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
 	<cache name="UserStatusHistory" maxEntriesLocalHeap="10" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
-	
-	<!-- <cache name="Author" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
-	<cache name="Book" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />
-	<cache name="Subscribe" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
-	<cache name="BookContent" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
-	<cache name="Category" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	
-	<cache name="Tag" maxEntriesLocalHeap="1000" eternal="true"		overflowToDisk="true" maxEntriesLocalDisk="10000" />	 -->
-	
+		
 </ehcache>

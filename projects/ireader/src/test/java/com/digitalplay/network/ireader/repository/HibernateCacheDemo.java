@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.digitalplay.network.ireader.domain.book.Author;
-import com.digitalplay.network.ireader.domain.book.Book;
-import com.digitalplay.network.ireader.domain.book.Category;
+import com.digitalplay.network.ireader.book.domain.Author;
+import com.digitalplay.network.ireader.book.domain.Book;
+import com.digitalplay.network.ireader.book.domain.Category;
 
 
 @ContextConfiguration(locations = { "/applicationContext_jdbc.xml"})

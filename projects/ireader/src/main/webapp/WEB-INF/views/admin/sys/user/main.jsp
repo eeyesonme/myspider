@@ -21,12 +21,12 @@
         line-height: 18px;
     }
 </style>
-<div class="ui-layout-north tree" style="overflow: hidden">
+<%-- <div class="ui-layout-north tree" style="overflow: hidden">
     <iframe id="treeFrame" name="treeFrame" width="100%" height="100%"
             style="overflow: hidden"
             frameborder="0" scrolling="no"
             src="about:blank" longdesc="${ctx}/admin/sys/user/tree"></iframe>
-</div>
+</div> --%>
 <div class="ui-layout-center tree">
     <iframe id="listFrame" name="listFrame" width="100%" height="100%"  frameborder="0" scrolling="auto"
              src="${ctx}/admin/sys/user/0/0"></iframe>

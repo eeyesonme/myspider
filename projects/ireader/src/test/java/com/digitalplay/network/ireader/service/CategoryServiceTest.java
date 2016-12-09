@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.digitalplay.network.ireader.domain.book.Category;
-import com.digitalplay.network.ireader.service.book.CategoryService;
+import com.digitalplay.network.ireader.book.domain.Category;
+import com.digitalplay.network.ireader.book.service.CategoryService;
 @ContextConfiguration(locations = { "/applicationContext.xml" })
 public class CategoryServiceTest extends AbstractJUnit4SpringContextTests {
 

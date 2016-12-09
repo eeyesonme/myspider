@@ -14,24 +14,26 @@
 
 	<description>Spring common configuration </description>
 
-	<context:property-placeholder ignore-unresolvable="true"	location="classpath*:/application.properties" />	
-	
-	<context:component-scan base-package="com.digitalplay.network.ireader.service" />
-	
-  <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basenames">
-            <list>
-                <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->
-                <value>classpath:messages</value>
-                <value>classpath:ValidationMessages</value>
-            </list>
-        </property>
-        <property name="useCodeAsDefaultMessage" value="false"/>
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="cacheSeconds" value="60"/>
-    </bean>
-    
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath*:/application.properties" />
+
+	<context:component-scan base-package="com.digitalplay.network.ireader.sys.service" />
+
+	<!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找 -->
+				<value>classpath:messages</value>
+				<value>classpath:ValidationMessages</value>
+			</list>
+		</property>
+		<property name="useCodeAsDefaultMessage" value="false" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="60" />
+	</bean>
+
 	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 		destroy-method="close">
 		<!-- Connection Info -->
@@ -46,12 +48,12 @@
 		<property name="defaultAutoCommit" value="false" />
 	</bean>
 
-  <bean id="springUtils" class="com.digitalplay.network.ireader.util.SpringUtils"/>
-  
+	<bean id="springUtils" class="com.digitalplay.network.ireader.util.SpringUtils" />
+
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.digitalplay.network.ireader.domain" />
+		<property name="packagesToScan" value="com.digitalplay.network.ireader.sys.domain" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="false" />
@@ -63,49 +65,65 @@
 		</property>
 		<property name="jpaPropertyMap">
 			<map>
-			    <entry key="hibernate.jdbc.batch_size" value="50" />
-			    <entry key="hibernate.jdbc.fetch_size" value="50" />
+				<entry key="hibernate.jdbc.batch_size" value="50" />
+				<entry key="hibernate.jdbc.fetch_size" value="50" />
 				<entry key="hibernate.show_sql" value="true" />
 				<entry key="hibernate.format_sql" value="true" />
 				<entry key="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
-				<!-- 开启二级缓存 -->  
-				<entry key="hibernate.cache.use_second_level_cache" value="true"/>
-				<!-- 开启查询缓存 --> 
-				<entry key="hibernate.cache.use_query_cache" value="true"/>
-				<!-- 二级缓存区域名的前缀 -->  
-			 	<!-- <entry key="hibernate.cache.region_prefix" value="ireader-cache" />  -->
+				<!-- 开启二级缓存 -->
+				<entry key="hibernate.cache.use_second_level_cache" value="true" />
+				<!-- 开启查询缓存 -->
+				<entry key="hibernate.cache.use_query_cache" value="true" />
+				<!-- 二级缓存区域名的前缀 -->
+				<!-- <entry key="hibernate.cache.region_prefix" value="ireader-cache" 
+					/> -->
 				<!-- 高速缓存提供程序 -->
 				<entry key="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
-				<!-- 指定缓存配置文件位置 -->  
+				<!-- 指定缓存配置文件位置 -->
 				<entry key="net.sf.ehcache.configurationResourceName" value="cache/ehcache.xml" />
-				<!-- 强制Hibernate以更人性化的格式将数据存入二级缓存 -->  
-				<entry key="hibernate.cache.use_structured_entries"  value="true" />  
-				<!-- Hibernate将收集有助于性能调节的统计数据 -->  
-				<entry key="hibernate.generate_statistics" value="true" />  
+				<!-- 强制Hibernate以更人性化的格式将数据存入二级缓存 -->
+				<entry key="hibernate.cache.use_structured_entries" value="true" />
+				<!-- Hibernate将收集有助于性能调节的统计数据 -->
+				<entry key="hibernate.generate_statistics" value="true" />
 			</map>
 		</property>
 	</bean>
 
-<!--设置BaseRepositoryImplHelper辅助类所需的entityManagerFactory-->
-    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-        <property name="staticMethod"
-                  value="com.digitalplay.network.ireader.repository.RepositoryHelper.setEntityManagerFactory"/>
-        <property name="arguments" ref="entityManagerFactory"/>
-    </bean>
-    
-	<jpa:repositories base-package="com.digitalplay.network.ireader.repository"	 repository-impl-postfix="Impl"  factory-class="com.digitalplay.network.ireader.repository.SimpleBaseRepositoryFactoryBean" transaction-manager-ref="transactionManager" 		entity-manager-factory-ref="entityManagerFactory" />
+
+
+	<!--设置BaseRepositoryImplHelper辅助类所需的entityManagerFactory -->
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="staticMethod"
+			value="com.digitalplay.network.ireader.common.repository.RepositoryHelper.setEntityManagerFactory" />
+		<property name="arguments" ref="entityManagerFactory" />
+	</bean>
+
+	<jpa:repositories base-package="com.digitalplay.network.ireader.sys.repository"
+		repository-impl-postfix="Impl"
+		factory-class="com.digitalplay.network.ireader.common.repository.SimpleBaseRepositoryFactoryBean"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
 
 	<!-- Jpa 事务配置 -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
- <!-- 类型转换及数据格式化 -->
-    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
-    
+	<!-- 类型转换及数据格式化 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+
+	<!-- 直接把id转换为entity 必须非lazy否则无法注册 -->
+	<bean id="domainClassConverter"
+		class="org.springframework.data.repository.support.DomainClassConverter" lazy-init="false">
+		<constructor-arg ref="conversionService" />
+	</bean>
+
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-    
-  
-    
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
+
+
 </beans>

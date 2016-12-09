@@ -54,4 +54,6 @@ public interface Constants {
 
     String ENCODING = "UTF-8";
 
+    int HASH_INTERATIONS = 1024;
+    int SALT_SIZE = 8;
 }

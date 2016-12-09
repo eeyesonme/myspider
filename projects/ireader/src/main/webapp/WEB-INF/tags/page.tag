@@ -16,22 +16,22 @@
 <%@ taglib prefix="es" tagdir="/WEB-INF/tags" %>
 
 <c:if test="${empty pageSize}">
-    <c:set var="pageSize" value="${page.size}"/>
+    <c:set var="pageSize" value="${page.getSize()}"/>
 </c:if>
 
 <c:set var="displaySize" value="2"/>
-<c:set var="current" value="${page.number + 1}"/>
+<c:set var="current" value="${page.getNumber() + 1}"/>
 
 <c:set var="begin" value="${current - displaySize}"/>
 <c:if test="${begin <= displaySize}">
     <c:set var="begin" value="${1}"/>
 </c:if>
 <c:set var="end" value="${current + displaySize}"/>
-<c:if test="${end > page.totalPages - displaySize}">
-    <c:set var="end" value="${page.totalPages - displaySize}"/>
+<c:if test="${end > page.getTotalPages() - displaySize}">
+    <c:set var="end" value="${page.getTotalPages() - displaySize}"/>
 </c:if>
-<c:if test="${end < 0 or page.totalPages < displaySize * 4}">
-    <c:set var="end" value="${page.totalPages}"/>
+<c:if test="${end < 0 or page.getTotalPages() < displaySize * 4}">
+    <c:set var="end" value="${page.getTotalPages()}"/>
 </c:if>
 
 
@@ -40,7 +40,7 @@
 <div class="pagination">
     <ul>
         <c:choose>
-            <c:when test="${page.firstPage}">
+            <c:when test="${page.isFirst()}">
                 <li class="disabled"><a title="首页">首页</a></li>
                 <li class="disabled"><a title="上一页">&lt;&lt;</a></li>
             </c:when>
@@ -67,24 +67,24 @@
         </c:forEach>
 
 
-        <c:if test="${end < page.totalPages - displaySize}">
+        <c:if test="${end < page.getTotalPages() - displaySize}">
             <li><a>...</a></li>
         </c:if>
 
-        <c:forEach begin="${end < page.totalPages ? page.totalPages - 1 : page.totalPages + 1}" end="${page.totalPages}" var="i">
+        <c:forEach begin="${end < page.getTotalPages() ? page.getTotalPages() - 1 : page.getTotalPages() + 1}" end="${page.getTotalPages()}" var="i">
             <li <c:if test="${current == i}"> class="active"</c:if>>
                 <a href="#" onclick="$.table.turnPage('${pageSize}', ${i}, this);" title="第${i}页">${i}</a>
             </li>
         </c:forEach>
 
         <c:choose>
-            <c:when test="${page.lastPage}">
+            <c:when test="${page.hasNext()}">
                 <li class="disabled"><a title="下一页">&gt;&gt;</a></li>
                 <li class="disabled"><a title="尾页">尾页</a></li>
             </c:when>
             <c:otherwise>
                 <li><a href="#" onclick="$.table.turnPage('${pageSize}', ${current + 1}, this);" title="下一页">&gt;&gt;</a></li>
-                <li><a href="#" onclick="$.table.turnPage('${pageSize}', ${page.totalPages}, this);" title="尾页">尾页</a></li>
+                <li><a href="#" onclick="$.table.turnPage('${pageSize}', ${page.getTotalPages()}, this);" title="尾页">尾页</a></li>
             </c:otherwise>
         </c:choose>
 
@@ -101,7 +101,7 @@
             <option value="30" <c:if test="${pageSize eq 30}">selected="selected" </c:if>>30</option>
             <option value="50" <c:if test="${pageSize eq 50}">selected="selected" </c:if>>50</option>
         </select>
-        <span class="page-info">[共${page.totalPages}页/${page.totalElements}条]</span >
+        <span class="page-info">[共${page.getTotalPages()}页/${page.getTotalElements()}条]</span >
     </div>
 </div>
 </div>
